@@ -17,23 +17,23 @@ app.use(EJSLayout);
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get("/", (req, res) => {
-    res.render("index", { layout: !req.headers['hx-request'] });
+    res.render("pages/index", { layout: !req.headers['hx-request'] });
 });
 
 app.get("/about", (req, res) => {
-    res.render("about", { layout: !req.headers['hx-request'] });
+    res.render("pages/about", { layout: !req.headers['hx-request'] });
 });
 
 app.get("/contact", (req, res) => {
-    res.render("contact", { layout: !req.headers['hx-request'] });
+    res.render("pages/contact", { layout: !req.headers['hx-request'] });
 });
 
 app.get("/teams", (req, res) => {
-    res.render("teams", { layout: !req.headers['hx-request'] });
+    res.render("pages/teams", { layout: !req.headers['hx-request'] });
 });
 
 app.get("/blog", (req, res) => {
-    res.render("blog", { layout: !req.headers['hx-request'] });
+    res.render("pages/blog", { layout: !req.headers['hx-request'] });
 });
 
 app.listen(port, (req, res) => {

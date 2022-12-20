@@ -1,6 +1,6 @@
 <header class="text-gray-600 border-b body-font">
   <div class="container flex flex-row-reverse items-center justify-between p-5 mx-auto md:flex-row">
-    <a hx-get="/" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="flex items-center font-medium text-gray-900 title-font md:mb-0">
+    <a hx-get="/" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="flex items-center font-medium text-gray-900 cursor-pointer title-font md:mb-0">
       <%- include('elements/icons/brand-logo-icon') %>
       <span class="hidden ml-3 text-xl md:inline">Tailblocks</span>
     </a>
@@ -9,7 +9,8 @@
       <span class="sr-only">Open main menu</span>
       <%- include('elements/icons/menu-mobile-icon') %>
     </button>
-    <button class="btn btn-primary">Button
+    <button class="hidden px-4 py-2 rounded md:inline btn btn-primary">
+      <span>Button</span>
       <%- include('elements/icons/arrow-right-icon') %>
     </button>
   </div>
