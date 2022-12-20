@@ -21,7 +21,7 @@
         x-transition:leave="transform transition ease-in-out duration-1000 sm:duration-700"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
-        class="fixed h-screen overflow-y-hidden bg-white"
+        class="fixed flex flex-col h-screen overflow-y-hidden bg-white"
     >
        <div class="flex items-center justify-center w-full border-b min-h-[3em]">
             <% if (title) { %>
@@ -31,7 +31,7 @@
                 <%- include('elements/buttons/close-buttons') %>
             </section>
        </div>
-        <div class="h-full overflow-y-auto border border-red-500">
+        <div class="h-full overflow-y-auto">
             <% components.forEach(component => { %>
              <%- include(component) %>
             <% }) %>
