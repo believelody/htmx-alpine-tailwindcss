@@ -1,21 +1,15 @@
-<nav class="flex-wrap items-center justify-center hidden text-base md:flex md:ml-auto md:mr-auto">
-    <a hx-get="/about" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">About</a>
-    <a hx-get="/contact" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Contact Us</a>
-    <a hx-get="/blog" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Blog</a>
-    <a hx-get="/teams" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Our teams</a>
-</nav>
+<% const menuItems = [{url: '/about', label: 'About'},{url: '/contact', label: 'Contact Us'},{url: '/blog', label: 'Blog'},{url: '/teams', label: 'Our teams'}] %> 
 
-<ul class="px-3 py-4 space-y-2 overflow-y-auto text-lg rounded bg-gray-50 md:hidden">
-    <li>
-        <a @click="openSidebar = null" hx-get="/about" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">About</a>
-    </li>
-    <li>
-        <a @click="openSidebar = null" hx-get="/contact" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Contact Us</a>
-    </li>
-    <li>
-        <a @click="openSidebar = null" hx-get="/blog" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Blog</a>
-    </li>
-    <li>
-        <a @click="openSidebar = null" hx-get="/teams" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="mr-5 hover:text-gray-900">Our teams</a>
-    </li>
-</ul>
+<div x-data="{ activeLink: window.location.pathname }" x-effect="console.log(activeLink)">
+    <nav class="flex-wrap items-center justify-center hidden text-base list-none md:flex md:ml-auto md:mr-auto">
+        <% menuItems.forEach(item => { %>
+            <%- include('item-nav', { item }) %>
+        <% }) %>
+    </nav>
+
+    <ul class="px-3 py-4 space-y-2 overflow-y-auto text-lg rounded bg-gray-50 md:hidden">
+        <% menuItems.forEach(item => { %>
+            <%- include('item-nav', { item }) %>
+        <% }) %>
+    </ul>
+</div>
