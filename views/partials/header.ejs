@@ -4,7 +4,7 @@
       <%- include('elements/icons/brand-logo-icon') %>
       <span class="hidden ml-3 text-xl md:inline">Tailblocks</span>
     </a>
-    
+    <div class="hidden md:flex"><%- include('elements/nav/menu-nav') %></div>
     <button @click="openSidebar = 'menu'" type="button" class="inline-flex items-center text-sm text-gray-700 rounded-lg md:hidden hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
       <span class="sr-only">Open main menu</span>
       <%- include('elements/icons/menu-mobile-icon') %>
