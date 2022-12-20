@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	/* Border layout style */
+	.border-primary {
+		@apply border-indigo-500;
+	}
+	.border-primary-light-1 {
+		@apply border-indigo-300;
+	}
+	.border-primary-light-2 {
+		@apply border-indigo-100;
+	}
+	.border-primary-dark-1 {
+		@apply border-indigo-700;
+	}
+	.border-primary-dark-2 {
+		@apply border-indigo-900;
+	}
+	.border-secondary {
+		@apply border-black;
+	}
+	.border-neutral {
+		@apply border-neutral-400;
+	}
+	.border-neutral-light {
+		@apply border-neutral-100;
+	}
+	.border-neutral-dark {
+		@apply border-neutral-700;
+	}
+	.border-success {
+		@apply border-green-600;
+	}
+	.border-success-light {
+		@apply border-green-400;
+	}
+	.border-success-dark {
+		@apply border-green-800;
+	}
+	.border-danger {
+		@apply border-red-500;
+	}
+	.border-danger-light {
+		@apply border-red-400;
+	}
+	.border-danger-dark {
+		@apply border-red-700;
+	}
+	.border-info {
+		@apply border-blue-600;
+	}
+	.border-info-light {
+		@apply border-blue-400;
+	}
+	.border-info-dark {
+		@apply border-blue-800;
+	}
+	.border-warning {
+		@apply border-yellow-500;
+	}
+	.border-warning-light {
+		@apply border-yellow-400;
+	}
+	.border-warning-dark {
+		@apply border-yellow-700;
+	}
+}

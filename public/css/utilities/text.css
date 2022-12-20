@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	/* Text layout style */
+	.text-primary {
+		@apply text-indigo-500;
+	}
+	.text-primary-light-1 {
+		@apply text-indigo-300;
+	}
+	.text-primary-light-2 {
+		@apply text-indigo-100;
+	}
+	.text-primary-dark-1 {
+		@apply text-indigo-700;
+	}
+	.text-primary-dark-2 {
+		@apply text-indigo-900;
+	}
+	.text-secondary {
+		@apply text-black;
+	}
+	.text-neutral {
+		@apply text-neutral-500;
+	}
+	.text-neutral-light {
+		@apply text-neutral-100;
+	}
+	.text-neutral-dark {
+		@apply text-neutral-700;
+	}
+	.text-success {
+		@apply text-green-600;
+	}
+	.text-success-light {
+		@apply text-green-400;
+	}
+	.text-success-dark {
+		@apply text-green-800;
+	}
+	.text-danger {
+		@apply text-red-500;
+	}
+	.text-danger-light {
+		@apply text-red-400;
+	}
+	.text-danger-dark {
+		@apply text-red-700;
+	}
+	.text-info {
+		@apply text-blue-600;
+	}
+	.text-info-light {
+		@apply text-blue-400;
+	}
+	.text-info-dark {
+		@apply text-blue-800;
+	}
+	.text-warning {
+		@apply text-yellow-500;
+	}
+	.text-warning-light {
+		@apply text-yellow-400;
+	}
+	.text-warning-dark {
+		@apply text-yellow-700;
+	}
+}
