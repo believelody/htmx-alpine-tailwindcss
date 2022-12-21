@@ -1,27 +1,38 @@
 require("dotenv").config();
 const express = require("express");
-const ejs = require("express");
+const hbs= require("express-hbs");
 const bodyParser = require("body-parser");
 const port = 3000;
 const app = express();
 const path = require("path");
-const EJSLayout = require('express-ejs-layouts');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // => Here we expose the views so it can be rendered.
-app.set('view engine', 'ejs');
+app.engine('.hbs', hbs.express4({
+    partialsDir: __dirname + '/views/partials',
+    layoutsDir: __dirname + '/views/layouts'
+}))
+app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(EJSLayout);
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get("/", (req, res) => {
-    res.render("pages/index", { layout: !req.headers['hx-request'] });
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    console.log(ctx);
+    res.render("partials/pages/index", ctx);
 });
 
 app.get("/about", (req, res) => {
-    res.render("pages/about", { layout: !req.headers['hx-request'] });
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    res.render("partials/pages/about", ctx);
 });
 
 app.get("/contact", (req, res) => {
