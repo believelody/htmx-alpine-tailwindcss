@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const hbs= require("express-hbs");
+const hbs = require("express-hbs");
 const bodyParser = require("body-parser");
 const port = 3000;
 const app = express();
@@ -8,6 +8,9 @@ const path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+hbs.registerHelper('define', function (varName, varValue, options) {
+    options.data.root[varName] = varValue;
+});
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({
     partialsDir: __dirname + '/views/partials',
@@ -24,7 +27,7 @@ app.get("/", (req, res) => {
         ctx.layout = null;
     }
     console.log(ctx);
-    res.render("partials/pages/index", ctx);
+    res.render("pages/index", ctx);
 });
 
 app.get("/about", (req, res) => {
@@ -32,7 +35,7 @@ app.get("/about", (req, res) => {
     if (req.headers['hx-request']) {
         ctx.layout = null;
     }
-    res.render("partials/pages/about", ctx);
+    res.render("pages/about", ctx);
 });
 
 app.get("/contact", (req, res) => {
