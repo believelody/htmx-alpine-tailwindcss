@@ -8,8 +8,8 @@ const path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-hbs.registerHelper('define', function (varName, varValue, options) {
-    options.data.root[varName] = varValue;
+hbs.registerHelper('let', function (varName, varValue, ctx) {
+    this[varName] = varValue;
 });
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({

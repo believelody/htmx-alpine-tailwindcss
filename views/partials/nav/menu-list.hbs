@@ -1,4 +1,4 @@
-{{#define menuItems [{url: '/about', label: 'About'},{url: '/contact', label: 'Contact Us'},{url: '/blog', label: 'Blog'},{url: '/teams', label: 'Our teams'}] }}
+{{#let menuItems [{url: '/about', label: 'About'},{url: '/contact', label: 'Contact Us'},{url: '/blog', label: 'Blog'},{url: '/teams', label: 'Our teams'}] }}
 
 <div x-data="{ activeLink: window.location.pathname }" x-effect="console.log(activeLink)">
     <nav class="flex-wrap items-center justify-center hidden text-base list-none md:flex md:ml-auto md:mr-auto">
@@ -14,4 +14,4 @@
     </ul>
 </div>
 
-{{/define}}
+{{/let}}
