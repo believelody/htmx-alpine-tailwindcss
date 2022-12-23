@@ -71,15 +71,27 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-    res.render("pages/contact", { layout: !req.headers['hx-request'] });
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    res.render("pages/contact", ctx);
 });
 
 app.get("/teams", (req, res) => {
-    res.render("pages/teams", { layout: !req.headers['hx-request'] });
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    res.render("pages/teams", ctx);
 });
 
 app.get("/blog", (req, res) => {
-    res.render("pages/blog", { layout: !req.headers['hx-request'] });
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    res.render("pages/blog", ctx);
 });
 
 app.listen(port, () => {
