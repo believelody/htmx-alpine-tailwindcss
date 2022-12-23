@@ -1,4 +1,4 @@
-<div x-data="{ activeLink: window.location.pathname }" x-effect="console.log(activeLink)">
+<div x-data="{ activeLink: window.location.pathname }">
     <nav class="flex-wrap items-center justify-center hidden text-base list-none md:flex md:ml-auto md:mr-auto">
         {{#each (routes) as |item|}}
             {{> nav/item item=item }}

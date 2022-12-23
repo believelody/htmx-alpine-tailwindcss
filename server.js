@@ -60,6 +60,10 @@ hbs.registerHelper('default', function(options) {
     return !this.switchValue.found ? options.fn(this) : null; ///We can add condition if needs
 });
 
+hbs.registerHelper('withDefault', (testedValue, defaultValue, options) => {
+    return testedValue || defaultValue;
+})
+
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({
     partialsDir: __dirname + '/views/partials',

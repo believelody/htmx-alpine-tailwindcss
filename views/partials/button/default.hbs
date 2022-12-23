@@ -1,47 +1,22 @@
-{{#switch type}}
-    {{#case 'primary'}}
-        {{let class='btn-primary'}}
-    {{/case}}
-    {{#case 'success'}}
-        {{let class='btn-success'}}
-    {{/case}}
-    {{#case 'danger'}}
-        {{let class='btn-danger'}}
-    {{/case}}
-    {{#case 'warning'}}
-        {{let class='btn-warning'}}
-    {{/case}}
-    {{#case 'info'}}
-        {{let class='btn-info'}}
-    {{/case}}
-    {{#case 'link'}}
-        {{let class='btn-link'}}
-    {{/case}}
-    {{#case 'outlined'}}
-        {{let class='btn-outlined'}}
-    {{/case}}
-    {{#case 'outlined-primary'}}
-        {{let class='btn-outlined-primary'}}
-    {{/case}}
-    {{#case 'outlined-success'}}
-        {{let class='btn-outlined-success'}}
-    {{/case}}
-    {{#case 'outlined-danger'}}
-        {{let class='btn-outlined-danger'}}
-    {{/case}}
-    {{#case 'outlined-warning'}}
-        {{let class='btn-outlined-warning'}}
-    {{/case}}
-    {{#case 'outlined-info'}}
-        {{let class='btn-outlined-info'}}
-    {{/case}}
-    {{#default}}
-        {{let class=''}}
-    {{/default}}
-{{/switch}}
-
-<button @click="{{ click }}" class="px-4 py-2 rounded md:flex btn {{ class }}">
-    <span>{{ label }}</span>
+<button type="{{withDefault type 'button'}}"
+    @click="{{ click }}"
+    class="px-4 py-2 rounded md:flex {{#if emphasis}}
+            {{~#if outlined}}
+                btn btn-{{ emphasis }}-outlined
+            {{~^~}}
+                btn btn-{{ emphasis }}
+            {{~/if}}
+        {{~^~}}
+            {{~#if outlined}}
+                btn btn-outlined
+            {{~^~}}
+                btn
+            {{~/if}}
+        {{~/if}}"
+>
+    {{#if label}}
+        <span>{{ label }}</span>
+    {{/if}}
     {{#if icon}}
         {{partial (append "icon/" icon) }}
     {{/if}}
