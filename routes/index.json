@@ -1,0 +1,20 @@
+{
+    "routes": [
+        {
+            "url": "/about",
+            "label": "About"
+        },
+        {
+            "url": "/contact",
+            "label": "Contact Us"
+        },
+        {
+            "url": "/blog",
+            "label": "Blog"
+        },
+        {
+            "url": "/teams",
+            "label": "Our teams"
+        }
+    ]
+}

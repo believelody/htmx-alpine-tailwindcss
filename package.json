@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "express-hbs": "^2.4.0"
+    "express-hbs": "^2.4.0",
+    "useful-handlebars-helpers": "^0.12.0"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",

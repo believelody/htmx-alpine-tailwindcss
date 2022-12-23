@@ -23,17 +23,18 @@
         x-transition:leave-end="-translate-x-full"
         class="fixed flex flex-col h-screen overflow-y-hidden bg-white"
     >
-       <div class="flex items-center justify-center w-full border-b min-h-[3em]">
-            {{#if (title) }}
-             {{ title }}
+       <div class="flex items-center justify-between w-full border-b min-h-[3em]">
+            {{#if title }}
+             <section>{{ title }}</section>
             {{/if}}
             <section class="flex justify-end">
                 {{> button/close }}
             </section>
        </div>
         <div class="h-full overflow-y-auto">
-            {{#each components }}
-             {{ component }}
+            {{#each components as |component| }}
+                {{> (toString component) }}
+                {{!-- {{ component }} --}}
             {{/each}}
         </div>
    </div>
