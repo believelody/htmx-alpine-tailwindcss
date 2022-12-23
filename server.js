@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 hbs.registerHelper('let', function (ctx) {
     Object.entries(ctx.hash).forEach(([key, value]) => {
-        ctx.data.root[key] = JSON.parse(value);
+        ctx.data.root[key] = value;
     })
 });
 
@@ -42,6 +42,22 @@ hbs.registerHelper('toString', function (name, options) {
         return '';
     }
     return name;
+});
+
+hbs.registerHelper('switch', function(value, options) {
+    this.switchValue = { value, found : false };
+    return options.fn(this);
+});
+
+hbs.registerHelper('case', function(value, options) {
+    if (value == this.switchValue.value) {
+        this.switchValue.found = true;
+        return options.fn(this);
+    }
+});
+
+hbs.registerHelper('default', function(options) {
+    return !this.switchValue.found ? options.fn(this) : null; ///We can add condition if needs
 });
 
 // => Here we expose the views so it can be rendered.

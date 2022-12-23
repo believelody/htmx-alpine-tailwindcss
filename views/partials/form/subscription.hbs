@@ -1,8 +1,4 @@
 <form class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
-    <div class="relative w-40 mr-2 sm:w-64 sm:mr-4">
-        <label for="footer-field" class="text-sm leading-7 text-gray-600">Placeholder</label>
-        <input type="text" id="footer-field" name="footer-field"
-            class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:ring-2 focus:bg-transparent focus:ring-indigo-200 focus:border-indigo-500">
-    </div>
-    {{> button/primary }}
+    {{> field/text label="Label" id="subscription" name="subscription" placeholder="Type your email here" }}
+    {{> button/primary label="Subscribe" }}
 </form>

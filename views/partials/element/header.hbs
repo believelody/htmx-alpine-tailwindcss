@@ -1,9 +1,6 @@
 <header class="text-gray-600 border-b body-font">
   <div class="container flex flex-row-reverse items-center justify-between p-5 mx-auto md:flex-row">
-    <a hx-get="/" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="flex items-center font-medium text-gray-900 cursor-pointer title-font md:mb-0">
-      {{> icon/brand-logo }}
-      <span class="hidden ml-3 text-xl md:inline">Tailblocks</span>
-    </a>
+    {{> element/brand }}
     <div class="hidden md:flex">
       {{> nav/menu-list }}
     </div>
