@@ -94,6 +94,14 @@ app.get("/blog", (req, res) => {
     res.render("pages/blog", ctx);
 });
 
+app.get("/login", (req, res) => {
+    let ctx = {};
+    if (req.headers['hx-request']) {
+        ctx.layout = null;
+    }
+    res.render("pages/login", ctx);
+});
+
 app.listen(port, () => {
     console.log("Server running");
 });
