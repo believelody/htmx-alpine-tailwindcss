@@ -1121,6 +1121,11 @@ h6{
   border-color: transparent;
 }
 
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
 .border-opacity-60{
   --tw-border-opacity: 0.6;
 }
