@@ -79,6 +79,29 @@
             },
         }));
 
+        Alpine.data('dropdown', () => ({
+            open: false,
+            trigger: {
+                ['x-ref']: 'trigger',
+                ['@click']() {
+                    this.open = true
+                },
+            },
+            dialogue: {
+                ['x-show']() {
+                    return this.open
+                },
+                ['@click.outside']() {
+                    this.open = false
+                },
+            },
+            closer: {
+                ['@click']() {
+                    this.open = false;
+                },
+            },
+        }))
+
         Alpine.bind('closerMenu', (url) => {
             return {
                 type: 'button',
