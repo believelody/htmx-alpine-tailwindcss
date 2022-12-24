@@ -1663,6 +1663,11 @@ h6{
 
 /* Text layout style */
 
+.text-primary{
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
 /* Border layout style */
 
 /* Border layout style */
@@ -1709,6 +1714,11 @@ body {
 .hover\:text-gray-800:hover{
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.hover\:text-primary-light-2:hover{
+  --tw-text-opacity: 1;
+  color: rgb(224 231 255 / var(--tw-text-opacity));
 }
 
 .focus\:z-10:focus{
