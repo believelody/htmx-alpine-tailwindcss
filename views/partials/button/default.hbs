@@ -1,6 +1,8 @@
-<button type="{{withDefault type 'button'}}"
-    @click="{{ click }}"
-    class="px-4 py-2 rounded md:flex {{#if emphasis}}
+<button
+    {{#if bind }}type="{{withDefault type 'button'}}"{{/if}}
+    {{#if click }}@click="{{ click }}"{{/if}}
+    {{#if bind }}x-bind="{{ bind }}"{{/if}}
+    class="{{withDefault class 'px-4 py-2 rounded md:flex'}} {{#if emphasis}}
             {{~#if outlined}}
                 btn btn-{{ emphasis }}-outlined
             {{~^~}}
@@ -19,5 +21,8 @@
     {{/if}}
     {{#if icon}}
         {{partial (append "icon/" icon) }}
+    {{/if}}
+    {{#if srOnly}}
+        <span class="sr-only">{{ srOnly }}</span>
     {{/if}}
 </button>

@@ -1,5 +1,5 @@
 <div x-data="sidebar" class="md:hidden">
-    {{> button/menu-mobile }}
+    {{> button/default bind="trigger" icon="menu-mobile" srOnly="Open main menu" class="inline-flex items-center text-sm text-gray-700 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" }}
     {{> element/sidebar title='Menu' components=(toArray 'nav/menu-sidebar' 'nav/external-list') }}
     {{!-- {{> element/sidebar title='Menu' components=(toArray (partial 'nav/menu-list') (partial 'nav/external-list')) }} --}}
 </div>
