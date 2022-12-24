@@ -1,2 +1,5 @@
-{{> element/sidebar title='Menu' components=(toArray 'nav/menu-list' 'nav/external-list') }}
-{{!-- {{> element/sidebar title='Menu' components=(toArray (partial 'nav/menu-list') (partial 'nav/external-list')) }} --}}
+<div x-data="sidebar" class="md:hidden">
+    {{> button/menu-mobile }}
+    {{> element/sidebar title='Menu' components=(toArray 'nav/menu-sidebar' 'nav/external-list') }}
+    {{!-- {{> element/sidebar title='Menu' components=(toArray (partial 'nav/menu-list') (partial 'nav/external-list')) }} --}}
+</div>
