@@ -1,0 +1,14 @@
+<form class="flex flex-wrap">
+    <div class="w-1/2 p-2">
+        {{> field/text label="Name" id="name" value="name" class="relative" placeholder="Your name" }}
+    </div>
+    <div class="w-1/2 p-2">
+        {{> field/email label="Email" id="email" name="email" class="relative"placeholder="Your email" }}
+    </div>
+    <div class="w-full p-2">
+        {{> field/textarea class="relative" height=32 id="message" name="message" placeholder="Tell us everything..." label="Message" no-resize=true animate=true}}
+    </div>
+    <div class="flex justify-center w-full p-2">
+        {{> button/primary label="Send"}}
+    </div>
+</form>
