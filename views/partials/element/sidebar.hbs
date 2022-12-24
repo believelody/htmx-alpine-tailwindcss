@@ -26,7 +26,7 @@
              <section>{{ title }}</section>
             {{/if}}
             <section class="flex justify-end">
-                {{> button/close-menu }}
+                {{> button/default bind="closer" icon="close" srOnly="Close menu" class="inline-flex items-center p-1 text-sm text-gray-700 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" }}
             </section>
        </div>
         <div class="h-full overflow-y-auto">
