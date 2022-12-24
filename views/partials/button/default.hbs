@@ -1,5 +1,10 @@
+{{log emphasis}}
 <button
-    {{#if bind }}type="{{withDefault type 'button'}}"{{/if}}
+    {{#unless bind }}
+        {{#if type }}
+            type="{{ type }}"
+        {{/if }}
+    {{/unless}}
     {{#if click }}@click="{{ click }}"{{/if}}
     {{#if bind }}x-bind="{{ bind }}"{{/if}}
     class="{{withDefault class 'px-4 py-2 rounded md:flex'}} {{#if emphasis}}

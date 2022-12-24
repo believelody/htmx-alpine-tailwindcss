@@ -816,6 +816,18 @@ h6{
   top: 0px;
 }
 
+.right-0{
+  right: 0px;
+}
+
+.-top-4{
+  top: -1rem;
+}
+
+.-right-4{
+  right: -1rem;
+}
+
 .z-40{
   z-index: 40;
 }
@@ -916,6 +928,10 @@ h6{
 
 .block{
   display: block;
+}
+
+.inline{
+  display: inline;
 }
 
 .flex{
@@ -1032,6 +1048,10 @@ h6{
 
 .max-w-md{
   max-width: 28rem;
+}
+
+.max-w-lg{
+  max-width: 32rem;
 }
 
 .flex-shrink-0{
@@ -1320,6 +1340,10 @@ h6{
   padding: 1.25rem;
 }
 
+.p-8{
+  padding: 2rem;
+}
+
 .px-5{
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -1547,6 +1571,12 @@ h6{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow{
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1744,6 +1774,10 @@ body {
 
   .sm\:flex-row{
     flex-direction: row;
+  }
+
+  .sm\:rounded-lg{
+    border-radius: 0.5rem;
   }
 
   .sm\:px-6{
