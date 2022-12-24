@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('.hbs', hbs.express4({
     partialsDir: __dirname + '/views/partials',
     layoutsDir: __dirname + '/views/layouts'
-}))
+}));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 // => Here we expose your dist folder

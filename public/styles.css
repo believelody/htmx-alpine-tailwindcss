@@ -1078,6 +1078,10 @@ h6{
   flex-grow: 1;
 }
 
+.grow{
+  flex-grow: 1;
+}
+
 .origin-top-right{
   transform-origin: top right;
 }
