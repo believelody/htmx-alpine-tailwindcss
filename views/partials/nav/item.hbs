@@ -1,13 +1,12 @@
 <li>
   <a
-    @click="openSidebar = null; activeLink = '{{ item.url }}'"
-    hx-get="{{ item.url }}"
+    x-bind="closerMenu('{{ route.url }}')"
+    hx-get="{{ route.url }}"
     hx-push-url="true"
     hx-target="#content"
     hx-swap="innerHTML"
-    :class="activeLink.includes('{{ item.url }}') && 'border-b-2 border-gray-800'"
     class="mr-5 cursor-pointer hover:text-gray-900"
   >
-    <span>{{ item.label }}</span>
+    <span>{{ route.label }}</span>
   </a>
 </li>

@@ -1,0 +1,26 @@
+<div x-data="{ openSidebar: null }">
+    <div x-show="openSidebar" id="drawer-example" class="z-40" @keyup.escape.window="openSidebar = null">
+        <div x-show="openSidebar" x-transition:enter="transition ease-in-out duration-1000 sm:duration-700"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-1"
+            x-transition:leave="transition ease-in-out duration-1000 sm:duration-700" x-transition:leave-start="opacity-1"
+            x-transition:leave-end="opacity-0" class="fixed top-0 left-0 w-screen h-screen bg-black/60 dark:bg-white/60">
+        </div>
+        <div @click.outside="openSidebar = null" x-show="openSidebar"
+            x-transition:enter="transform transition ease-in-out duration-1000 sm:duration-700"
+            x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+            x-transition:leave="transform transition ease-in-out duration-1000 sm:duration-700"
+            x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
+            class="fixed flex flex-col h-screen overflow-y-hidden bg-white">
+            <div class="flex items-center justify-between w-full border-b min-h-[3em]">
+                {{#if title }}
+                <section>{{ title }}</section>
+                {{/if}}
+                <section class="flex justify-end">
+                    {{> button/close-menu }}
+                </section>
+            </div>
+            <div class="h-full overflow-y-auto">
+            </div>
+        </div>
+    </div>
+</div>

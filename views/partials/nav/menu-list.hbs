@@ -1,13 +1,13 @@
 <div x-data="{ activeLink: window.location.pathname }">
-    <nav class="flex-wrap items-center justify-center hidden text-base list-none md:flex md:ml-auto md:mr-auto">
-        {{#each (routes) as |item|}}
-            {{> nav/item item=item }}
+    <nav class="flex-wrap justify-center hidden text-base list-none routes-center md:flex md:ml-auto md:mr-auto">
+        {{#each (routes) as |route|}}
+            {{> nav/item route=route }}
         {{/each}}
     </nav>
 
     <ul class="px-3 py-4 space-y-2 overflow-y-auto text-lg rounded bg-gray-50 md:hidden">
-        {{#each (routes) as |item|}}
-            {{> nav/item item=item }}
+        {{#each (routes) as |route|}}
+            {{> nav/item route=route }}
         {{/each}}
     </ul>
 </div>
