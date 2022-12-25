@@ -6,6 +6,7 @@ const routes = require('./routes');
 const caseHelper = require('./case');
 const defaultHelper = require('./default');
 const withDefault = require('./withDefault');
+const cond = require('./cond');
 
 module.exports.customHelpers = {
     toString,
@@ -15,5 +16,6 @@ module.exports.customHelpers = {
     routes,
     case: caseHelper,
     default: defaultHelper,
-    withDefault
+    withDefault,
+    cond
 };

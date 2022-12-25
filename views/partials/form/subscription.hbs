@@ -1,4 +1,4 @@
 <form hx-get="/login" hx-target="#content" hx-trigger="submit" hx-push-url="true" class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
     {{> field/text class="relative w-auto mr-2 sm:w-64 sm:mr-4" name="subscription" placeholder="Type your email here" }}
-    {{> button/primary label="Subscribe" click="console.log('subscribe')" outlined=true }}
+    {{> button/default label="Subscribe" click="console.log('subscribe')" outlined=true }}
 </form>

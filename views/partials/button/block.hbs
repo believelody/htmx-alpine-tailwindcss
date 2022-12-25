@@ -1,0 +1,23 @@
+<button
+    {{#unless bind }}
+        {{#if type }}
+            type="{{ type }}"
+        {{/if }}
+    {{/unless}}
+    class="relative justify-center w-full py-2 rounded btn {{#if color}}{{#if outlined}}btn-{{color}}-outlined{{else}}btn-{{color}}{{/if}}{{else}}{{#if outlined}}btn-outlined{{/if}}{{/if}}""
+>
+    {{#if icon}}
+        <span class="{{ icon-class }}">
+            {{> (append 'icon/' icon) }}
+        </span>
+    {{/if}}
+    {{#if label}}
+        <span>{{ label }}</span>
+    {{/if}}
+    {{#if sr-only}}
+        <span class="sr-only">{{ sr-only }}</span>
+    {{/if}}
+    {{#if image}}
+        {{ image }}
+    {{/if}}
+</button>

@@ -7,28 +7,16 @@
     {{/unless}}
     {{#if click }}@click="{{ click }}"{{/if}}
     {{#if bind }}x-bind="{{ bind }}"{{/if}}
-    class="{{withDefault class 'px-4 py-2 rounded md:flex'}} {{#if color}}
-            {{~#if outlined}}
-                btn btn-{{ color }}-outlined
-            {{~^~}}
-                btn btn-{{ color }}
-            {{~/if}}
-        {{~^~}}
-            {{~#if outlined}}
-                btn btn-outlined
-            {{~^~}}
-                btn
-            {{~/if}}
-        {{~/if}}"
+    class="{{withDefault class 'relative px-4 py-2 rounded btn'}} {{#if color}}{{#if outlined}}btn-{{color}}-outlined{{else}}btn-{{color}}{{/if}}{{else}}{{#if outlined}}btn-outlined{{/if}}{{/if}} {{#if block}}w-full{{/if}}"
 >
     {{#if label}}
         <span>{{ label }}</span>
     {{/if}}
     {{#if icon}}
-        {{partial (append "icon/" icon) }}
+        <span class="{{ icon-class}}">{{partial (append "icon/" icon) }}</span>
     {{/if}}
-    {{#if srOnly}}
-        <span class="sr-only">{{ srOnly }}</span>
+    {{#if sr-only}}
+        <span class="sr-only">{{ sr-only }}</span>
     {{/if}}
     {{#if image}}
         {{ image }}
