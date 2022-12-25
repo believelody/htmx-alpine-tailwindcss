@@ -7,21 +7,43 @@
         @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-1;
     }
     .input-primary {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-primary-light-1 focus:border-primary;
+        @apply focus:ring-2 focus:ring-primary-light-1 focus:border-primary;
     }
     .input-secondary {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-secondary-light-1 focus:border-secondary;
+        @apply focus:ring-2 focus:ring-secondary-light-1 focus:border-secondary;
     }
     .input-success {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-success-light-1 focus:border-success;
+        @apply focus:ring-2 focus:ring-success-light-1 focus:border-success;
     }
     .input-danger {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-danger-light-1 focus:border-danger;
+        @apply focus:ring-2 focus:ring-danger-light-1 focus:border-danger;
     }
     .input-warning {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-warning-light-1 focus:border-warning;
+        @apply focus:ring-2 focus:ring-warning-light-1 focus:border-warning;
     }
     .input-info {
-        @apply w-full px-3 py-1 text-base leading-8 bg-opacity-50 border rounded outline-none text-neutral-dark bg-neutral-light-2 border-neutral focus:ring-2 focus:ring-info-light-1 focus:border-info;
+        @apply focus:ring-2 focus:ring-info-light-1 focus:border-info;
+    }
+
+    .checkbox {
+        @apply border rounded-sm;
+    }
+    .checkbox-primary {
+        @apply accent-primary;
+    }
+    .checkbox-secondary {
+        @apply accent-secondary;
+    }
+    .checkbox-success {
+        @apply accent-success;
+    }
+    .checkbox-danger {
+        @apply accent-danger;
+    }
+    .checkbox-warning {
+        @apply accent-warning;
+    }
+    .checkbox-info {
+        @apply accent-info;
     }
 }

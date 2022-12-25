@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+
+    /* Accent layout style */
+    .accent-primary {
+        @apply accent-indigo-500;
+    }
+
+    .accent-primary-light-1 {
+        @apply accent-indigo-300;
+    }
+
+    .accent-primary-light-2 {
+        @apply accent-indigo-100;
+    }
+
+    .accent-primary-dark-1 {
+        @apply accent-indigo-700;
+    }
+
+    .accent-primary-dark-2 {
+        @apply accent-indigo-900;
+    }
+
+    .accent-secondary {
+        @apply accent-black;
+    }
+
+    .accent-neutral {
+        @apply accent-neutral-400;
+    }
+
+    .accent-neutral-light {
+        @apply accent-neutral-100;
+    }
+
+    .accent-neutral-dark {
+        @apply accent-neutral-700;
+    }
+
+    .accent-success {
+        @apply accent-green-600;
+    }
+
+    .accent-success-light {
+        @apply accent-green-400;
+    }
+
+    .accent-success-dark {
+        @apply accent-green-800;
+    }
+
+    .accent-danger {
+        @apply accent-red-500;
+    }
+
+    .accent-danger-light {
+        @apply accent-red-400;
+    }
+
+    .accent-danger-dark {
+        @apply accent-red-700;
+    }
+
+    .accent-info {
+        @apply accent-blue-600;
+    }
+
+    .accent-info-light {
+        @apply accent-blue-400;
+    }
+
+    .accent-info-dark {
+        @apply accent-blue-800;
+    }
+
+    .accent-warning {
+        @apply accent-yellow-500;
+    }
+
+    .accent-warning-light {
+        @apply accent-yellow-400;
+    }
+
+    .accent-warning-dark {
+        @apply accent-yellow-700;
+    }
+}
