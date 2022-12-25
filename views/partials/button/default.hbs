@@ -1,4 +1,4 @@
-{{log emphasis}}
+{{log color}}
 <button
     {{#unless bind }}
         {{#if type }}
@@ -7,11 +7,11 @@
     {{/unless}}
     {{#if click }}@click="{{ click }}"{{/if}}
     {{#if bind }}x-bind="{{ bind }}"{{/if}}
-    class="{{withDefault class 'px-4 py-2 rounded md:flex'}} {{#if emphasis}}
+    class="{{withDefault class 'px-4 py-2 rounded md:flex'}} {{#if color}}
             {{~#if outlined}}
-                btn btn-{{ emphasis }}-outlined
+                btn btn-{{ color }}-outlined
             {{~^~}}
-                btn btn-{{ emphasis }}
+                btn btn-{{ color }}
             {{~/if}}
         {{~^~}}
             {{~#if outlined}}

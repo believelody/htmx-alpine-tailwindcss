@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const hbs = require("express-hbs");
-const { array, misc, string } = require('useful-handlebars-helpers');
+const { array, misc, string, comparison } = require('useful-handlebars-helpers');
 const { customHelpers } = require('./helpers');
 const bodyParser = require("body-parser");
 const port = 8000;
@@ -17,7 +17,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-[array, misc, string, customHelpers].forEach(helper => hbs.registerHelper(helper));
+[array, misc, string, comparison, customHelpers].forEach(helper => hbs.registerHelper(helper));
 
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({
