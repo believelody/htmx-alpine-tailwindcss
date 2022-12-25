@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+
+    /* Ring layout style */
+    .ring-primary {
+        @apply ring-indigo-500;
+    }
+
+    .ring-primary-light-1 {
+        @apply ring-indigo-300;
+    }
+
+    .ring-primary-light-2 {
+        @apply ring-indigo-100;
+    }
+
+    .ring-primary-dark-1 {
+        @apply ring-indigo-700;
+    }
+
+    .ring-primary-dark-2 {
+        @apply ring-indigo-900;
+    }
+
+    .ring-secondary {
+        @apply ring-black;
+    }
+
+    .ring-neutral {
+        @apply ring-neutral-400;
+    }
+
+    .ring-neutral-light {
+        @apply ring-neutral-100;
+    }
+
+    .ring-neutral-dark {
+        @apply ring-neutral-700;
+    }
+
+    .ring-success {
+        @apply ring-green-600;
+    }
+
+    .ring-success-light {
+        @apply ring-green-400;
+    }
+
+    .ring-success-dark {
+        @apply ring-green-800;
+    }
+
+    .ring-danger {
+        @apply ring-red-500;
+    }
+
+    .ring-danger-light {
+        @apply ring-red-400;
+    }
+
+    .ring-danger-dark {
+        @apply ring-red-700;
+    }
+
+    .ring-info {
+        @apply ring-blue-600;
+    }
+
+    .ring-info-light {
+        @apply ring-blue-400;
+    }
+
+    .ring-info-dark {
+        @apply ring-blue-800;
+    }
+
+    .ring-warning {
+        @apply ring-yellow-500;
+    }
+
+    .ring-warning-light {
+        @apply ring-yellow-400;
+    }
+
+    .ring-warning-dark {
+        @apply ring-yellow-700;
+    }
+}

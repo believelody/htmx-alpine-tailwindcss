@@ -3,3 +3,5 @@
 @import "./utilities/text.css";
 @import "./utilities/placeholder.css";
 @import "./utilities/layout.css";
+@import "./utilities/ring.css";
+@import "./utilities/transition.css";

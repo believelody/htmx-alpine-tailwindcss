@@ -1,12 +1,12 @@
 <form class="flex flex-wrap">
     <div class="w-1/2 p-2">
-        {{> field/text label="Name" id="name" value="name" class="relative" placeholder="Your name" }}
+        {{> field/text label="Name" id="name" value="name" class="relative" placeholder="Your name" emphasis="primary" }}
     </div>
     <div class="w-1/2 p-2">
-        {{> field/email label="Email" id="contact-email" name="contact-email" class="relative"placeholder="Your email" }}
+        {{> field/email label="Email" id="contact-email" name="contact-email" class="relative" placeholder="Your email" emphasis="primary" }}
     </div>
     <div class="w-full p-2">
-        {{> field/textarea class="relative" height=32 id="message" name="message" placeholder="Tell us everything..." label="Message" no-resize=true animate=true}}
+        {{> field/textarea class="relative" height=32 id="message" name="message" transition=true placeholder="Tell us everything..." label="Message" no-resize=true}}
     </div>
     <div class="flex justify-center w-full p-2">
         {{> button/primary label="Send"}}
