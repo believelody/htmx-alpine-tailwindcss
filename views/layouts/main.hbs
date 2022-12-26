@@ -24,7 +24,7 @@
 </body>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('modal', () => ({
+        Alpine.data('drawer', () => ({
             open: false,
             trigger: {
                 ['x-ref']: 'trigger',
@@ -51,57 +51,6 @@
             },
         }));
             
-        Alpine.data('sidebar', () => ({
-            open: false,
-            trigger: {
-                ['x-ref']: 'trigger',
-                ['@click']() {
-                    this.open = true
-                },
-            },
-            drawer: {
-                ['x-show']() {
-                    return this.open
-                },
-                ['@click.outside']() {
-                    this.open = false
-                },
-                ['@keyup.escape.window']() {
-                    this.open = false
-                },
-            },
-            closer: {
-                ['@click']() {
-                    if (this.open) {
-                        this.open = false;
-                    }
-                },
-            },
-        }));
-
-        Alpine.data('dropdown', () => ({
-            open: false,
-            trigger: {
-                ['x-ref']: 'trigger',
-                ['@click']() {
-                    this.open = true
-                },
-            },
-            dialogue: {
-                ['x-show']() {
-                    return this.open
-                },
-                ['@click.outside']() {
-                    this.open = false
-                },
-            },
-            closer: {
-                ['@click']() {
-                    this.open = false;
-                },
-            },
-        }))
-
         Alpine.bind('closerMenu', (url) => {
             return {
                 type: 'button',

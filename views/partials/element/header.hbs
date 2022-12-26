@@ -6,9 +6,9 @@
     {{> sidebar/menu }}
     <div class="items-center hidden gap-4 md:flex">
       {{> dropdown/user }}
-      <template x-if="!activeRoute.includes('/login')">
-        {{> modal/login }}
-      </template>
+      {{> modal/login }}
+      {{!-- <template x-if="!activeRoute.includes('/login')">
+      </template> --}}
     </div>
   </div>
 </header>
