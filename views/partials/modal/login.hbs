@@ -1,4 +1,4 @@
 <div x-data="modal">
-    {{> button/primary label="Login" bind="trigger" icon=(partial 'icon/arrow-right') }}
-    <div class="{{ class }}">{{> element/modal component=(partial 'form/login') }}</div>
+    {{> button/primary label="Login" bind="trigger" icon=(partial 'icon/arrow-right' color='text-primary-200') }}
+    {{> element/modal component=(partial 'form/login') class="p-8"}}
 </div>
