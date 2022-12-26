@@ -1,4 +1,4 @@
-<div class="{{ class }}" x-data="{ checked: false }" x-effect="console.log(checked)">
+<div class="{{ class }}" x-data="{ checked: false }"">
     {{#if (is label-position "left")}}
         <label for="{{ id }}" class="block mr-2 text-{{withDefault label-size 'sm'}} text-{{withDefault label-color 'neutral'}}">{{ label }}</label>
     {{/if}}

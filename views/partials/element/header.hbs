@@ -1,14 +1,14 @@
-<header x-effect="console.log(window.location.pathname)" class="text-gray-600 border-b body-font" x-data="{ activeRoute: window.location.pathname }">
+<header class="text-gray-600 border-b body-font">
   <div class="container flex flex-row-reverse items-center justify-between p-5 mx-auto md:flex-row">
     {{> element/brand }}
-      {{> nav/menu-list }}
+    {{> nav/menu-list }}
     {{!-- {{> button/menu-mobile }} --}}
     {{> sidebar/menu }}
     <div class="items-center hidden gap-4 md:flex">
       {{> dropdown/user }}
-      {{> modal/login }}
-      {{!-- <template x-if="!activeRoute.includes('/login')">
-      </template> --}}
+      {{!-- <template x-if="!$data.currentRoute.includes('/login')"> --}}
+        {{> modal/login }}
+      {{!-- </template> --}}
     </div>
   </div>
 </header>

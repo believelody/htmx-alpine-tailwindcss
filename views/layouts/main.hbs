@@ -13,7 +13,11 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body x-data="{ currentRoute : window.location.pathname }" x-init="$watch('currentRoute', (value) => {
+        navigation.addEventListener('navigate', ({ destination }) => {
+            console.log(destination);
+        });
+    })">
     {{> element/header }}
     <div class="flex flex-col overflow-y-auto grow">
         <main id="content" class="h-full">
@@ -24,6 +28,16 @@
 </body>
 <script>
     document.addEventListener('alpine:init', () => {
+        Alpine.data('route', () => ({
+            currentRoute : window.location.pathname
+        }));
+        Alpine.directive('route', (el, {}, { cleanup }) => {
+            navigation.addEventListener('navigate', ({ destination }) => {
+                this.currentRoute = new URL(destination.url).pathname;
+            });
+                console.log("in directive : ", this.currentRoute);
+            navigation.removeEventListener('navigate', navigateEvent => {});
+        });
         Alpine.data('drawer', () => ({
             open: false,
             trigger: {
@@ -48,20 +62,36 @@
                 ['@click']() {
                     this.open = false
                 },
+                ['@navigate']() {
+                    console.log('test')
+                }
             },
         }));
             
-        Alpine.bind('closerMenu', (url) => {
+        Alpine.bind('goto', (url) => {
             return {
                 type: 'button',
                 '@click'() {
-                    this.activeLink = url;
+                    this.activeRoute = url;
                 },
                 ':class'() {
-                    return this.activeLink.includes(url) && 'border-b-2 border-gray-800'
+                    return this.activeRoute.includes(url) && 'border-b-2 border-gray-800'
                 },
             }
         })
+    });
+
+    document.addEventListener('alpine:initialized', () => {
+        Alpine.magic('currentRoute', (el, { interceptor }) => {
+            return window.location.pathname;
+        });
+        Alpine.directive('route', (el, {}, { cleanup }) => {
+            navigation.addEventListener('navigate', ({ destination }) => {
+                this.$currentRoute = new URL(destination.url).pathname;
+                console.log("in directive : ", this.$currentRoute);
+            });
+            navigation.removeEventListener('navigate', navigateEvent => {});
+        });
     })
 </script>
 </html>

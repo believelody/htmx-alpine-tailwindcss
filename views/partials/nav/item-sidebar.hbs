@@ -1,12 +1,11 @@
 <li>
   <a
-    @click="activeLink = '{{ route.url }}'"
     x-bind="closer"
     hx-get="{{ route.url }}"
     hx-push-url="true"
     hx-target="#content"
     hx-swap="innerHTML"
-    :class="activeLink.includes('{{ route.url }}') && 'border-b-2 border-gray-800'"
+    {{!-- :class="$currentRoute.includes('{{ route.url }}') && 'border-b-2 border-gray-800'" --}}
     class="mr-5 cursor-pointer hover:text-gray-900"
   >
     <span>{{ route.label }}</span>
