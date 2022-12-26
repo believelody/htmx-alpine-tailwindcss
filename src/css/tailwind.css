@@ -1,0 +1,18 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "./base/typography.css";
+@import "./components/button.css";
+@import "./components/input.css";
+@import "./components/link.css";
+@import "tailwindcss/utilities";
+@import "./utilities/layout.css";
+@import "./utilities/transition.css";
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+  position: relative;
+}

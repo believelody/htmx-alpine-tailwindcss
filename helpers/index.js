@@ -7,6 +7,7 @@ const caseHelper = require('./case');
 const defaultHelper = require('./default');
 const withDefault = require('./withDefault');
 const cond = require('./cond');
+const typeofHelper = require('./typeof');
 
 module.exports.customHelpers = {
     toString,
@@ -17,5 +18,6 @@ module.exports.customHelpers = {
     case: caseHelper,
     default: defaultHelper,
     withDefault,
-    cond
+    cond,
+    typeof: typeofHelper,
 };
