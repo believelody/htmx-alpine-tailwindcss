@@ -1,4 +1,4 @@
 <div x-data="modal">
-    {{> button/primary label="Login" bind="trigger" icon="arrow-right" }}
+    {{> button/primary label="Login" bind="trigger" icon=(partial 'icon/arrow-right') }}
     <div class="{{ class }}">{{> element/modal component=(partial 'form/login') }}</div>
 </div>
