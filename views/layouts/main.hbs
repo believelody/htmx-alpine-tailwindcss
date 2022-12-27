@@ -21,8 +21,8 @@
     @route.window="currentRoute = $event.detail"
 >
     {{> element/header }}
-    <div class="flex flex-col overflow-y-auto grow">
-        <main id="content" class="h-full">
+    <div class="relative flex flex-col overflow-y-auto grow">
+        <main id="content" class="grow">
             {{{ body }}}
         </main>
         {{> element/footer }}
