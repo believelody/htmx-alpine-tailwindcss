@@ -4,8 +4,7 @@
     hx-push-url="true"
     hx-target="#content"
     hx-swap="innerHTML"
-    @click="currentRoute = '{{ route.url }}'"
-    {{!-- :class="$data.currentRoute.includes('{{ route.url }}') && 'border-b-2 border-gray-800'" --}}
+    :class="currentRoute.includes('{{ route.url }}') && 'border-b-2 border-gray-800'"
     class="mr-5 cursor-pointer hover:text-gray-900"
   >
     <span>{{ route.label }}</span>

@@ -2,13 +2,12 @@
   <div class="container flex flex-row-reverse items-center justify-between p-5 mx-auto md:flex-row">
     {{> element/brand }}
     {{> nav/menu-list }}
-    {{!-- {{> button/menu-mobile }} --}}
     {{> sidebar/menu }}
     <div class="items-center hidden gap-4 md:flex">
       {{> dropdown/user }}
-      {{!-- <template x-if="!$data.currentRoute.includes('/login')"> --}}
+      <template x-if="!currentRoute.includes('/login')">
         {{> modal/login }}
-      {{!-- </template> --}}
+      </template>
     </div>
   </div>
 </header>
