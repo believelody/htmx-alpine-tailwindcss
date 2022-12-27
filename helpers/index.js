@@ -8,6 +8,7 @@ const defaultHelper = require('./default');
 const withDefault = require('./withDefault');
 const cond = require('./cond');
 const typeofHelper = require('./typeof');
+const objectHelper = require('./object');
 
 module.exports.customHelpers = {
     toString,
@@ -20,4 +21,5 @@ module.exports.customHelpers = {
     withDefault,
     cond,
     typeof: typeofHelper,
+    object: objectHelper,
 };
