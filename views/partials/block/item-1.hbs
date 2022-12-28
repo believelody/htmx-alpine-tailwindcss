@@ -6,15 +6,7 @@
     <h2 class="mb-3 font-medium text-neutral-900 title-font sm:text-2xl">{{ item.title }}</h2>
     <p class="mb-3 leading-relaxed">{{ item.content }}</p>
     {{> link/default color=color icon=(partial 'icon/arrow-right') label="Learn More" href=item.url }}
-    <div class="absolute bottom-0 left-0 flex items-center justify-center w-full py-4 mt-2 leading-none text-center text-neutral-800">
-        <section class="inline-flex items-center py-1 text-sm leading-none cursor-pointer">
-            <span class="mr-1">{{> icon/eye }}</span>
-            <span>{{ item.views }}</span>
-        </section>
-        <span class="w-px h-4 mx-3 border border-neutral-700"></span>
-        <section class="inline-flex items-center text-sm leading-none cursor-pointer ">
-            <span class="mr-1">{{> icon/chat }}</span>
-            <span>{{ item.comments }}</span>
-        </section>
-    </div>
+    {{#if footer }}
+        {{> footer }}
+    {{/if}}
 </div>

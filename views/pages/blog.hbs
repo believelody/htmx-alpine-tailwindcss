@@ -1,10 +1,24 @@
+{{#*inline 'footer'}}
+<div class="absolute bottom-0 left-0 flex items-center justify-center w-full py-4 mt-2 leading-none text-center text-neutral-800">
+    <section class="inline-flex items-center py-1 text-sm leading-none cursor-pointer">
+        <span class="mr-1">{{> icon/eye }}</span>
+        <span>{{ item.views }}</span>
+    </section>
+    <span class="w-px h-4 mx-3 border border-neutral-700"></span>
+    <section class="inline-flex items-center text-sm leading-none cursor-pointer ">
+        <span class="mr-1">{{> icon/chat }}</span>
+        <span>{{ item.comments }}</span>
+    </section>
+</div>
+{{/inline}}
+
 {{!< main }}
 <section class="text-neutral-600 body-font">
   <div class="container py-24 mx-auto">
     <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {{#each blogs as |item|}}
       <div class="min-w-full">
-        {{> block/item-1 color="primary" item=item}}
+        {{> block/item-1 color="primary" item=item footer='footer'}}
       </div>
       {{/each}}
     </div>
