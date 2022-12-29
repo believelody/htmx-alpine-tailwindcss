@@ -9,7 +9,7 @@ const path = require("path");
 const homeRoute = require('./routes/home');
 const aboutRoute = require('./routes/about');
 const contactRoute = require('./routes/contact');
-const teamsRoute = require('./routes/teams');
+const teamsRoute = require('./routes/team');
 const blogRoute = require('./routes/blog');
 const loginRoute = require('./routes/login');
 
@@ -29,18 +29,22 @@ app.set('views', path.join(__dirname, 'views'));
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { layout : null, fromHTMX: true };
     }
-    next();
+    await setTimeout(() => {
+        console.log('waiting...');
+        next();
+    }, 2000);
+    // next();
 });
 
 app.use('/', homeRoute);
 app.use('/about', aboutRoute);
 app.use('/contact', contactRoute);
 app.use('/blog', blogRoute);
-app.use('/teams', teamsRoute);
+app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
 
 app.listen(port, () => {

@@ -11,9 +11,11 @@
     <script src="https://unpkg.com/htmx.org@1.8.4"
         integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
 </head>
 
-<body hx-boost="true" x-data="{ currentRoute : window.location.pathname }"
+<body hx-boost="true" hx-ext="loading-states"
+    x-data="{ currentRoute : window.location.pathname }"
     x-effect="
         navigation.addEventListener('navigate', ({ destination }) => {
             $dispatch('route', new URL(destination.url).pathname);
@@ -22,9 +24,11 @@
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
-        <main id="content" class="relative grow">
-            {{log title }}
-            {{{ body }}}
+        <main class="relative grow">
+            {{> loading/base-2}}
+            <section id="content" class="relative">
+                {{{ body }}}
+            </section>
         </main>
         {{> element/footer }}
     </div>

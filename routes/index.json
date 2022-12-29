@@ -13,8 +13,8 @@
             "label": "Blog"
         },
         {
-            "url": "/teams",
-            "label": "Our teams"
+            "url": "/team",
+            "label": "Our team"
         }
     ]
 }
