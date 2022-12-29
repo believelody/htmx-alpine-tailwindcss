@@ -13,17 +13,17 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body x-data="{ currentRoute : window.location.pathname }"
+<body hx-boost="true" x-data="{ currentRoute : window.location.pathname }"
     x-effect="
         navigation.addEventListener('navigate', ({ destination }) => {
             $dispatch('route', new URL(destination.url).pathname);
         });"
     @route.window="currentRoute = $event.detail"
 >
-    {{log title }}
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
-        <main id="content" class="grow">
+        <main id="content" class="relative grow">
+            {{log title }}
             {{{ body }}}
         </main>
         {{> element/footer }}

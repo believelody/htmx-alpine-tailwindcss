@@ -1,4 +1,4 @@
-<a hx-get="{{ href }}" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="inline-flex items-center cursor-pointer hover:border-b-2 {{withDefault color 'hover:border-b-neutral-500 text-neutral-500'}}">
+<a href="{{ href }}" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="inline-flex items-center cursor-pointer hover:border-b-2 {{withDefault color 'hover:border-b-neutral-500 text-neutral-500'}}">
     <span class="mr-2">{{label}}</span>
     {{#if icon}}
         <span>{{ icon }}</span>

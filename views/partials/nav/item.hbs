@@ -1,9 +1,10 @@
 <li>
   <a
-    hx-get="{{ route.url }}"
+    href="{{ route.url }}"
     hx-push-url="true"
     hx-target="#content"
     hx-swap="innerHTML"
+    hx-indicator="#loader"
     :class="currentRoute.includes('{{ route.url }}') && 'border-b-2 border-gray-800'"
     class="mr-5 cursor-pointer hover:text-gray-900"
   >
