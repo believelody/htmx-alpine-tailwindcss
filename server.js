@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
     if (req.headers['hx-request']) {
-        req.ctx = { layout : null };
+        req.ctx = { layout : null, fromHTMX: true };
     }
     next();
 });

@@ -1,1 +1,6 @@
-<div class="hidden" x-init="console.log(document.onlaod);document.title='{{title}}'"></div>
+<div class="hidden" x-init="
+        if ('{{ fromHTMX }}') {
+            document.title='{{title}}';
+        }
+    "
+></div>
