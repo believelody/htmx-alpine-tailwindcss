@@ -12,6 +12,7 @@
         integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 
 <body hx-boost="true" hx-ext="loading-states"
@@ -25,7 +26,7 @@
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
         <main class="relative grow">
-            {{> loading/base-2}}
+            {{> loading/base-2 size=18 }}
             <section id="content" class="relative">
                 {{{ body }}}
             </section>

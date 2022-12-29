@@ -1,4 +1,10 @@
-<a href="/login" hx-push-url="true" hx-target="#content" hx-swap="innerHTML" class="flex items-center font-medium text-gray-900 cursor-pointer title-font md:mb-0">
+<a href="/login"
+    hx-push-url="true"
+    hx-target="#content"
+    hx-swap="innerHTML"
+    hx-trigger="load, click"
+    hx-indicator="#loader, #content"
+    class="flex items-center font-medium text-gray-900 cursor-pointer title-font md:mb-0">
     {{> icon/brand-logo }}
     <span class="hidden ml-3 text-xl md:inline">Tailblocks</span>
 </a>
