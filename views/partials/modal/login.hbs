@@ -1,4 +1,4 @@
 <div x-data="drawer">
     {{> button/primary label="Login" bind="trigger" icon=(partial 'icon/arrow-right' color='text-primary-200') }}
-    {{> element/modal component=(partial 'form/login') class="p-8"}}
+    {{> element/modal modal=(object component=(partial 'form/login')) class="p-8"}}
 </div>
