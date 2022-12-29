@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         subtitle: "SUBTITLE",
         content: "Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche."
     }));
-    req.ctx = { ...req.ctx, cards };
+    req.ctx = { ...req.ctx, cards, title: 'About Us' };
     return res.render('pages/about', req.ctx)
 });
 

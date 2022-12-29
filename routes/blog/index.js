@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         comments: 6,
         url: '/'
     }));
-    req.ctx = { ...req.ctx, blogs };
+    req.ctx = { ...req.ctx, blogs, title: 'Blogs' };
     return res.render('pages/blog', req.ctx)
 });
 

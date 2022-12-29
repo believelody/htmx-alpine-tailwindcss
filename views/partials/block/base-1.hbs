@@ -2,10 +2,10 @@
     {{#if item.background}}
         <img loading="lazy" class="absolute top-0 left-0 object-cover w-full h-full -z-10 opacity-20" src="{{ item.background }}" alt="{{ item.content }}" />
     {{/if}}
-    <h5 class="mb-1 font-medium tracking-widest text-{{withDefault color 'neutral'}}-700 title-font">{{ item.subtitle }}</h5>
+    <h5 class="mb-1 font-medium tracking-widest {{withDefault color 'text-neutral-700'}} title-font">{{ item.subtitle }}</h5>
     <h2 class="mb-3 font-medium text-neutral-900 title-font sm:text-2xl">{{ item.title }}</h2>
     <p class="mb-3 leading-relaxed">{{ item.content }}</p>
-    {{> link/default color=color icon=(partial 'icon/arrow-right') label="Learn More" href=item.url }}
+    {{> (append 'link/' (withDefault color 'default')) icon=(partial 'icon/arrow-right') label="Learn More" href=item.url }}
     {{#if footer }}
         {{> footer }}
     {{/if}}
