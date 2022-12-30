@@ -1,19 +1,25 @@
-const express = require('express');
+import fetch from 'node-fetch';
+import express from 'express';
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    const blogs = [...Array(6)].map((_, index) => ({
+router.get('/', async (req, res) => {
+    const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=10`);
+    const { posts } = await postsRes.json();
+    console.log(posts);
+    const blogs = posts.map((post, index) => ({
         background: `https://picsum.photos/id/${Math.ceil(Math.random(6) * 100)}/200/300`,
         alt: "content " + (index + 1),
-        title: "Raclette Blueberry Nextious Level",
-        subtitle: "CATEGORY",
-        content: "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
-        views: "1.2k",
-        comments: 6,
-        url: '/'
+        title: post.title,
+        content: post.body,
+        views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 1000 + 100)),
+        comments: post.reactions * Math.ceil(Math.random()*100 + 10),
+        url: `/blog/${post.id}`,
+        tags: post.tags,
+        id: post.id,
+        userId: post.userId,
     }));
     req.ctx = { ...req.ctx, blogs, title: 'Blogs' };
     return res.render('pages/blog', req.ctx)
 });
 
-module.exports = router;
+export default router;

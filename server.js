@@ -1,17 +1,23 @@
-require("dotenv").config();
-const express = require("express");
-const hbs = require("express-hbs");
-const { array, misc, string, comparison } = require('useful-handlebars-helpers');
-const { customHelpers } = require('./helpers');
-const bodyParser = require("body-parser");
+import { config } from "dotenv";
+import express from 'express';
+import hbs from "express-hbs";
+import { array, misc, string, comparison } from 'useful-handlebars-helpers';
+import customHelpers from './helpers';
+import bodyParser from "body-parser";
+import path from "path";
+import homeRoute from './routes/home';
+import aboutRoute from './routes/about';
+import contactRoute from './routes/contact';
+import teamsRoute from './routes/team';
+import blogRoute from './routes/blog';
+import loginRoute from './routes/login';
+import * as url from 'url';
+config();
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
 const port = 8000;
-const path = require("path");
-const homeRoute = require('./routes/home');
-const aboutRoute = require('./routes/about');
-const contactRoute = require('./routes/contact');
-const teamsRoute = require('./routes/team');
-const blogRoute = require('./routes/blog');
-const loginRoute = require('./routes/login');
 
 const app = express();
 

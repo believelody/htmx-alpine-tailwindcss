@@ -1,16 +1,17 @@
-const toString = require('./toString');
-const partial = require('./partial');
-const switchHelper = require('./switch');
-const letHelper = require('./let');
-const routes = require('./routes');
-const caseHelper = require('./case');
-const defaultHelper = require('./default');
-const withDefault = require('./withDefault');
-const cond = require('./cond');
-const typeofHelper = require('./typeof');
-const objectHelper = require('./object');
+import toString from './toString';
+import partial from './partial';
+import switchHelper from './switch';
+import letHelper from './let';
+import routes from './routes';
+import caseHelper from './case';
+import defaultHelper from './default';
+import withDefault from './withDefault';
+import cond from './cond';
+import typeofHelper from './typeof';
+import objectHelper from './object';
 
-module.exports.customHelpers = {
+
+export default {
     toString,
     partial,
     switch: switchHelper,

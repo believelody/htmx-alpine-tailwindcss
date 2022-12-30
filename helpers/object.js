@@ -1,3 +1,3 @@
-module.exports = function ({ hash }) {
+export default function ({ hash }) {
     return hash;
 };

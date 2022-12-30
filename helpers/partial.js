@@ -1,6 +1,6 @@
-const hbs = require("express-hbs");
+import hbs from "express-hbs";
 
-module.exports = function (partialName, options) {
+export default function (partialName, options) {
     if (!partialName) {
         console.error('No partial name given.');
         return '';

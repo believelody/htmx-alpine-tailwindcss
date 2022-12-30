@@ -1,4 +1,4 @@
-module.exports = function (name, options) {
+export default function (name, options) {
     if (!name) {
         console.error('No name given.');
         return '';

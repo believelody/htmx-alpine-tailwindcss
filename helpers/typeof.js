@@ -1,3 +1,3 @@
-module.exports = function (value, options) {
+export default function (value, options) {
     return typeof value;
 };

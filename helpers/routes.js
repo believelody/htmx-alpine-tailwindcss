@@ -1,5 +1,5 @@
-const { routes } = require('../routes');
+import data from '../routes/index.json' assert {type: 'json'};
 
-module.exports = ctx => {
-    return routes;
+export default ctx => {
+    return data.routes;
 }

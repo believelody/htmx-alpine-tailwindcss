@@ -18,6 +18,14 @@
 <body hx-boost="true" hx-ext="loading-states"
     x-data="{ currentRoute : window.location.pathname }"
     x-effect="
+        {{!-- console.log(navigator.languages); --}}
+        console.log(new Intl.NumberFormat('en-GB',  {
+            notation: 'compact',
+            compactDisplay: 'short'
+        }).format(50000));
+        {{!-- window.addEventListener('offline', (e) => { console.log('offline'); }); --}}
+        {{!-- window.addEventListener('online', (e) => { console.log('online'); }); --}}
+
         navigation.addEventListener('navigate', ({ destination }) => {
             $dispatch('route', new URL(destination.url).pathname);
         });"

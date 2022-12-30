@@ -1,3 +1,3 @@
-module.exports = (testedValue, defaultValue, options) => {
+export default (testedValue, defaultValue, options) => {
     return testedValue || defaultValue;
 }
