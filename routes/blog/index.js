@@ -5,7 +5,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=10`);
     const { posts } = await postsRes.json();
-    console.log(posts);
     const blogs = posts.map((post, index) => ({
         background: `https://picsum.photos/id/${Math.ceil(Math.random(6) * 100)}/200/300`,
         alt: "content " + (index + 1),
