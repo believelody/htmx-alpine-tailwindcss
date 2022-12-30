@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         alt: "content " + (index + 1),
         title: post.title,
         content: post.body,
-        views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 1000 + 100)),
+        views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 9999 + 1000)),
         comments: post.reactions * Math.ceil(Math.random()*100 + 10),
         url: `/blog/${post.id}`,
         tags: post.tags,

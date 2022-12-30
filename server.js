@@ -39,11 +39,11 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { layout : null, fromHTMX: true };
     }
-    await setTimeout(() => {
-        console.log('waiting...');
-        next();
-    }, 2000);
-    // next();
+    // await setTimeout(() => {
+    //     console.log('waiting...');
+    //     next();
+    // }, 2000);
+    next();
 });
 
 app.use('/', homeRoute);
