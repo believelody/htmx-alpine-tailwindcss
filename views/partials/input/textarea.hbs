@@ -1,5 +1,6 @@
 <textarea {{#if id}}id="{{ id }}"{{/if}}
     {{#if name}}name="message"{{/if}}
     {{#if required}}required{{/if}}
+    {{#if data-loading-disable}}data-loading-disable{{/if}}
     placeholder="{{ placeholder }}"
     class="h-{{ height }} input {{#if color}}input-{{color}}{{/if}} {{#if transition}}color-transition{{/if}} {{#if no-resize}}resize-none{{/if}}"></textarea>

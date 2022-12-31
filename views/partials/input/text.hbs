@@ -1,5 +1,6 @@
 <input type="text" {{#if id}}id="{{ id }}"{{/if}}
        name="{{ name }}" {{#if required}}required{{/if}}
        placeholder="{{ placeholder }}" x-model="value"
+       {{#if data-loading-disable}}data-loading-disable{{/if}}
        {{#if autocomplete}}autocomplete="{{ autocomplete }}"{{/if}}
        class="input {{#if color}}input-{{color}}{{/if}} {{#if transition}}color-transition{{/if}}">

@@ -1,6 +1,6 @@
 /* Button layout style */
 .btn {
-  @apply box-border flex items-center justify-center text-white outline-none bg-neutral-500 hover:bg-neutral-700 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:opacity-75 disabled:cursor-not-allowed;
+  @apply box-border flex items-center justify-center text-white outline-none bg-neutral-500 hover:bg-neutral-700 disabled:bg-neutral-100 disabled:hover:bg-neutral-100 disabled:text-neutral-500 disabled:opacity-75 disabled:cursor-not-allowed;
 }
 .btn-primary {
   @apply text-white bg-primary-500 hover:bg-primary-700;
