@@ -1,0 +1,16 @@
+<ul class="flex flex-wrap gap-3 mb-3" x-data="{ toggleDisplayOther: false }">
+    {{#each (first tags limit) as |tag|}}
+        <li class="rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">
+            {{> link/base href="/" label=tag }}
+        </li>
+    {{/each}}
+    {{#if (gt (length tags) limit)}}
+        <li x-show="!toggleDisplayOther" @click="toggleDisplayOther = true" class="cursor-pointer rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">+ {{subtract (length tags) limit}}</li>
+    {{/if}}
+    {{#each (last tags (subtract (length tags) limit)) as |tag|}}
+        <li x-show="toggleDisplayOther" class="rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">
+            {{> link/base href="/" label=tag }}
+        </li>
+    {{/each}}
+
+</ul>
