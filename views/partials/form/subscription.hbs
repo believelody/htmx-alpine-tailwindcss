@@ -1,4 +1,6 @@
-<form hx-target="#subscription-content" hx-trigger="submit" hx-push-url="true" class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
-    {{> field/text class="relative w-auto mr-2 sm:w-64 sm:mr-4" name="subscription" placeholder="Type your email here" }}
-    {{> button/success outlined=true label="Subscribe" click="console.log('subscribe')" }}
+<form hx-post="/api/subscription"
+    hx-trigger="submit"
+    class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
+    {{> field/email class="relative w-auto mr-2 sm:w-64 sm:mr-4" name="subscription" placeholder="Type your email here" required=true }}
+    {{> button/primary outlined=true label="Subscribe" }}
 </form>

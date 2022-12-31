@@ -11,6 +11,7 @@ import contactRoute from './routes/contact';
 import teamsRoute from './routes/team';
 import blogRoute from './routes/blog';
 import loginRoute from './routes/login';
+import apiRoute from './routes/api';
 import * as url from 'url';
 config();
 
@@ -39,10 +40,7 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { layout : null, fromHTMX: true };
     }
-    // await setTimeout(() => {
-    //     console.log('waiting...');
-    //     next();
-    // }, 2000);
+    // await new Promise(r => setTimeout(r, 2000));
     next();
 });
 
@@ -52,6 +50,7 @@ app.use('/contact', contactRoute);
 app.use('/blog', blogRoute);
 app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
+app.use('/api', apiRoute);
 
 app.listen(port, () => {
     console.log("Server running");
