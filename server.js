@@ -38,8 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
-        req.ctx = { layout : null, fromHTMX: true };
+        req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
     }
+    req.ctx = { ...req.ctx, user: { subscribed: false } }
     // await new Promise(r => setTimeout(r, 2000));
     next();
 });
@@ -51,6 +52,10 @@ app.use('/blog', blogRoute);
 app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
 app.use('/api', apiRoute);
+app.use((error, req, res, next) => {
+    console.log("in 500 handler : ", error);
+    res.status(500).render('partials/error/500', { error });
+});
 
 app.listen(port, () => {
     console.log("Server running");

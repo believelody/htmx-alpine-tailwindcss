@@ -1650,6 +1650,10 @@ h6 {
   padding-left: 0.75rem;
 }
 
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
@@ -1778,6 +1782,11 @@ h6 {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-danger-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
@@ -1786,11 +1795,6 @@ h6 {
 .text-info-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
-.text-danger-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .text-neutral-500 {

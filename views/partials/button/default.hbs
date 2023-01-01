@@ -10,21 +10,25 @@
     {{#if data-loading-disable}}data-loading-disable{{/if}}
     class="{{withDefault class 'relative px-4 py-2 rounded btn'}} {{#if color}}{{cond outlined (append 'btn-' color '-outlined') (append 'btn-' color)}}{{else}}{{cond outlined 'btn-outlined' ''}}{{/if}} {{#if block}}w-full{{/if}}"
 >
-    <span id="loading-text"
-        data-loading
-        data-loading-class="text-neutral-600"
-    >
-        {{withDefault data-loading-text 'Loading ...'}}
-    </span>
+    {{#if data-loading-text}}
+        <span id="loading-text"
+            data-loading
+            data-loading-class="text-neutral-600"
+        >
+            {{withDefault data-loading-text 'Loading ...'}}
+        </span>
+    {{/if}}
     {{#if label}}
         <span {{#if data-loading-text}}data-loading-class="hidden"{{/if}}>{{ label }}</span>
     {{/if}}
+    {{#if data-loading-icon}}
     <span id="loading-icon"
         data-loading
         data-loading-class="text-neutral-600"
     >
         {{partial (toString data-loading-icon) }}
     </span>
+    {{/if}}
     {{#if icon}}
         <span class="{{ icon-class}}" {{#if data-loading-icon}}data-loading-class="hidden"{{/if}}>{{ icon }}</span>
     {{/if}}

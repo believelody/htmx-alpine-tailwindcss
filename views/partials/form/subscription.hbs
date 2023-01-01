@@ -1,8 +1,11 @@
-<form hx-post="/api/subscription"
+<form hx-post="/api/subscription/1"
     hx-trigger="submit"
     data-loading-path="/api/subscription"
     class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
-    {{> field/email data-loading-disable=true class="relative w-auto mr-2 sm:w-64 sm:mr-4" name="subscription" placeholder="Type your email here" required=true }}
+    {{> field/email data-loading-disable=true 
+            class="relative w-auto mr-2 sm:w-64 sm:mr-4" 
+            name="subscription" placeholder="Type your email here"
+            required=true }}
     {{> button/primary
             outlined=true
             label="Subscribe"
