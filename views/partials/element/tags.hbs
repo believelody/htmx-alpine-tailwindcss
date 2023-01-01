@@ -1,4 +1,4 @@
-<ul class="flex flex-wrap gap-3 mb-3" x-data="{ toggleDisplayOther: false }">
+<ul hx-boost="true" class="flex flex-wrap gap-3 mb-3" x-data="{ toggleDisplayOther: false }">
     {{#each (first tags limit) as |tag|}}
         <li class="rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">
             {{> link/base href="/" label=tag }}

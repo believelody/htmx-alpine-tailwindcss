@@ -1,17 +1,30 @@
 <form hx-post="/api/subscription/1"
     hx-trigger="submit"
-    data-loading-path="/api/subscription"
+    data-loading-path="/api/subscription/1"
     class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
     {{> field/email data-loading-disable=true 
-            class="relative w-auto mr-2 sm:w-64 sm:mr-4" 
+            class="relative w-auto mr-2 sm:w-64 sm:mr-4" value=form.subscription
             name="subscription" placeholder="Type your email here"
             required=true }}
     {{> button/primary
             outlined=true
             label="Subscribe"
+            type="submit"
             data-loading-icon="lottie/loading-2"
             data-loading-text="Chargement"
             data-loading-aria-busy=true
             data-loading-disable=true
     }}
+    {{#if error.subscription}}
+        <div x-data="drawer(true)">
+        {{> element/modal
+                modal=(object
+                title=(partial 'title/default'
+                                text="Subscription"
+                                class="text-lg text-center py-4")
+                component=(partial 'error/subscription' error=error.subscription))
+                class="px-8 pb-8"
+        }}
+        </div>
+    {{/if}}
 </form>

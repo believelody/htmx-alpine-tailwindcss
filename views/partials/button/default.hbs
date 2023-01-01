@@ -13,21 +13,19 @@
     {{#if data-loading-text}}
         <span id="loading-text"
             data-loading
-            data-loading-class="text-neutral-600"
         >
-            {{withDefault data-loading-text 'Loading ...'}}
+            {{ data-loading-text }}
         </span>
     {{/if}}
     {{#if label}}
         <span {{#if data-loading-text}}data-loading-class="hidden"{{/if}}>{{ label }}</span>
     {{/if}}
     {{#if data-loading-icon}}
-    <span id="loading-icon"
-        data-loading
-        data-loading-class="text-neutral-600"
-    >
-        {{partial (toString data-loading-icon) }}
-    </span>
+        <span id="loading-icon"
+            data-loading
+        >
+            {{partial (toString data-loading-icon) }}
+        </span>
     {{/if}}
     {{#if icon}}
         <span class="{{ icon-class}}" {{#if data-loading-icon}}data-loading-class="hidden"{{/if}}>{{ icon }}</span>
