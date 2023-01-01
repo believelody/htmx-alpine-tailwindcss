@@ -53,8 +53,7 @@ app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
 app.use('/api', apiRoute);
 app.use((error, req, res, next) => {
-    console.log("in 500 handler : ", error);
-    res.status(500).render('partials/error/500', { error });
+    res.status(500).send({ error });
 });
 
 app.listen(port, () => {

@@ -16,16 +16,24 @@
 </head>
 
 <body hx-ext="loading-states"
-    x-data="{ currentRoute : window.location.pathname }"
+    x-data="{ currentRoute : window.location.pathname, error: null }"
     x-effect="
         {{!-- console.log(navigator.languages); --}}
         {{!-- window.addEventListener('offline', (e) => { console.log('offline'); }); --}}
         {{!-- window.addEventListener('online', (e) => { console.log('online'); }); --}}
-
+        $el.addEventListener('htmx:responseError', ({ detail }) => {
+            if (detail.xhr.status === 500) {
+                $dispatch('error', 'error-500');
+            } else {
+                console.log(detail.xhr.response);
+                $dispatch('error', JSON.parse(detail.xhr.response));
+            }
+        });
         navigation.addEventListener('navigate', ({ destination }) => {
             $dispatch('route', new URL(destination.url).pathname);
         });"
-    @route.window="currentRoute = $event.detail"
+    @route="currentRoute = $event.detail"
+    @error="console.log('in dispatch : ', $event.detail); error = $event.detail"
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
@@ -37,11 +45,24 @@
         </main>
         {{> element/footer }}
     </div>
+    <div x-data="drawer" x-effect="open = error === 'error-500'">
+        {{> element/modal
+            modal=(object
+            title=(partial 'title/default'
+                    text="An error iccured"
+                    class="text-lg text-danger-500 border rounded-lg text-center py-4")
+            component=(partial 'error/500'))
+            class="p-8"
+        }}
+    </div>
 </body>
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('drawer', (initialOpenState = false) => ({
             open: initialOpenState,
+            init() {
+                {{!-- this.$watch('open', console.log) --}}
+            },
             toggle() {
                 this.open = !this.open;
             },
