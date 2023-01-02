@@ -9,6 +9,7 @@ import withDefault from './withDefault';
 import cond from './cond';
 import typeofHelper from './typeof';
 import objectHelper from './object';
+import arrayFrom from './arrayFrom';
 
 
 export default {
@@ -23,4 +24,5 @@ export default {
     cond,
     typeof: typeofHelper,
     object: objectHelper,
+    arrayFrom,
 };

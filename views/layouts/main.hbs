@@ -25,7 +25,6 @@
             if (detail.xhr.status === 500) {
                 $dispatch('error', 'error-500');
             } else {
-                console.log(detail.xhr.response);
                 $dispatch('error', JSON.parse(detail.xhr.response));
             }
         });

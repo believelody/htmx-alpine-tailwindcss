@@ -3,8 +3,10 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=10`);
-    const { posts } = await postsRes.json();
+    const page = parseInt(req.query.page) || 1;
+    const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=6&skip=6`);
+    const postsJson = await postsRes.json();
+    const { posts, total } = postsJson;
     const blogs = posts.map((post, index) => ({
         background: `https://picsum.photos/id/${Math.ceil(Math.random(6) * 100)}/200/300`,
         alt: "content " + (index + 1),
@@ -17,7 +19,7 @@ router.get('/', async (req, res) => {
         id: post.id,
         userId: post.userId,
     }));
-    req.ctx = { ...req.ctx, blogs, title: 'Blogs' };
+    req.ctx = { ...req.ctx, blogs, meta: { total, page }, title: 'Blogs' };
     return res.render('pages/blog', req.ctx)
 });
 

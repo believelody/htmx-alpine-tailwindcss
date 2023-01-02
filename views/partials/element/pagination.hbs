@@ -1,0 +1,29 @@
+<ul class="flex flex-wrap gap-4 mb-8 items-center justify-center">
+  {{#unless (eq page 1)}}
+    <li class="bg-neutral-400 text-white py-2 px-4 rounded-md">
+      {{> link/base href="/blog?page=1" label="First" }}
+    </li>
+    <li class="bg-neutral-400 text-white py-2 px-4 rounded-md">
+      {{> link/base href=(append '/blog?page=' (subtract page 1)) label="Prev" }}
+    </li>
+  {{/unless}}
+  {{#each (arrayFrom pages) as |item|}}
+    {{log page}}
+    <li class="{{#if (eq page (add @index 1))}}bg-white text-neutral-700{{else}}bg-neutral-400 text-white{{/if}} py-2 px-4 rounded-md">
+      {{log 'page='page ', index='(add @index 1) ', ' (eq page 1)}}
+      {{#if (eq page (add @index 1))}}
+        {{add @index 1}}
+      {{else}}
+        {{> link/base href=(append '/blog?page=' (add @index 1)) label=(add @index 1) }}
+      {{/if}}
+    </li>
+  {{/each}}
+  {{#unless (eq page pages)}}
+    <li class="{{#if (eq page pages)}}bg-white text-neutral-700{{else}}bg-neutral-400 text-white{{/if}} py-2 px-4 rounded-md">
+      {{> link/base href=(append '/blog?page=' (add page 1)) label="Next" }}
+    </li>
+    <li class="{{#if (eq page pages)}}bg-white text-neutral-700{{else}}bg-neutral-400 text-white{{/if}} py-2 px-4 rounded-md">
+      {{> link/base href=(append '/blog?page=' pages) label="Last" }}
+    </li>
+  {{/unless}}
+</ul>
