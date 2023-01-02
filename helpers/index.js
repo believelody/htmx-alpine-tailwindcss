@@ -10,6 +10,7 @@ import cond from './cond';
 import typeofHelper from './typeof';
 import objectHelper from './object';
 import arrayFrom from './arrayFrom';
+import numberIntoString from './numberIntoString';
 
 
 export default {
@@ -25,4 +26,5 @@ export default {
     typeof: typeofHelper,
     object: objectHelper,
     arrayFrom,
+    numberIntoString
 };
