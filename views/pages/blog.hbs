@@ -1,4 +1,4 @@
-{{#*inline 'footer'}}
+{{#*inline 'extra'}}
 <div class="absolute bottom-0 left-0 flex items-center justify-center w-full py-4 mt-2 leading-none text-center text-neutral-800">
     <section class="inline-flex items-center py-1 text-sm leading-none cursor-pointer">
         <span class="mr-1">{{> icon/eye }}</span>
@@ -15,11 +15,11 @@
 {{!< main }}
 <section class="text-neutral-600 body-font">
   {{> element/seo}}
-  <div class="container py-24 mx-auto">
+  <div class="container pt-16 mx-auto">
     <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {{#each blogs as |item|}}
       <div class="min-w-full" id="blogs-content">
-        {{> block/base-3 color="primary" item=item footer='footer'}}
+        {{> block/base-3 color="primary" item=item extra='extra'}}
       </div>
       {{/each}}
     </div>
