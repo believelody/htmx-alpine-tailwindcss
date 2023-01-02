@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     console.log(req.query);
     const page = parseInt(req.query.page) || 1;
-    const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=6&skip=6`);
+    const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=6&skip=${6 * (page - 1)}`);
     const postsJson = await postsRes.json();
     const { posts, total } = postsJson;
     const blogs = posts.map((post, index) => ({

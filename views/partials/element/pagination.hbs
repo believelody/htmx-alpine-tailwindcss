@@ -1,30 +1,20 @@
-<ul class="flex flex-wrap gap-4 mb-8 items-center justify-center">
+<nav class="flex flex-wrap gap-4 mb-8 items-center justify-center">
   {{#unless (eq page 1)}}
-    <li class="bg-neutral-700 text-white py-2 px-4 rounded-md">
-      {{> link/base href="/blog?page=1" label="First" }}
-    </li>
-    <li class="bg-neutral-700 text-white py-2 px-4 rounded-md">
-      {{> link/base href=(append '/blog?page=' (numberIntoString (subtract page 1))) label="Prev" }}
-    </li>
-  {{/unless}}
+    {{> link/base href="/blog?page=1" label="First" class="bg-neutral-700 text-white py-2 px-4 rounded-md" }}
+    {{> link/base href=(append '/blog?page=' (numberIntoString (subtract page 1))) label="Prev" class="bg-neutral-700 text-white py-2 px-4 rounded-md" }}
+{{/unless}}
   {{#each (arrayFrom pages) as |item|}}
     {{#with @root.meta}}
       {{log (append '/blog?page=' (toFixed (add @index 1) 0))}}
-      <li class="{{#if (eq page (add @index 1))}}bg-white text-neutral-700{{else}}bg-neutral-700 text-white{{/if}} py-2 px-4 rounded-md">
-        {{#if (eq page (add @index 1))}}
-          {{add @index 1}}
-        {{else}}
-          {{> link/base href=(append '/blog?page=' (numberIntoString (add @index 1))) label=(add @index 1) }}
-        {{/if}}
-      </li>
-    {{/with}}
+      {{#if (eq page (add @index 1))}}
+        <span>{{add @index 1}}</span>
+      {{else}}
+        {{> link/base href=(append '/blog?page=' (numberIntoString (add @index 1))) label=(add @index 1) class="bg-neutral-700 text-white py-2 px-4 rounded-md" }}
+      {{/if}}
+  {{/with}}
   {{/each}}
   {{#unless (eq page pages)}}
-    <li class="bg-neutral-700 text-white py-2 px-4 rounded-md">
-      {{> link/base href=(append '/blog?page=' (numberIntoString (add page 1))) label="Next" }}
-    </li>
-    <li class="bg-neutral-700 text-white py-2 px-4 rounded-md">
-      {{> link/base href=(append '/blog?page=' (numberIntoString pages)) label="Last" }}
-    </li>
+    {{> link/base href=(append '/blog?page=' (numberIntoString (add page 1))) label="Next" class="bg-neutral-700 text-white py-2 px-4 rounded-md" }}
+    {{> link/base href=(append '/blog?page=' (numberIntoString pages)) label="Last" class="bg-neutral-700 text-white py-2 px-4 rounded-md" }}
   {{/unless}}
-</ul>
+</nav>
