@@ -11,6 +11,7 @@ import typeofHelper from './typeof';
 import objectHelper from './object';
 import arrayFrom from './arrayFrom';
 import numberIntoString from './numberIntoString';
+import chain from './chain';
 
 
 export default {
@@ -26,5 +27,6 @@ export default {
     typeof: typeofHelper,
     object: objectHelper,
     arrayFrom,
-    numberIntoString
+    numberIntoString,
+    chain,
 };
