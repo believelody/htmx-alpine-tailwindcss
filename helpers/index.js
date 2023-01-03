@@ -12,6 +12,7 @@ import objectHelper from './object';
 import arrayFrom from './arrayFrom';
 import numberIntoString from './numberIntoString';
 import chain from './chain';
+import urlFromParams from './urlFromParams';
 
 
 export default {
@@ -29,4 +30,5 @@ export default {
     arrayFrom,
     numberIntoString,
     chain,
+    urlFromParams
 };

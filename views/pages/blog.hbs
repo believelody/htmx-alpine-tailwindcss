@@ -16,18 +16,35 @@
 <section class="text-neutral-600 body-font h-full">
   {{> element/seo}}
   <div class="relative container flex flex-col mx-auto h-full box-border">
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full">
-      {{#each blogs as |item|}}
-        <div class="min-w-full" id="blogs-content">
-          {{> block/base-3 color="primary" item=item extra='extra'}}
-        </div>
-      {{else}}
-        <div class="flex items-center justify-center sm:col-span-2 lg:col-span-3">
-          <p class="text-lg text-center">Aucun résultat n'a été trouvé</p>
-        </div>
-      {{/each}}
-    </div>
-    {{!-- {{> pagination/select href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
-    {{> pagination/input href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
+    {{#if error}}
+      <div class="flex flex-col items-center justify-center h-full sm:col-span-2 lg:col-span-3">
+        <h2 class="text-center pb-12 text-danger-500 font-semibold">{{ error }}</h2>
+        {{> button/default click="history.back()" label="Back to previous page"}}
+      </div>
+    {{else}}
+      <div class="flex items-center justify-start p-4 gap-x-4">
+        {{#each (toArray '6' '75' '30') as |limit|}}
+          {{#with @root}}
+            {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
+              name="limit" id=(append "limit-" limit) label=limit disabled=(eq meta.limit limit)
+              href=(chain "/blog?limit=" limit "&page=" (numberIntoString meta.page))
+            }}
+          {{/with}}
+        {{/each}}
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full">
+        {{#each blogs as |item|}}
+          <div class="min-w-full" id="blogs-content">
+            {{> block/base-3 color="primary" item=item extra='extra'}}
+          </div>
+        {{else}}
+          <div class="flex items-center justify-center sm:col-span-2 lg:col-span-3">
+            <p class="text-lg text-center">Aucun résultat n'a été trouvé</p>
+          </div>
+        {{/each}}
+      </div>
+      {{!-- {{> pagination/select href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
+      {{> pagination/input href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
+    {{/if}}
   </div>
 </section>

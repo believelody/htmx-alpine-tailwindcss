@@ -32,7 +32,8 @@
             $dispatch('route', new URL(destination.url).pathname);
         });"
     @route="currentRoute = $event.detail"
-    @error="console.log('in dispatch : ', $event.detail); error = $event.detail"
+    @error="error = $event.detail;"
+    @modal-closer="if (error) { error = '' }"
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
@@ -44,7 +45,7 @@
         </main>
         {{> element/footer }}
     </div>
-    <div x-data="drawer" x-effect="open = error === 'error-500'">
+    <div x-data="drawer" x-effect="open = error === 'error-500';">
         {{> element/modal
             modal=(object
             title=(partial 'title/default'
@@ -60,10 +61,13 @@
         Alpine.data('drawer', (initialOpenState = false) => ({
             open: initialOpenState,
             init() {
-                {{!-- this.$watch('open', console.log) --}}
+                {{!-- this.$watch('open', console.log); --}}
             },
             toggle() {
                 this.open = !this.open;
+                if (!open) {
+                    this.$dispatch('modal-closer');
+                }
             },
             trigger: {
                 ['x-ref']: 'trigger',
@@ -71,22 +75,24 @@
                     this.open = true
                 },
             },
-
             dialogue: {
                 ['x-show']() {
                     return this.open
                 },
                 ['@click.outside']() {
-                    this.open = false
+                    this.open = false;
+                    this.$dispatch('modal-closer');
                 },
                 ['@keyup.escape.window']() {
-                    this.open = false
+                    this.open = false;
+                    this.$dispatch('modal-closer');
                 },
             },
             closer: {
                 type: 'button',
                 ['@click']() {
-                    this.open = false
+                    this.open = false;
+                    this.$dispatch('modal-closer');
                 },
             },
         }));
