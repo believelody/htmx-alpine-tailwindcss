@@ -13,16 +13,22 @@
 {{/inline}}
 
 {{!< main }}
-<section class="text-neutral-600 body-font">
+<section class="text-neutral-600 body-font border h-full">
   {{> element/seo}}
-  <div class="container pt-16 mx-auto">
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {{#each blogs as |item|}}
-      <div class="min-w-full" id="blogs-content">
-        {{> block/base-3 color="primary" item=item extra='extra'}}
+  <div class="container mx-auto border h-full">
+    {{#if error}}
+      <div class="flex items-center justify-center h-full">
+        <p class="text-lg">{{ error }}</p>
       </div>
-      {{/each}}
-    </div>
+    {{else}}
+      <div class="pt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {{#each blogs as |item|}}
+        <div class="min-w-full" id="blogs-content">
+          {{> block/base-3 color="primary" item=item extra='extra'}}
+        </div>
+        {{/each}}
+      </div>
+      {{> pagination/input href=(chain "/blog?limit=" meta.limit "&pages=" (numberIntoString meta.pages)) page=meta.page pages=meta.pages}}
+    {{/if}}
   </div>
-  {{> pagination/input href="/blog" page=meta.page pages=(divide meta.total 6)}}
 </section>

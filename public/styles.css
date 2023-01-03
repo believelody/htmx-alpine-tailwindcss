@@ -1500,6 +1500,16 @@ h6 {
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
 }
 
+.border-danger-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.border-green-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+
 .border-opacity-60 {
   --tw-border-opacity: 0.6;
 }

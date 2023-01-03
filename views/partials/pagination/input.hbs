@@ -4,13 +4,8 @@
   <input class="input w-12 text-center out-of-range:bg-danger-500"
     type="number"
     min="1" max="{{ pages }}"
-    value="{{ page }}" name="page"
+    value="{{ page }}" name="page" pattern="/\d/g"
     hx-get="{{ href }}" hx-push-url="true" hx-target="#content" hx-trigger="change"
-    @change="
-      if ($event.target.value > $event.target.max) {
-        $event.stopImmediatePropagation();
-      }
-    "
     aria-valuenow="{{ page }}" aria-valuemin="1" aria-valuemax="{{ pages }}"
   />
   <span>/ {{ pages }}</span>
