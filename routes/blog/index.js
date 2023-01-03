@@ -38,4 +38,14 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id', (req, res, next) => {
+    try {
+        console.log(req.params)
+        return res.render('pages/blog/id', req.ctx);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+})
+
 export default router;
