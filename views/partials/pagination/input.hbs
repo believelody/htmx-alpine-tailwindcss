@@ -1,7 +1,18 @@
 {{#> pagination/default href=href page=page pages=pages}}
-<section class="w-2/3 sm:w-auto text-center text-lg mx-auto sm:mx-8">
+<section x-data="{ value: {{ page }} }" class="w-2/3 sm:w-auto text-center text-lg mx-auto sm:mx-8">
   {{!-- Pagination with input --}}
-  <input type="text" inputmode="numeric" />
+  <input class="input w-12 text-center out-of-range:bg-danger-500"
+    type="number"
+    min="1" max="{{ pages }}"
+    value="{{ page }}" name="page"
+    hx-get="{{ href }}" hx-push-url="true" hx-target="#content" hx-trigger="change"
+    @change="
+      if ($event.target.value > $event.target.max) {
+        $event.stopImmediatePropagation();
+      }
+    "
+    aria-valuenow="{{ page }}" aria-valuemin="1" aria-valuemax="{{ pages }}"
+  />
   <span>/ {{ pages }}</span>
 </section>
 {{/pagination/default}}

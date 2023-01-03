@@ -1281,6 +1281,10 @@ h6 {
   width: 66.666667%;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -1956,6 +1960,11 @@ body {
 
 .htmx-request#content {
   display: none;
+}
+
+.out-of-range\:bg-danger-500:out-of-range {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .hover\:border-b-2:hover {
