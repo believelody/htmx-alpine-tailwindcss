@@ -1861,6 +1861,11 @@ h6 {
   color: rgb(199 210 254 / var(--tw-text-opacity));
 }
 
+.text-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .opacity-20 {
   opacity: 0.2;
 }

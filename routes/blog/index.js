@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import express from 'express';
+import { error500 } from '../../server';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -7,9 +8,9 @@ router.get('/', async (req, res, next) => {
         const limitArray = ['6', '18', '30'];
         if (req.query?.limit && !limitArray.includes(req.query.limit)) {
             if (req.ctx.fromHTMX) {
-                throw "Error: something went wrong.";
+                throw "There is a problem with limit value";
             }
-            req.ctx.error = "Error: something went wrong.";
+            req.ctx.error = error500;
             res.statusCode = 500;
         } else {
             const limit = req.query.limit || limitArray[0];
@@ -41,6 +42,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     try {
         console.log(req.params)
+        console.log(req.params.id.match(/\d/g));
         return res.render('pages/blog/id', req.ctx);
     } catch (error) {
         console.log(error);

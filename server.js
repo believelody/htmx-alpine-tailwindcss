@@ -22,6 +22,8 @@ const port = 8000;
 
 const app = express();
 
+export const error500 = "Error: something went wrong.";
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 [array, misc, string, comparison, math, number, collection, object, customHelpers].forEach(helper => hbs.registerHelper(helper));

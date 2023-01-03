@@ -6,6 +6,7 @@
         {{> element/tags items=item.tags limit=2}}
     {{/if}}
     <h2 class="mb-3 font-medium text-neutral-900 title-font sm:text-2xl">{{ item.title }}</h2>
+    <div hx-get="/api/users/{{ item.userId }}/author-name" hx-trigger="load" hx-swap="outerHTML"></div>
     <p class="mb-3 leading-relaxed"
         style="
             display: -webkit-box;
