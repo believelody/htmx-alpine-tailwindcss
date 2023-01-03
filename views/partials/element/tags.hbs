@@ -1,14 +1,19 @@
 <ul hx-boost="true" class="flex flex-wrap gap-3 mb-3" x-data="{ toggleDisplayOther: false }">
-    {{#each (first tags limit) as |tag|}}
+    {{log limit}}
+    {{log items}}
+    {{log (first items limit)}}
+    {{#each (first items limit) as |tag|}}
         <li class="rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">
+            {{log tag}}
             {{> link/base href="/" label=tag }}
         </li>
     {{/each}}
-    {{#if (gt (length tags) limit)}}
-        <li x-show="!toggleDisplayOther" @click="toggleDisplayOther = true" class="cursor-pointer rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">+ {{subtract (length tags) limit}}</li>
+    {{#if (gt (length items) limit)}}
+        <li x-show="!toggleDisplayOther" @click="toggleDisplayOther = true" class="cursor-pointer rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">+ {{subtract (length items) limit}}</li>
     {{/if}}
-    {{#each (last tags (subtract (length tags) limit)) as |tag|}}
+    {{#each (last items (subtract (length items) limit)) as |tag|}}
         <li x-show="toggleDisplayOther" class="rounded-lg py-1 px-2 text-sm bg-primary-400 text-white">
+            {{log tag}}
             {{> link/base href="/" label=tag }}
         </li>
     {{/each}}

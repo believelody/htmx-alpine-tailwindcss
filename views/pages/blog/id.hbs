@@ -1,1 +1,13 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas libero aliquid delectus, ab ullam et est adipisci, ipsam blanditiis ex nam magnam. Incidunt inventore nihil aspernatur, sunt adipisci, distinctio doloribus veritatis pariatur sit, iusto vero nostrum autem sint et voluptas neque molestiae reiciendis eaque architecto odit! Ducimus facilis ullam aut, tenetur quis doloremque distinctio asperiores.</p>
+{{!< main }}
+<section class="max-w-xl p-8 my-4 border rounded-md shadow-md mx-auto flex flex-col gap-y-4">
+  {{> element/seo }}
+  <h2 class="text-center font-medium mb-8">{{ post.title }}</h2>
+  <h3 class="text-right">by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=(chain post.author.firstName " " post.author.lastName) }}</h3>
+  <p class="text-base">{{ post.body }}</p>
+  {{#if post.tags}}
+    <p>
+      <span>Tags: </span>
+      {{> element/tags items=post.tags limit=(length post.tags)}}
+    </p>
+  {{/if}}
+</section>

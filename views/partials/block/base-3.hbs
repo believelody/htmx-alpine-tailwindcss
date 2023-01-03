@@ -2,7 +2,7 @@
     {{#if item.background}}
         <img loading="lazy" class="absolute top-0 left-0 object-cover w-full h-full -z-10 opacity-20" src="{{ item.background }}" alt="{{ item.content }}" />
     {{/if}}
-    {{#if tags}}
+    {{#if item.tags}}
         {{> element/tags items=item.tags limit=2}}
     {{/if}}
     <h2 class="mb-3 font-medium text-neutral-900 title-font sm:text-2xl">{{ item.title }}</h2>

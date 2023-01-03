@@ -39,10 +39,18 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
-        console.log(req.params)
-        console.log(req.params.id.match(/\d/g));
+        if (!req.params?.id.match(/[0-9]/g)) {
+            throw "id params is not a numeric value";
+        }
+        const postRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${req.params.id}`);
+        const postJson = await postRes.json();
+        const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=firstName,lastName`);
+        const authorJson = await authorRes.json();
+        delete postJson.userId;
+        const post = { ...postJson, author: authorJson };
+        req.ctx = { ...req.ctx, post, title: post.title };
         return res.render('pages/blog/id', req.ctx);
     } catch (error) {
         console.log(error);
