@@ -23,7 +23,7 @@
       </div>
     {{else}}
       <div class="flex items-center justify-start p-4 gap-x-4">
-        {{#each (toArray '6' '75' '30') as |limit|}}
+        {{#each (toArray '6' '18' '30') as |limit|}}
           {{#with @root}}
             {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
               name="limit" id=(append "limit-" limit) label=limit disabled=(eq meta.limit limit)

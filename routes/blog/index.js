@@ -50,7 +50,7 @@ router.get('/:id', async (req, res, next) => {
         const prevPostJson = await prevPostRes.json();
         const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.id) + 1}?select=id`);
         const nextPostJson = await nextPostRes.json();
-        const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=firstName,lastName`);
+        const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=username`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
         const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id };
