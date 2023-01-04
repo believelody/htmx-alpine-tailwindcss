@@ -1,16 +1,42 @@
 {{!< main }}
-<section class="max-w-xl p-8 my-4 border rounded-md shadow-md mx-auto flex flex-col gap-y-4">
-  {{> element/seo }}
-  <div class="flex items-center">
+<section class="flex flex-col max-w-xl mx-auto h-full">
+  <div class="flex items-center my-4">
     {{> link/default href="/blog" label="Back to blog list"}}
   </div>
-  <h2 class="text-center font-medium mb-8">{{ post.title }}</h2>
-  <h3 class="text-right">by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=(chain post.author.firstName " " post.author.lastName) }}</h3>
-  <p class="text-base">{{ post.body }}</p>
-  {{#if post.tags}}
-    <p>
-      <span>Tags: </span>
-      {{> element/tags items=post.tags limit=(length post.tags)}}
-    </p>
-  {{/if}}
+  <div class="flex items-center justify-between my-4">
+    {{#if post.prev }}
+      <div class="flex items-center grow">
+        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"}}
+      </div>
+    {{/if}}
+    {{#if post.next }}
+      <div class="flex items-center justify-end grow">
+        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="p-8 border h-full rounded-md shadow-md mx-auto flex flex-col gap-y-4">
+    {{> element/seo }}
+    <h2 class="text-center font-medium mb-8">{{ post.title }}</h2>
+    <h3 class="text-right">by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=(chain post.author.firstName " " post.author.lastName) }}</h3>
+    <p class="text-base">{{ post.body }}</p>
+    {{#if post.tags}}
+      <p>
+        <span>Tags: </span>
+        {{> element/tags items=post.tags limit=(length post.tags)}}
+      </p>
+    {{/if}}
+  </div>
+  <div class="flex items-center justify-between my-4">
+    {{#if post.prev }}
+      <div class="flex items-center grow">
+        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"}}
+      </div>
+    {{/if}}
+    {{#if post.next }}
+      <div class="flex items-center justify-end grow">
+        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"}}
+      </div>
+    {{/if}}
+  </div>
 </section>

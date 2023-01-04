@@ -46,10 +46,14 @@ router.get('/:id', async (req, res, next) => {
         }
         const postRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${req.params.id}`);
         const postJson = await postRes.json();
+        const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.id) - 1}?select=id`);
+        const prevPostJson = await prevPostRes.json();
+        const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.id) + 1}?select=id`);
+        const nextPostJson = await nextPostRes.json();
         const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=firstName,lastName`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, author: authorJson };
+        const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id };
         req.ctx = { ...req.ctx, post, title: post.title };
         return res.render('pages/blog/id', req.ctx);
     } catch (error) {
