@@ -1,6 +1,9 @@
 {{!< main }}
 <section class="max-w-xl p-8 my-4 border rounded-md shadow-md mx-auto flex flex-col gap-y-4">
   {{> element/seo }}
+  <div class="flex items-center">
+    {{> link/default href="/blog" label="Back to blog list"}}
+  </div>
   <h2 class="text-center font-medium mb-8">{{ post.title }}</h2>
   <h3 class="text-right">by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=(chain post.author.firstName " " post.author.lastName) }}</h3>
   <p class="text-base">{{ post.body }}</p>
