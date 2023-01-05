@@ -20,7 +20,7 @@
     <h3 class="flex items-center justify-between">
       <div>by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=post.author.username }}</div>
       <div class="flex items-center gap-x-2">
-        {{> button/heart-circle hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML" bg-color="bg-secondary" size=6 color="text-white"}}
+        {{> button/heart-circle class="flex" hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML" bg-color="bg-secondary" size=6 color="text-white"}}
         {{!-- {{button hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML"}} --}}
         <span>{{ post.reactions }}</span>
       </div>
