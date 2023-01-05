@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import express from 'express';
 import hbs from "express-hbs";
-import { array, misc, string, comparison, math, number, collection, object } from 'useful-handlebars-helpers';
+import { array, misc, string, comparison, math, number, collection, object, html } from 'useful-handlebars-helpers';
 import customHelpers from './helpers';
 import bodyParser from "body-parser";
 import path from "path";
@@ -26,7 +26,7 @@ export const error500 = "Error: something went wrong.";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-[array, misc, string, comparison, math, number, collection, object, customHelpers].forEach(helper => hbs.registerHelper(helper));
+[array, misc, string, comparison, math, number, collection, object, html, customHelpers].forEach(helper => hbs.registerHelper(helper));
 
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({

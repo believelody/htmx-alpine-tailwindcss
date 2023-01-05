@@ -1,6 +1,8 @@
 import hbs from "express-hbs"; 
 
-export default function(options) {
-  // console.log("options : ", options);
-  return Object.entries(options).filter(([key, value]) => typeof value !== "object" && value).map(([key, value]) => `${key}='${value}'`).join(" ");
+export default function(context) {
+  const result = Object.entries(context).filter(([key, value]) => typeof value !== "object" && value).map(([key, value]) => {
+    return `${key}="${value}"`
+  }).join(" ");
+  return result;
 }
