@@ -26,7 +26,7 @@
         {{#each (toArray '6' '18' '30') as |limit|}}
           {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
             name="limit" id=(append "limit-" limit) label=limit disabled=(eq ../meta.limit limit)
-            href=(chain "/blog?limit=" limit "&page=" (numberIntoString ../meta.page))
+            hx-get=(chain "/blog?limit=" limit "&page=" (numberIntoString ../meta.page)) hx-target="#content" hx-trigger="click" hx-push-url="true"
           }}
         {{/each}}
       </div>

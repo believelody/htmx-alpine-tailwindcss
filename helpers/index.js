@@ -14,6 +14,7 @@ import numberIntoString from './numberIntoString';
 import chain from './chain';
 import urlFromParams from './urlFromParams';
 import spread from './spread';
+import button from './button';
 
 
 export default {
@@ -33,4 +34,5 @@ export default {
     chain,
     urlFromParams,
     spread,
+    button
 };
