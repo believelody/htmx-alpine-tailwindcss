@@ -1,17 +1,17 @@
 {{!< main }}
 <section class="flex flex-col max-w-xl mx-auto h-full">
   <div class="flex items-center justify-center my-4">
-    {{> link/default href="/blog" label="Back to blog list"}}
+    {{> link/default href="/blog" label="Back to blog list" icon=(object component=(partial "icon/arrow-left") position="left") }}
   </div>
   <div class="flex items-center justify-between my-4">
     {{#if post.prev }}
       <div class="flex items-center grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"}}
+        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post" icon=(object component=(partial "icon/chevron-left") position="left") }}
       </div>
     {{/if}}
     {{#if post.next }}
       <div class="flex items-center justify-end grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"}}
+        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post" icon=(object component=(partial "icon/chevron-right") position="right") }}
       </div>
     {{/if}}
   </div>
@@ -32,12 +32,12 @@
   <div class="flex items-center justify-between my-4">
     {{#if post.prev }}
       <div class="flex items-center grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"}}
+        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post" icon=(object component=(partial "icon/chevron-left") position="left") }}
       </div>
     {{/if}}
     {{#if post.next }}
       <div class="flex items-center justify-end grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"}}
+        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post" icon=(object component=(partial "icon/chevron-right") position="right") }}
       </div>
     {{/if}}
   </div>

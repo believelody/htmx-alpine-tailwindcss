@@ -1,6 +1,9 @@
 <a hx-boost="true" href="{{ href }}" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="inline-flex items-center box-border cursor-pointer hover:border-b-2 {{withDefault color 'hover:border-b-neutral-500 text-neutral-500'}}">
-    <span {{#if icon}}class="mr-2"{{/if}}>{{label}}</span>
-    {{#if icon}}
-        <span>{{ icon }}</span>
+    {{#if (eq icon.position "left")}}
+        <span class="mr-2">{{ icon.component }}</span>
+    {{/if}}
+    <span >{{label}}</span>
+    {{#if (or (not (eq icon.position "left")) (eq icon.postion "right"))}}
+        <span class="ml-2">{{ icon.component }}</span>
     {{/if}}
 </a>
