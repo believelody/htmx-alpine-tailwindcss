@@ -24,12 +24,10 @@
     {{else}}
       <div class="flex items-center justify-start p-4 gap-x-4">
         {{#each (toArray '6' '18' '30') as |limit|}}
-          {{#with @root}}
-            {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
-              name="limit" id=(append "limit-" limit) label=limit disabled=(eq meta.limit limit)
-              href=(chain "/blog?limit=" limit "&page=" (numberIntoString meta.page))
-            }}
-          {{/with}}
+          {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
+            name="limit" id=(append "limit-" limit) label=limit disabled=(eq ../meta.limit limit)
+            href=(chain "/blog?limit=" limit "&page=" (numberIntoString ../meta.page))
+          }}
         {{/each}}
       </div>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full">
@@ -43,8 +41,8 @@
           </div>
         {{/each}}
       </div>
-      {{!-- {{> pagination/select href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
-      {{> pagination/input href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
+      {{> pagination/select href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
+      {{!-- {{> pagination/input href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
     {{/if}}
   </div>
 </section>

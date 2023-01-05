@@ -13,6 +13,7 @@ import arrayFrom from './arrayFrom';
 import numberIntoString from './numberIntoString';
 import chain from './chain';
 import urlFromParams from './urlFromParams';
+import restProps from './restProps';
 
 
 export default {
@@ -30,5 +31,6 @@ export default {
     arrayFrom,
     numberIntoString,
     chain,
-    urlFromParams
+    urlFromParams,
+    restProps,
 };

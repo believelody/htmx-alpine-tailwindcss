@@ -18,8 +18,11 @@
   <div class="p-8 border h-full rounded-md shadow-md mx-auto flex flex-col gap-y-4">
     {{> element/seo }}
     <h3 class="flex items-center justify-between">
-      <span>by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=post.author.username }}</span>
-      <span>Reactions: {{ post.reactions }}</span>
+      <div>by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=post.author.username }}</div>
+      <div class="flex items-center gap-x-2">
+        {{> button/heart-circle hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML" bg-color="bg-secondary" size=6 color="text-white"}}
+        <span>{{ post.reactions }}</span>
+      </div>
     </h3>
     <h2 class="text-center font-medium mb-8">{{ post.title }}</h2>
     <p class="text-base">{{ post.body }}</p>
