@@ -14,8 +14,8 @@ router.get('/', async (req, res, next) => {
             res.statusCode = 500;
         } else {
             const limit = req.query.limit || limitArray[0];
-            const page = parseInt(req.query.page) || 1;
-            const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=${limit}&skip=${parseInt(limit) * (page - 1)}`);
+            const page = Number(req.query.page) || 1;
+            const postsRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts?limit=${limit}&skip=${Number(limit) * (page - 1)}`);
             const postsJson = await postsRes.json();
             const { posts, total } = postsJson;
             const blogs = posts.map((post, index) => ({
@@ -30,7 +30,7 @@ router.get('/', async (req, res, next) => {
                 id: post.id,
                 userId: post.userId,
             }));
-            req.ctx = { ...req.ctx, blogs, meta: { pages: Math.round(total / parseInt(limit)), page, limit }, title: 'Blogs' };
+            req.ctx = { ...req.ctx, blogs, meta: { pages: Math.round(total / Number(limit)), page, limit }, title: 'Blogs' };
         }
         return res.render('pages/blog', req.ctx);
     } catch (error) {
@@ -46,9 +46,9 @@ router.get('/:id', async (req, res, next) => {
         }
         const postRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${req.params.id}`);
         const postJson = await postRes.json();
-        const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.id) - 1}?select=id`);
+        const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${Number(req.params.id) - 1}?select=id`);
         const prevPostJson = await prevPostRes.json();
-        const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.id) + 1}?select=id`);
+        const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${Number(req.params.id) + 1}?select=id`);
         const nextPostJson = await nextPostRes.json();
         const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=username`);
         const authorJson = await authorRes.json();

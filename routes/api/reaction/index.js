@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post('/post/:postId', async (req, res, next) => {
   try {
-    console.log({ body: req.body });
     if (!req.params?.postId.match(/\d/g).length) {
       throw "postId params is not a numeric value";
     }
@@ -14,9 +13,9 @@ router.post('/post/:postId', async (req, res, next) => {
       body: JSON.stringify({ reactions: Number(req.body.reaction) + 1 })
     });
     const postJson = await postRes.json();
-    const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.postId) - 1}?select=id`);
+    const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${Number(req.params.postId) - 1}?select=id`);
     const prevPostJson = await prevPostRes.json();
-    const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${parseInt(req.params.postId) + 1}?select=id`);
+    const nextPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${Number(req.params.postId) + 1}?select=id`);
     const nextPostJson = await nextPostRes.json();
     const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=username`);
     const authorJson = await authorRes.json();
