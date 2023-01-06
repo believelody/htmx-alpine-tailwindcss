@@ -21,8 +21,8 @@
       <div>by {{> link/primary href="/users/{{ post.author.id }}" hx-target="#content" hx-swap="innerHTML" label=post.author.username }}</div>
       <div class="flex items-center gap-x-2">
         {{> button/heart-circle title="React to this post" class="flex"
-          hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click"
-          hx-target="#content" hx-swap="outerHTML" hx-vals=(JSONstringify (object reaction=post.reactions))
+          hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading"
+          hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions))
           bg-color="bg-secondary"}}
         {{!-- {{button hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML"}} --}}
         <span>{{ post.reactions }}</span>
