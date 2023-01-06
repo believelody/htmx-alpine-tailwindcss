@@ -2100,9 +2100,23 @@ input[type=number] {
   --tw-ring-offset-color: #1f2937;
 }
 
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.disabled\:bg-neutral-200:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+
 .disabled\:text-black:disabled {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.disabled\:text-neutral-200:disabled {
+  --tw-text-opacity: 1;
+  color: rgb(229 229 229 / var(--tw-text-opacity));
 }
 
 @media (prefers-color-scheme: dark) {

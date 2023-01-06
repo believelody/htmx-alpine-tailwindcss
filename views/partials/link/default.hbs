@@ -1,4 +1,4 @@
-<a hx-boost="true" href="{{ href }}" data-loading-target="#loading" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="inline-flex items-center box-border cursor-pointer hover:border-b-2 {{withDefault color 'hover:border-b-neutral-500 text-neutral-500'}}">
+<a hx-boost="true" href="{{ href }}" hx-indicator="#loading-3" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="inline-flex items-center box-border cursor-pointer hover:border-b-2 {{withDefault color 'hover:border-b-neutral-500 text-neutral-500'}}">
     {{#if (eq icon.position "left")}}
         <span class="mr-2">{{ icon.component }}</span>
     {{/if}}

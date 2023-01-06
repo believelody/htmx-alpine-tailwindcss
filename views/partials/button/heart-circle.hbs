@@ -1,5 +1,12 @@
 {{#button spread=this}}
-  {{> icon/heart-circle bg-color="bg-secondary" full=liked size=6 color="text-white"}}
+  <span class="flex items-center justify-center" {{#if data-loading-icon}}data-loading-class="hidden"{{/if}}>{{> icon/heart-circle bg-color="bg-secondary" full=liked size=6 color="text-white"}}</span>
+  {{#if data-loading-icon}}
+        <span id="loading-icon"
+            data-loading
+        >
+            {{partial (toString data-loading-icon) size=10}}
+        </span>
+    {{/if}}
 {{/button}}
 {{!-- <button title="React to this post" class="flex"
           hx-post={{append "/api/reaction/post/" (numberIntoString post.id)}} hx-trigger="click"
