@@ -23,20 +23,6 @@ export default function({ fn, hash }) {
     }
     hash.spread.class = className.join(" ");
   }
-  const contentProps = {};
-  ['label', 'icon', 'image', 'sr-only'].forEach(item => {
-    if (hash.spread[item]) {
-      contentProps[item] = hash.spread[item];
-      delete hash.spread[item];
-    }
-  });
-  const dataLoadingProps = {};
-  ['data-loading-text', 'data-loading-icon'].forEach(item => {
-    if (hash.spread[item]) {
-      dataLoadingProps[item] = hash.spread[item];
-      delete hash.spread[item];
-    }
-  });
   const spreadAttrs = expressHbs.handlebars.helpers['spread'].call(this, hash.spread);
-  return "<button " + spreadAttrs + ">" + fn({ ...contentProps, ...dataLoadingProps }) + "</button>";
+  return "<button " + spreadAttrs + ">" + fn(hash.spread) + "</button>";
 }

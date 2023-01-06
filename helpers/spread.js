@@ -3,7 +3,7 @@ export default function(context) {
     if (typeof value === "boolean" && value) {
       return `${key}`;
     }
-    return `${key}="${value}"`
+    return `${key}='${value}'`
   }).join(" ");
   return result;
 }
