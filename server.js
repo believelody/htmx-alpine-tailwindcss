@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import express from 'express';
 import hbs from "express-hbs";
+import session from 'express-session';
 import { array, misc, string, comparison, math, number, collection, object, html } from 'useful-handlebars-helpers';
 import customHelpers from './helpers';
 import bodyParser from "body-parser";
@@ -11,6 +12,7 @@ import contactRoute from './routes/contact';
 import teamsRoute from './routes/team';
 import blogRoute from './routes/blog';
 import loginRoute from './routes/login';
+import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import * as url from 'url';
 config();
@@ -25,6 +27,7 @@ const app = express();
 export const error500 = "Error: something went wrong.";
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'yeswecan', resave: false }));
 
 [array, misc, string, comparison, math, number, collection, object, html, customHelpers].forEach(helper => hbs.registerHelper(helper));
 
@@ -42,7 +45,7 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
     }
-    req.ctx = { ...req.ctx, user: { subscribed: false } }
+    req.ctx = { ...req.ctx, user: { ...req.session?.user } }
     // await new Promise(r => setTimeout(r, 2000));
     next();
 });
@@ -53,6 +56,7 @@ app.use('/contact', contactRoute);
 app.use('/blog', blogRoute);
 app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
+app.use('/user', userRoute);
 app.use('/api', apiRoute);
 app.use((error, req, res, next) => {
     console.log(error);

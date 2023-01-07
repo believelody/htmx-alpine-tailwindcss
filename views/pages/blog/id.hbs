@@ -55,5 +55,5 @@
   </div>
   <hr>
   <div class="my-4">{{> form/comment }}</div>
-  <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-trigger="load" class="mb-4"></div>
+  <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-push-url="false" hx-trigger="load" class="mb-4"></div>
 </section>

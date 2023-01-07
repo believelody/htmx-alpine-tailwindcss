@@ -4,10 +4,14 @@
     {{> nav/menu-list }}
     {{> sidebar/menu }}
     <div class="items-center hidden gap-4 md:flex">
-      {{> dropdown/user }}
-      <template x-if="!currentRoute.includes('/login')">
-        {{> modal/login }}
-      </template>
+        {{log user}}
+      {{#if user.isAuthenticated}}
+        {{> dropdown/user }}
+      {{else}}
+        <template x-if="!currentRoute.includes('/login')">
+          {{> modal/login }}
+        </template>
+      {{/if}}
     </div>
   </div>
 </header>

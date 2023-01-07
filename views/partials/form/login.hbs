@@ -1,31 +1,33 @@
-<div>
-    <img class="w-auto h-12 mx-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-        alt="Your Company">
-    <h2 class="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Sign in to your account</h2>
-    <p class="mt-2 text-sm text-center text-gray-600">
-        Or
-        {{> link/primary href="/register" label="Register now !" bold="medium" }}
-    </p>
-</div>
-<form hx-post="/api/auth/login" hx-trigger="submit" class="mt-8 space-y-6">
-    <div x-show="error?.login" x-transition>
-        <p class="text-danger-500 text-center text-xl" x-text="error?.login"></p>
+<div id="login-form">
+    <div>
+        <img class="w-auto h-12 mx-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Your Company">
+        <h2 class="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Sign in to your account</h2>
+        <p class="mt-2 text-sm text-center text-gray-600">
+            Or
+            {{> link/primary href="/register" label="Register now !" bold="medium" }}
+        </p>
     </div>
-    
-    <div class="rounded-md shadow-sm">
-        {{> field/email class="" name="login-email" id="login-email" placeholder="Email address" required=true label-class="sr-only" }}
-        {{> field/password class="" name="password" id="password" placeholder="Password" required=true label-class="sr-only" }}
-    </div>
-
-    <div class="flex items-center justify-between">
-        {{> field/checkbox-2 class="flex items-center" color="primary" size=6 label="Remember Me" id="remember" name="remember" }}
-        <div class="text-sm">
-            {{> link/secondary href="/forgotten-password" label="Forgot your password ?" bold="medium" }}
+    <form hx-post="/api/auth/login" hx-trigger="submit" class="mt-8 space-y-6" hx-target="#login-form">
+        <div x-show="error?.login" x-transition>
+            <p class="text-danger-500 text-center text-xl" x-text="error?.login"></p>
         </div>
-    </div>
+        
+        <div class="rounded-md shadow-sm">
+            {{> field/email class="" name="login-email" id="login-email" placeholder="Email address" required=true label-class="sr-only" }}
+            {{> field/password class="" name="password" id="password" placeholder="Password" required=true label-class="sr-only" }}
+        </div>
 
-    {{> button/info-3 block=true label="Sign In" x-on:click="error = null" icon=(partial 'icon/lock-closed' color="text-info-500" size=6)
-        icon-class="absolute inset-y-0 left-0 flex items-center pl-3"
-        data-loading-disable=true data-loading-text="Authentication..." data-loading-aria-busy=true data-loading-icon="lottie/loading-1"
-    }}
-</form>
+        <div class="flex items-center justify-between">
+            {{> field/checkbox-2 class="flex items-center" color="primary" size=6 label="Remember Me" id="remember" name="remember" }}
+            <div class="text-sm">
+                {{> link/secondary href="/forgotten-password" label="Forgot your password ?" bold="medium" }}
+            </div>
+        </div>
+
+        {{> button/info-3 block=true label="Sign In" x-on:click="error = null" icon=(partial 'icon/lock-closed' color="text-info-500" size=6)
+            icon-class="absolute inset-y-0 left-0 flex items-center pl-3"
+            data-loading-disable=true data-loading-text="Authentication..." data-loading-aria-busy=true data-loading-icon="lottie/loading-1"
+        }}
+    </form>
+</div>
