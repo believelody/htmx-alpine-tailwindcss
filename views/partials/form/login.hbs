@@ -4,10 +4,10 @@
     <h2 class="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Sign in to your account</h2>
     <p class="mt-2 text-sm text-center text-gray-600">
         Or
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Register now !</a>
+        {{> link/primary href="/register" label="Register now !" bold="medium" }}
     </p>
 </div>
-<form class="mt-8 space-y-6">
+<form hx-post="/api/auth/login" class="mt-8 space-y-6">
     
     <div class="rounded-md shadow-sm">
         {{> field/email class="" name="login-email" id="login-email" placeholder="Email address" required=true label-class="sr-only" }}
@@ -17,7 +17,7 @@
     <div class="flex items-center justify-between">
         {{> field/checkbox class="flex items-center" color="primary" size=6 label="Remember Me" id="remember-me" name="remember-me" }}
         <div class="text-sm">
-            <a href="#" class="font-medium link link-secondary">Forgot your password?</a>
+            {{> link/secondary href="/forgotten-password" label="Forgot your password?" bold="medium" }}
         </div>
     </div>
 
