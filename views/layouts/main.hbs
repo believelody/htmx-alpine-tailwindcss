@@ -33,7 +33,7 @@
         });"
     @route="currentRoute = $event.detail"
     @error="error = $event.detail;"
-    @modal-closer="if (error) { error = '' }"
+    @modal-closer="if (error) { error = null }"
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">

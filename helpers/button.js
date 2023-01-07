@@ -3,7 +3,7 @@ import expressHbs from 'express-hbs';
 export default function({ fn, hash }) {
   delete hash.spread.body;
   if (!hash.spread.class) {
-    let className = ["px-4 py-2 rounded border border-red-500 btn"];
+    let className = ["relative px-4 py-2 rounded border border-red-500 btn"];
     if (hash.spread.color) {
       if (hash.spread.outlined) {
         className.push(`btn-${hash.spread.color}-outlined`);
