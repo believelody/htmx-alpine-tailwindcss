@@ -45,7 +45,7 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
     }
-    req.ctx = { ...req.ctx, user: { ...req.session?.user } }
+    req.ctx = { ...req.ctx, user: { ...req.session?.user }, isAuthenticated: !!req.session?.user }
     // await new Promise(r => setTimeout(r, 2000));
     next();
 });

@@ -14,5 +14,5 @@
     >
         Settings
     </a>
-    <button x-bind="closer" class="block px-4 py-2 text-sm text-gray-700">Sign out</button>
+    <button x-bind="closer" hx-post="/api/auth/logout" hx-target="#content" hx-swap="innerHTML" class="border w-full py-2 text-sm text-gray-700">Sign out</button>
 </nav>

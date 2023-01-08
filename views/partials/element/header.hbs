@@ -3,15 +3,6 @@
     {{> element/brand }}
     {{> nav/menu-list }}
     {{> sidebar/menu }}
-    <div class="items-center hidden gap-4 md:flex" hx-get="api/auth/header" hx-trigger="auth-success">
-        {{log "isAuthenticated : " isAuthenticated}}
-      {{#if user.isAuthenticated}}
-        {{> dropdown/user }}
-      {{else}}
-        <template x-if="!currentRoute.includes('/login')">
-          {{> modal/login }}
-        </template>
-      {{/if}}
-    </div>
+    {{> auth/header }}
   </div>
 </header>

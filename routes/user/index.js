@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get('/me', async (req, res, next) => {
   try {
-    // console.log("user session : ", req.session.user);
     if (!req.session.user) {
-      return res.redirect("/login");
+      res.setHeader('HX-Push', '/login');
+      return res.render("pages/login");
     }
     return res.render("pages/user", { ...req.ctx, title: "My Profile" });
   } catch (error) {
