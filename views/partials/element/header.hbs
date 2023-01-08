@@ -3,8 +3,8 @@
     {{> element/brand }}
     {{> nav/menu-list }}
     {{> sidebar/menu }}
-    <div class="items-center hidden gap-4 md:flex">
-        {{log user}}
+    <div class="items-center hidden gap-4 md:flex" hx-get="api/auth/header" hx-push-url="false" hx-trigger="auth-success">
+        {{log "isAuthenticated : " isAuthenticated}}
       {{#if user.isAuthenticated}}
         {{> dropdown/user }}
       {{else}}
