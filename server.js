@@ -56,7 +56,7 @@ app.use('/contact', contactRoute);
 app.use('/blog', blogRoute);
 app.use('/team', teamsRoute);
 app.use('/login', loginRoute);
-app.use('/user', userRoute);
+app.use('/users', userRoute);
 app.use('/api', apiRoute);
 app.use((error, req, res, next) => {
     console.log(error);

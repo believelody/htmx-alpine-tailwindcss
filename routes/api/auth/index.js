@@ -27,8 +27,8 @@ router.post('/login', async (req, res, next) => {
     // }
     req.ctx = { ...req.ctx, user: req.session.user };
     res.setHeader('HX-Trigger', 'auth-success');
-    res.setHeader('HX-Redirect', '/url');
-    return res.status(201);
+    res.setHeader('HX-Redirect', '/users/me');
+    return res.status(204).end();
   } catch (error) {
     console.log(error);
     next(error);
@@ -37,7 +37,7 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/header', (req, res, next) => {
   console.log("header-auth",req.session.user);
-  return res.status(200).send({ isAuthenticated: true });
+  return res.status(204).send({ isAuthenticated: true });
 });
 
 export default router;

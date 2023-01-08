@@ -1,10 +1,18 @@
 <nav hx-boost="true">
-    <a href="/user/me"
+    <a href="/users/me"
     hx-target="#content" x-bind="closer"
-    :class="currentRoute.includes('/user/me') && 'bg-gray-800 text-white'"
-    class="block px-4 py-2 text-sm text-gray-700">
+    aria-disabled="currentRoute.includes('/users/me')"
+    disabled="currentRoute.includes('/users/me')"
+    :class="currentRoute.includes('/users/me') && 'bg-gray-200'"
+    class="block px-4 py-2 text-sm text-gray-700"
+    >
         Your Profile
     </a>
-    <a href="#" x-bind="closer" class="block px-4 py-2 text-sm text-gray-700">Settings</a>
-    <a href="#" x-bind="closer" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
+    <a href="/users/me/settings" x-bind="closer"
+        :class="currentRoute.includes('/user/me/settings') && 'bg-gray-800 text-white'"
+        class="block px-4 py-2 text-sm text-gray-700"
+    >
+        Settings
+    </a>
+    <button x-bind="closer" class="block px-4 py-2 text-sm text-gray-700">Sign out</button>
 </nav>

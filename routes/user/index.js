@@ -8,7 +8,7 @@ router.get('/me', async (req, res, next) => {
     if (!req.session.user) {
       return res.redirect("/login");
     }
-    return res.render("pages/user", req.ctx);
+    return res.render("pages/user", { ...req.ctx, title: "My Profile" });
   } catch (error) {
     console.log(error);
     next(error);
