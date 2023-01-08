@@ -58,7 +58,7 @@
     {{#if isAuthenticated}}
       {{> form/comment }}
     {{else}}
-      <p class="text-xl flex flex-wrap border">Please {{> modal/login trigger=(partial 'button/link-3' label="log in" class="link link-primary" x-bind="trigger") }} before comment.</p>    
+      <div class="text-xl flex flex-wrap gap-2 items-end">Please {{> modal/login trigger=(partial 'button/link-3' label="log in" class="link link-primary text-3xl" x-bind="trigger") }} before comment.</div>    
     {{/if}}
   </div>
   <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-push-url="false" hx-trigger="load" class="mb-4"></div>
