@@ -1,5 +1,7 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import { homeTitle } from '../../home';
+import { myProfileTitle } from '../user';
 const router = express.Router();
 
 router.post('/login', async (req, res, next) => {
@@ -27,7 +29,7 @@ router.post('/login', async (req, res, next) => {
     // }
     res.setHeader('HX-Push', '/users/me');
     res.setHeader('HX-Trigger', 'check-auth');
-    return res.render('pages/user', { ...req.ctx, user: req.session.user, isAuthenticated: true });
+    return res.render('pages/user', { ...req.ctx, user: req.session.user, isAuthenticated: true, title: myProfileTitle });
   } catch (error) {
     console.log(error);
     next(error);
@@ -46,9 +48,9 @@ router.get('/header', async (req, res, next) => {
 router.post('/logout', async (req, res, next) => {
   try {
     req.session.destroy();
-    res.setHeader('HX-Push', '/about');
+    res.setHeader('HX-Push', '/');
     res.setHeader('HX-Trigger', 'check-auth');
-    return res.render('pages/about', { ...req.ctx, isAuthenticated: false });
+    return res.render('pages/about', { ...req.ctx, isAuthenticated: false, title: homeTitle });
   } catch (error) {
     console.log(error);
     next(error);
