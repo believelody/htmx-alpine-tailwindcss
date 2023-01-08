@@ -15,6 +15,7 @@ import chain from './chain';
 import urlFromParams from './urlFromParams';
 import spread from './spread';
 import button from './button';
+import uuid from './uuid';
 
 
 export default {
@@ -34,5 +35,6 @@ export default {
     chain,
     urlFromParams,
     spread,
-    button
+    button,
+    uuid
 };
