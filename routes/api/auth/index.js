@@ -27,8 +27,11 @@ router.post('/login', async (req, res, next) => {
     // if (req.body.remember) {
     //   req.session.remember = true;
     // }
-    res.setHeader('HX-Push', '/users/me');
     res.setHeader('HX-Trigger', 'check-auth');
+    if (req.body['stay_on_current_url']) {
+      return res.redirect(new URL(req.headers['hx-current-url']).pathname);
+    }
+    res.setHeader('HX-Push', '/users/me');
     return res.render('pages/user', { ...req.ctx, user: req.session.user, isAuthenticated: true, title: myProfileTitle });
   } catch (error) {
     console.log(error);

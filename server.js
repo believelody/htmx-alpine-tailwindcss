@@ -45,6 +45,9 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
     }
+    if (req.method === "GET" && req.session?.user) {
+        res.setHeader('HX-Trigger', 'check-auth');
+    }
     req.ctx = { ...req.ctx, user: { ...req.session?.user }, isAuthenticated: !!req.session?.user }
     // await new Promise(r => setTimeout(r, 2000));
     next();
