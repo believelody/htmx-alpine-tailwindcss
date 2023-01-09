@@ -40,7 +40,7 @@
             {{!-- {{> loading/base-1 }} --}}
             {{> loading/base-2 size=18 }}
             {{> loading/base-3 }}
-            <section id="content" class="relative h-full border border-red-500">
+            <section id="content" class="relative h-full">
                 {{{ body }}}
             </section>
         </main>
@@ -49,10 +49,10 @@
     <div x-data="drawer" x-effect="open = error === 'error-500';">
         {{> element/modal
             modal=(object
-            title=(partial 'title/default'
-                    text="An error occured"
-                    class="text-lg text-danger-500 border rounded-lg text-center py-4")
-            component=(partial 'error/500'))
+                title=(partial 'title/default'
+                        text="An error occured"
+                        class="text-lg text-danger-500 border rounded-lg text-center py-4")
+                component=(partial 'error/500'))
             class="p-8"
         }}
     </div>
@@ -61,6 +61,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('drawer', (initialOpenState = false) => ({
             open: initialOpenState,
+            lock: false,
             init() {
                 {{!-- this.$watch('open', console.log); --}}
             },
@@ -73,20 +74,24 @@
             trigger: {
                 ['x-ref']: 'trigger',
                 ['@click']() {
-                    this.open = true
+                    this.open = true;
                 },
             },
             dialogue: {
                 ['x-show']() {
-                    return this.open
+                    return this.open;
                 },
                 ['@click.outside']() {
-                    this.open = false;
-                    this.$dispatch('modal-closer');
+                    if (!this.lock) {
+                        this.open = false;
+                        this.$dispatch('modal-closer');
+                    }
                 },
                 ['@keyup.escape.window']() {
-                    this.open = false;
-                    this.$dispatch('modal-closer');
+                    if (!this.lock) {
+                        this.open = false;
+                        this.$dispatch('modal-closer');
+                    }
                 },
             },
             closer: {

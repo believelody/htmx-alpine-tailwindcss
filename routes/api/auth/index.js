@@ -6,16 +6,17 @@ const router = express.Router();
 
 router.post('/login', async (req, res, next) => {
   try {
+    // await new Promise(resolve => setTimeout(resolve, 3000));
     const { email, password } = req.body;
     const loginRes = await fetch(`${process.env.DUMMY_DATA_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      // body: JSON.stringify({ email, password })
+      // body: JSON.stringify({ email, password }),
       body: JSON.stringify({
         username: 'kminchelle',
         password: '0lelplR',
         // expiresInMins: 60, // optional
-      })
+      }),
     });
     const loginJson = await loginRes.json();
     if (loginJson.message) {

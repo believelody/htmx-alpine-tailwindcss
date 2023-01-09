@@ -4,10 +4,10 @@
     <h2 class="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Sign in to your account</h2>
     <p class="mt-2 text-sm text-center text-gray-600">
         Or
-        {{> link/primary href="/register" label="Register now !" bold="medium" }}
+        {{> link/primary href="/register" label="Register now !" text-size="lg" bold="medium" }}
     </p>
 </div>
-<form hx-post="/api/auth/login" {{#if fromModal}}hx-vals='{ "stay_on_current_url" : true }'{{/if}} hx-swap="innerHTML" hx-trigger="submit" class="mt-8 space-y-6" hx-target="#content">
+<form hx-post="/api/auth/login" {{#if fromModal}}@submit.prevent="lock = true;" hx-vals='{ "stay_on_current_url" : true }'{{/if}} hx-swap="innerHTML" hx-trigger="submit" class="mt-8 space-y-6" hx-target="#content">
     <div x-show="error?.login" x-transition>
         <p class="text-danger-500 text-center text-xl" x-text="error?.login"></p>
     </div>

@@ -1,4 +1,6 @@
-<a hx-boost="true" href="{{ href }}" hx-indicator="#loading-3" hx-push-url="true" hx-swap="innerHTML" hx-target="#content" class="{{cond bold (append 'font-' bold) '' }} inline-flex items-center box-border link {{withDefault color ''}}">
+<a hx-boost="true" href="{{ href }}" hx-indicator="#loading-3" hx-push-url="true" hx-swap="innerHTML" hx-target="#content"
+    class="{{cond bold (append 'font-' bold) '' }} {{cond text-size (chain "text-" text-size) ""}} inline-flex items-center box-border link {{withDefault color ''}}"
+>
     {{#if (eq icon.position "left")}}
         <span class="mr-2">{{ icon.component }}</span>
     {{/if}}

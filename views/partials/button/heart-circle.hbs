@@ -1,4 +1,5 @@
 {{#button spread=this}}
+  {{log liked}}
   <span class="flex items-center justify-center" {{#if data-loading-icon}}data-loading-class="hidden"{{/if}}>{{> icon/heart-circle bg-color="bg-secondary" full=liked size=6 color="text-white"}}</span>
   {{#if data-loading-icon}}
         <span id="loading-icon"
