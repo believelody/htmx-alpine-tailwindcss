@@ -7,6 +7,7 @@ router.get('/post/:id', async (req, res, next) => {
     if (!req.params?.id.match(/[0-9]/g)) {
       throw "id params is not a numeric value";
     }
+    // await new Promise(resolve => setTimeout(resolve, 3000));
     const commentsRes = await fetch(`${process.env.DUMMY_DATA_URL}/comments/post/${req.params.id}`);
     const { comments, total, limit } = await commentsRes.json();
     req.ctx = { ...req.ctx, comments, meta: { total, limit } };

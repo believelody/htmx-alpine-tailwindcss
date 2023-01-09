@@ -16,6 +16,7 @@ import urlFromParams from './urlFromParams';
 import spread from './spread';
 import button from './button';
 import uuid from './uuid';
+import raw from './raw';
 
 
 export default {
@@ -36,5 +37,6 @@ export default {
     urlFromParams,
     spread,
     button,
-    uuid
+    uuid,
+    raw,
 };

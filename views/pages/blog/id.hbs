@@ -1,6 +1,6 @@
 {{!< main }}
 {{> element/seo }}
-<section class="flex flex-col max-w-xl mx-auto h-full">
+<section x-data="drawer" class="flex flex-col max-w-xl mx-auto h-full">
   <div class="flex items-center justify-center my-4">
     {{> link/default href="/blog" label="Back to blog list" icon=(object component=(partial "icon/arrow-left" full=true) position="left") }}
   </div>
@@ -22,11 +22,14 @@
     <h3 class="flex items-center justify-between">
       <div>by {{> link/primary href="/users/{{ post.author.id }}" label=post.author.username }}</div>
       <div class="flex items-center gap-x-2">
-        {{> button/heart-circle title="React to this post" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
-          hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
-          data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
-          hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
-          bg-color="bg-secondary"}}
+        {{cond isAuthenticated
+          (partial 'button/heart-circle' title="React to this post" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
+            hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
+            data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
+            hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
+            bg-color="bg-secondary")
+          (partial 'button/heart-circle' x-bind="trigger" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200")
+        }}
         {{!-- {{button hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML"}} --}}
         <span>{{ post.reactions }}</span>
       </div>
@@ -58,8 +61,11 @@
     {{#if isAuthenticated}}
       {{> form/comment }}
     {{else}}
-      <div class="text-xl flex flex-wrap gap-2 items-end">Please {{> modal/login trigger=(partial 'button/link-3' label="log in" class="link link-primary text-3xl" x-bind="trigger") }} before comment.</div>    
+      <div class="text-xl flex flex-wrap gap-2 items-end">Please {{> button/link-3 label="log in" class="link link-primary text-3xl" x-bind="trigger" }} before comment.</div>    
     {{/if}}
   </div>
-  <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-push-url="false" hx-trigger="load" class="mb-4"></div>
+  <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-push-url="false" hx-trigger="load" hx-indicator="#comment-loader" class="mb-4">
+    <div id="comment-loader" class="htmx-indicator justify-center">{{> lottie/loading-1 size=16 }}</div>
+  </div>
+  {{> element/modal modal=(object component=(partial 'form/login')) class="p-8"}}
 </section>
