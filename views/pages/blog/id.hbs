@@ -22,7 +22,6 @@
     <h3 class="flex items-center justify-between">
       <div>by {{> link/primary href="/users/{{ post.author.id }}" label=post.author.username }}</div>
       <div class="flex items-center gap-x-2">
-        {{log "in blog detail : " liked}}
         {{#if isAuthenticated}}
           {{> 'button/heart-circle' title="React to this post" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
             hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
@@ -59,15 +58,15 @@
     {{/if}}
   </div>
   <hr>
-  <div class="my-4">
+  <div class="my-4 px-4">
     {{#if isAuthenticated}}
       {{> form/comment }}
     {{else}}
       <div class="text-xl flex flex-wrap gap-2 items-end">Please {{> button/link-3 label="log in" class="link link-primary text-3xl" x-bind="trigger" }} before comment.</div>    
     {{/if}}
   </div>
-  <div id="comments" hx-get="/api/comments/post/{{ post.id }}" hx-push-url="false" hx-trigger="load" hx-indicator="#comment-loader" class="mb-4">
-    <div id="comment-loader" class="htmx-indicator justify-center">{{> lottie/loading-1 size=16 }}</div>
+  <div hx-get="/api/comments/post/{{ post.id }}" hx-swap="innerHTML" hx-push-url="false" hx-trigger="load, add-comment from:body" data-loading-class="hidden" class="mb-4 px-4">
+    <div id="comment-loader" data-loading class="justify-center">{{> lottie/loading-1 size=16 }}</div>
   </div>
   {{> element/modal modal=(object component=(partial 'form/login' fromModal=true)) class="p-8"}}
 </section>

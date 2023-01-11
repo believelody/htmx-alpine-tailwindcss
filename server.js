@@ -3,7 +3,7 @@ import express from 'express';
 import hbs from "express-hbs";
 import session from 'express-session';
 import { array, misc, string, comparison, math, number, collection, object, html } from 'useful-handlebars-helpers';
-import customHelpers from './helpers';
+import customHelpers from './src/js/helpers';
 import bodyParser from "body-parser";
 import path from "path";
 import homeRoute from './routes/home';
