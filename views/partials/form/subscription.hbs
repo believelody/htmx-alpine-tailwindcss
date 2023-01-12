@@ -2,9 +2,9 @@
     hx-trigger="submit"
     data-loading-path="/api/subscription/1"
     x-effect="console.log('error : ', error)"
-    class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
+    class="flex flex-wrap items-center justify-center gap-y-2 md:gap-y-0 md:gap-x-2 md:flex-nowrap md:justify-start">
     {{> field/email data-loading-disable=true 
-            class="relative w-auto mr-2 sm:w-64 sm:mr-4" value=form.subscription
+            class="relative w-auto shrink" value=form.subscription
             name="subscription" placeholder="Type your email here"
             required=true }}
     {{> button/primary-3

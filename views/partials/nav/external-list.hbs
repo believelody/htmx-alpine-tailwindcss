@@ -72,31 +72,31 @@
         </div>
     </div>
     <div class="border-t border-gray-200">
-        <div class="container flex flex-wrap items-center px-5 py-4 mx-auto">
-        <div class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start">
-            {{#unless user.subscribed}}
-                {{> form/subscription }}
-            {{/unless}}
-            <p class="mt-2 text-sm text-center text-gray-500 md:ml-6 md:mt-0 sm:text-left">
-                Bitters chicharrones fanny pack
-                <br class="hidden lg:block">
-                waistcoat green juice
-            </p>
-        </div>
-        <span class="inline-flex justify-center w-full mt-6 lg:ml-auto lg:mt-0 md:justify-start md:w-auto">
-            <a class="text-gray-500">
-                {{> icon/facebook size=7 }}
-            </a>
-            <a class="ml-3 text-gray-500">
-                {{> icon/twitter size=7 }}
-            </a>
-            <a class="ml-3 text-gray-500">
-                {{> icon/instagram size=7 }}
-            </a>
-            <a class="ml-3 text-gray-500">
-                {{> icon/linkedin size=7 }}
-            </a>
-        </span>
+        <div class="container flex flex-wrap items-center px-2 py-4 gap-y-4 lg:gap-y-0 lg:gap-x-4 mx-auto">
+            <div class="flex flex-wrap items-center gap-y-2 md:gap-y-0 md:gap-x-2 justify-center md:flex-nowrap md:justify-start">
+                {{#unless user.subscribed}}
+                    {{> form/subscription }}
+                {{/unless}}
+                <p class="text-sm text-center text-gray-500 sm:text-left">
+                    Bitters chicharrones fanny pack
+                    <br class="hidden lg:block">
+                    waistcoat green juice
+                </p>
+            </div>
+            <span class="inline-flex justify-around border flex-1 lg:justify-end">
+                <a class="text-gray-500">
+                    {{> icon/facebook size=6 }}
+                </a>
+                <a class="ml-3 text-gray-500">
+                    {{> icon/twitter size=6 }}
+                </a>
+                <a class="ml-3 text-gray-500">
+                    {{> icon/instagram size=6 }}
+                </a>
+                <a class="ml-3 text-gray-500">
+                    {{> icon/linkedin size=6 }}
+                </a>
+            </span>
         </div>
     </div>
     <div class="bg-gray-100">

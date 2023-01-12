@@ -11,7 +11,10 @@ module.exports = {
         danger: colors.red,
         info: colors.blue,
         warning: colors.yellow,
-      })
+      }),
+      screens: {
+        'xs': '375px',
+      },
     },
   },
   plugins: [],
