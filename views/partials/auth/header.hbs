@@ -3,7 +3,7 @@
     {{> dropdown/user }}
   {{else}}
     <template x-if="!currentRoute.includes('/login')">
-      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(partial 'icon/arrow-right') ) }}
+      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(partial 'icon/arrow-right' fill="none") ) }}
     </template>
   {{/if}}
 </div>

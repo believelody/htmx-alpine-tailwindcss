@@ -1,3 +1,18 @@
+{{#*inline 'nav-prev-next'}}
+  {{#if post.prev }}
+    <div class="flex items-center grow">
+      {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"
+          icon=(object component=(partial "icon/chevron-left" size=8 stroke="none") position="left") }}
+    </div>
+  {{/if}}
+  {{#if post.next }}
+    <div class="flex items-center justify-end grow">
+      {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"
+          icon=(object component=(partial "icon/chevron-right" size=8 stroke="none") position="right") }}
+    </div>
+  {{/if}}
+{{/inline}}
+
 {{!< main }}
 {{> element/seo }}
 <section x-data="drawer" class="flex flex-col max-w-xl mx-auto h-full">
@@ -5,31 +20,20 @@
     {{> link/default href="/blog" label="Back to blog list" icon=(object component=(partial "icon/arrow-left" full=true) position="left") }}
   </div>
   <div class="flex items-center justify-between my-4">
-    {{#if post.prev }}
-      <div class="flex items-center grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"
-          icon=(object component=(partial "icon/chevron-left" full=true) position="left") }}
-      </div>
-    {{/if}}
-    {{#if post.next }}
-      <div class="flex items-center justify-end grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"
-          icon=(object component=(partial "icon/chevron-right" full=true) position="right") }}
-      </div>
-    {{/if}}
+    {{> nav-prev-next}}
   </div>
   <div class="p-8 border h-full rounded-md shadow-md mx-auto flex flex-col gap-y-4">
     <h3 class="flex items-center justify-between">
       <div>by {{> link/primary href="/users/{{ post.author.id }}" label=post.author.username }}</div>
       <div class="flex items-center gap-x-2">
         {{#if isAuthenticated}}
-          {{> 'button/heart-circle' title="React to this post" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
+          {{> button/heart-circle class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
             hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
             data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
             hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
-            bg-color="bg-secondary"}}
+            bg-icon-color="bg-secondary"}}
         {{else}}
-          {{> 'button/heart-circle' x-bind="trigger" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"}}
+          {{> button/heart-circle x-bind="trigger" bg-icon-color="bg-secondary" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"}}
         {{/if}}
         {{!-- {{button hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML"}} --}}
         <span>{{ post.reactions }}</span>
@@ -44,18 +48,7 @@
     {{/if}}
   </div>
   <div class="flex items-center justify-between my-4">
-    {{#if post.prev }}
-      <div class="flex items-center grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.prev)) label="Previous post"
-          icon=(object component=(partial "icon/chevron-left" full=true) position="left") }}
-      </div>
-    {{/if}}
-    {{#if post.next }}
-      <div class="flex items-center justify-end grow">
-        {{> link/default href=(append "/blog/" (numberIntoString post.next)) label="Next post"
-          icon=(object component=(partial "icon/chevron-right" full=true) position="right") }}
-      </div>
-    {{/if}}
+    {{> nav-prev-next}}
   </div>
   <hr>
   <div class="my-4 px-4">

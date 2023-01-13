@@ -17,7 +17,7 @@ import spread from './spread';
 import button from './button';
 import uuid from './uuid';
 import raw from './raw';
-
+import svg from './svg';
 
 export default {
     toString,
@@ -39,4 +39,5 @@ export default {
     button,
     uuid,
     raw,
+    svg
 };

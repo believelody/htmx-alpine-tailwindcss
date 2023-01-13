@@ -1,12 +1,12 @@
 {{#*inline 'extra'}}
 <div class="absolute bottom-0 left-0 flex items-center justify-center w-full py-4 mt-2 leading-none text-center text-neutral-800">
     <section class="inline-flex items-center py-1 text-sm leading-none cursor-pointer">
-        <span class="mr-1">{{> icon/eye }}</span>
+        <span class="mr-1">{{> icon/eye fill="none" }}</span>
         <span>{{ views }}</span>
     </section>
     <span class="w-px h-4 mx-3 border border-neutral-700"></span>
     <section class="inline-flex items-center text-sm leading-none cursor-pointer ">
-        <span class="mr-1">{{> icon/chat }}</span>
+        <span class="mr-1">{{> icon/chat fill="none" }}</span>
         <span>{{ comments }}</span>
     </section>
 </div>
@@ -41,7 +41,7 @@
           </div>
         {{/each}}
       </div>
-      {{> pagination/select href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
+      {{> pagination/select-2 href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}}
       {{!-- {{> pagination/input href=(chain "/blog?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
     {{/if}}
   </div>

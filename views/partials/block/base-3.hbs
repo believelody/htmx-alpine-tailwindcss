@@ -18,7 +18,7 @@
     >
         {{ content }}
     </p>
-    {{> (append 'link/' (withDefault color 'default')) icon=(object component=(partial 'icon/arrow-right')) label="Learn More" href=url }}
+    {{> (append 'link/' (withDefault color 'default')) icon=(object component=(partial 'icon/arrow-right' fill="none")) label="Learn More" href=url }}
     {{#if extra }}
         {{> extra }}
     {{/if}}
