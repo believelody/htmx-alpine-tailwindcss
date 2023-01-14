@@ -1,0 +1,1 @@
+export const error500 = "Error: something went wrong.";

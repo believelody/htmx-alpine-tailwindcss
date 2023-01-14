@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import express from 'express';
-import { error500 } from '../../server';
+import utils from '../../src/js/utils';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
             if (req.ctx.fromHTMX) {
                 throw "There is a problem with limit value";
             }
-            req.ctx.error = error500;
+            req.ctx.error = utils.error500;
             res.statusCode = 500;
         } else {
             const limit = req.query.limit || limitArray[0];

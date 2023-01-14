@@ -17,9 +17,6 @@
 <body hx-ext="loading-states"
     x-data="{ currentRoute : window.location.pathname, error: null }"
     x-effect="
-        {{!-- console.log(navigator.languages); --}}
-        {{!-- window.addEventListener('offline', (e) => { console.log('offline'); }); --}}
-        {{!-- window.addEventListener('online', (e) => { console.log('online'); }); --}}
         $el.addEventListener('htmx:responseError', ({ detail }) => {
             if (detail.xhr.status === 500) {
                 $dispatch('error', 'error-500');
@@ -36,6 +33,9 @@
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
+        <div x-data="notifier" @notify.window="send($event.detail)">
+            {{> element/notification }}
+        </div>
         <main class="relative grow">
             {{!-- {{> loading/base-1 }} --}}
             {{> loading/base-2 size=18 }}
@@ -59,6 +59,28 @@
 </body>
 <script>
     document.addEventListener('alpine:init', () => {
+        Alpine.data('notifier', (initialState = { notifications: [], timeout: 3000}) => ({
+            notifications: initialState.notifications,
+            timer: null,
+            timeout: initialState.timeout,
+            send(notification) {
+                this.notifications = [{ id: crypto.randomUUID(), ...notification }, ...this.notifications];
+            },
+            remove(notificationId) {
+                this.notifications = this.notifications.filter(notification => notification.id !== notificationId);
+                clearTimeout(this.timer);
+            },
+            wrapper: {
+                ['x-show']() {
+                    if (this.notifications.length) {
+                        this.timer = setTimeout(() => {
+                            this.notifications.pop();
+                        }, this.timeout);
+                    }
+                    return !!this.notifications.length;
+                }
+            },
+        }));
         Alpine.data('drawer', (initialOpenState = false) => ({
             open: initialOpenState,
             lock: false,

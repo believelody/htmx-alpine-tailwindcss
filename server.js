@@ -24,8 +24,6 @@ const port = 8000;
 
 const app = express();
 
-export const error500 = "Error: something went wrong.";
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'yeswecan', resave: false }));
 
