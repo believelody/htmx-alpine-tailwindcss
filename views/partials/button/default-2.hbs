@@ -9,11 +9,13 @@
     :disabled="loading"
     class="{{withDefault class 'relative px-4 py-2 rounded btn'}} {{#if color}}{{cond outlined (append 'btn-' color '-outlined') (append 'btn-' color)}}{{else}}{{cond outlined 'btn-outlined' ''}}{{/if}} {{#if block}}w-full{{/if}}"
 >
-    <template x-if="loading">
-        <span id="loading-text" class="text-neutral-600">
-            {{withDefault data-loading-text 'Loading ...'}}
-        </span>
-    </template>
+    {{#if data-loading-text}}
+        <template x-if="loading">
+            <span id="loading-text" class="text-neutral-600">
+                {{data-loading-text}}
+            </span>
+        </template>
+    {{/if}}
     {{#if label}}
         <span x-show="!loading">{{ label }}</span>
     {{/if}}

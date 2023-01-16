@@ -73,9 +73,10 @@
             wrapper: {
                 ['x-show']() {
                     if (this.notifications.length) {
+                        const timeout = this.notifications.at(-1)?.timeout || this.timeout;
                         this.timer = setTimeout(() => {
                             this.notifications.pop();
-                        }, this.timeout);
+                        }, timeout);
                     }
                     return !!this.notifications.length;
                 }
@@ -84,9 +85,6 @@
         Alpine.data('drawer', (initialOpenState = false) => ({
             open: initialOpenState,
             lock: false,
-            init() {
-                {{!-- this.$watch('open', console.log); --}}
-            },
             toggle() {
                 this.open = !this.open;
                 if (!open) {
