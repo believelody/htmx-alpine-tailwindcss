@@ -33,7 +33,7 @@
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
-        <div x-data="notifier" @notify.window="send($event.detail)">
+        <div x-data="notifier" @notify.window="add()">
             {{> element/notification }}
         </div>
         <main class="relative grow">
@@ -66,18 +66,27 @@
             send(notification) {
                 this.notifications = [{ id: crypto.randomUUID(), ...notification }, ...this.notifications];
             },
+            add() {
+                const length = this.notifications.length;
+                this.notifications = [...this.notifications, { id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 10000 }];
+            },
             remove(notificationId) {
                 this.notifications = this.notifications.filter(notification => notification.id !== notificationId);
                 clearTimeout(this.timer);
             },
             wrapper: {
-                ['x-show']() {
-                    if (this.notifications.length) {
-                        const timeout = this.notifications.at(-1)?.timeout || this.timeout;
-                        this.timer = setTimeout(() => {
-                            this.notifications.pop();
-                        }, timeout);
-                    }
+                async ['x-show']() {
+                    console.log("length before : ", length);
+                    await new Promise(resolve => {
+                        if (this.notifications.length) {
+                            const timeout = this.notifications.at(-1)?.timeout || this.timeout;
+                            this.timer = setTimeout(() => {
+                                this.notifications.pop();
+                                resolve();
+                            }, timeout);
+                        }
+                    })
+                    console.log("length before : ", length);
                     return !!this.notifications.length;
                 }
             },
