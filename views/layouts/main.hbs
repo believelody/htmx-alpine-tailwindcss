@@ -33,7 +33,8 @@
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
-        <div x-data="notifier" @notify.window="add()">
+        <div x-data="notifier" @notify.window="send($event.detail)" class="flex">
+        {{!-- <div x-data="notifier" @notify.window="addFromBottom()" class="flex"> --}}
             {{> element/notification }}
         </div>
         <main class="relative grow">
@@ -61,34 +62,22 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('notifier', (initialState = { notifications: [], timeout: 3000}) => ({
             notifications: initialState.notifications,
-            timer: null,
+            timer: {},
             timeout: initialState.timeout,
             send(notification) {
                 this.notifications = [{ id: crypto.randomUUID(), ...notification }, ...this.notifications];
             },
-            add() {
+            addFromBottom() {
                 const length = this.notifications.length;
-                this.notifications = [...this.notifications, { id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 10000 }];
+                this.notifications = [...this.notifications, { id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }];
+            },
+            addFromTop() {
+                const length = this.notifications.length;
+                this.notifications =[{ id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }, ...this.notifications];
             },
             remove(notificationId) {
                 this.notifications = this.notifications.filter(notification => notification.id !== notificationId);
-                clearTimeout(this.timer);
-            },
-            wrapper: {
-                async ['x-show']() {
-                    console.log("length before : ", length);
-                    await new Promise(resolve => {
-                        if (this.notifications.length) {
-                            const timeout = this.notifications.at(-1)?.timeout || this.timeout;
-                            this.timer = setTimeout(() => {
-                                this.notifications.pop();
-                                resolve();
-                            }, timeout);
-                        }
-                    })
-                    console.log("length before : ", length);
-                    return !!this.notifications.length;
-                }
+                clearTimeout(this.timer[notificationId]);
             },
         }));
         Alpine.data('drawer', (initialOpenState = false) => ({

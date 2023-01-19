@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post('/post/:postId', async (req, res, next) => {
   try {
-    console.log(req.body);
     if (!req.params?.postId.match(/\d/g).length) {
       throw "postId params is not a numeric value";
     }

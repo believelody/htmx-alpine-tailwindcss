@@ -1,23 +1,40 @@
-<div {{#if id}}id="{{id}}"{{/if}} x-bind="wrapper"
-  class="absolute overflow-hidden p-1 max-w-sm top-0 left-0 flex flex-col gap-y-4 w-auto"
+<ul {{#if id}}id="{{id}}"{{/if}}
+  class="absolute overflow-hidden p-1 max-w-sm top-0 left-0 flex flex-col"
+  x-ref="list"
 >
-  <template x-for="notification in notifications">
-    <div x-transition:enter="transition ease-in-out duration-1000 sm:duration-700" x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-1" x-transition:leave="transition ease-in-out duration-1000 sm:duration-700"
-        x-transition:leave-start="opacity-1" x-transition:leave-end="opacity-0"
-        class="relative z-40 p-2 rounded bg-white border-2 box-border"
-        :class="`border ${borderFromNotificationType(notification.type)} border-l-[12px]`">
-      <section class="flex items-start justify-between">
-        <h4>
-          <b x-text="notification.title"></b>
-        </h4>
-        {{> button/simple x-on:click="remove(notification.id)" icon=(partial "icon/close" size=6 stroke="none") sr-only="Close notification" class="p-1 rounded-full focus:bg-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600
-dark:hover:text-white inline-flex items-center justify-end text-sm" }}
-      </section>
-      <p x-text="notification.message"></p>
-    </div>
+  <template x-for="notification in notifications" :key="notification.id">
+    <li
+      x-data="{ show: false }"
+      x-show="show"
+      x-ref="item"
+      x-transition:enter="animate-slide-in-left"
+      x-transition:leave="animate-slide-out-left"
+      x-effect="
+        show = true;
+        await new Promise(resolve => {
+          timer.id = setTimeout(() => {
+            show = false;
+          }, notification.timeout);
+        });
+        remove(notification.id);
+      "
+      class="relative z-40 p-2 box-border"
+    >
+      <div class="p-2 rounded border-2 box-border"
+        :class="`border ${borderFromNotificationType(notification.type)} border-l-[12px]`"
+      >
+        <section class="flex items-start justify-between">
+          <h4>
+            <b x-text="notification.id"></b>
+          </h4>
+          {{> button/simple x-on:click="show = false; setTimeout(() => remove(notification), notification.timeout)" icon=(partial "icon/close" size=6 stroke="none") sr-only="Close notification" class="p-1 rounded-full focus:bg-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600
+        dark:hover:text-white inline-flex items-center justify-end text-sm" }}
+        </section>
+        <p x-text="notification.message"></p>
+      </div>
+    </li>
   </template>
-</div>
+</ul>
 
 <script>
   function borderFromNotificationType(notificationType) {
