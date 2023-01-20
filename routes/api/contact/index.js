@@ -21,7 +21,7 @@ router.post("/2", async (req, res, next) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
     return res.json({
-      notify: { type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 10000 }
+      notify: { type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.' }
     });
   } catch (error) {
     console.log(error);

@@ -1405,42 +1405,6 @@ h6 {
   animation: slide-out-left 1s ease-in-out forwards;
 }
 
-@keyframes slide-in-right {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-    max-height: 0;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-    max-height: 100vh;
-  }
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 1s ease-in-out forwards;
-}
-
-@keyframes slide-out-right {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-    max-height: 100vh;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(100%);
-    max-height: 0;
-  }
-}
-
-.animate-slide-out-right {
-  animation: slide-out-right 1s ease-in-out forwards;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }

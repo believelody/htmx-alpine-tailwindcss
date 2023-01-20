@@ -8,14 +8,14 @@
       x-data="{ show: false }"
       x-show="show"
       x-ref="item"
-      x-transition:enter="animate-slide-in-right"
-      x-transition:leave="animate-slide-out-right"
+      x-transition:enter="animate-slide-in-left"
+      x-transition:leave="animate-slide-out-left"
       x-effect="
         show = true;
         await new Promise(resolve => {
           timer.id = setTimeout(() => {
             show = false;
-          }, notification.timeout);
+          }, timeout);
         });
         remove(notification.id);
       "
@@ -26,9 +26,9 @@
       >
         <section class="flex items-start justify-between">
           <h4>
-            <b x-text="notification.id"></b>
+            <b x-text="notification.title"></b>
           </h4>
-          {{> button/simple x-on:click="show = false; setTimeout(() => remove(notification), notification.timeout)" icon=(partial "icon/close" size=6 stroke="none") sr-only="Close notification" class="p-1 rounded-full focus:bg-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600
+          {{> button/simple x-on:click="show = false; setTimeout(() => remove(notification), timeout)" icon=(partial "icon/close" size=6 stroke="none") sr-only="Close notification" class="p-1 rounded-full focus:bg-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600
         dark:hover:text-white inline-flex items-center justify-end text-sm" }}
         </section>
         <p x-text="notification.message"></p>
