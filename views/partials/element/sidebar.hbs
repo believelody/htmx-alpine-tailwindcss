@@ -29,9 +29,9 @@
                 {{> button/default bind="closer" icon=(partial "icon/close") sr-only="Close menu" class="inline-flex items-center p-1 text-sm text-gray-700 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" }}
             </section>
        </div>
-        <div class="flex flex-col overflow-y-auto grow">
+        <div class="block overflow-y-auto">
             {{#each components as |component| }}
-                {{> (toString component) }}
+                {{> (toString component) user=../user isAuthenticated=../isAuthenticated }}
                 {{!-- {{ component }} --}}
             {{/each}}
         </div>

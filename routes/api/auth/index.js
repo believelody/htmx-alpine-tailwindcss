@@ -40,9 +40,9 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/header', async (req, res, next) => {
+router.get('/check', async (req, res, next) => {
   try {
-    return res.render('partials/auth/header', req.ctx);
+    return res.render(`partials/auth/${req.query.component}`, req.ctx);
   } catch (error) {
     console.log(error);
     next(error);

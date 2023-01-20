@@ -1104,6 +1104,11 @@ h6 {
   margin-bottom: 2rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -1563,6 +1568,11 @@ h6 {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-y {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
 }
 
 .border-t {
@@ -2435,8 +2445,16 @@ input[type=number] {
     margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
   }
 
+  .md\:border-none {
+    border-style: none;
+  }
+
   .md\:text-left {
     text-align: left;
+  }
+
+  .md\:text-center {
+    text-align: center;
   }
 }
 
