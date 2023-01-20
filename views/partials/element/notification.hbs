@@ -1,5 +1,6 @@
 <ul {{#if id}}id="{{id}}"{{/if}}
-  class="absolute overflow-hidden p-1 max-w-sm top-0 left-0 flex flex-col"
+  class="absolute overflow-hidden p-1 max-w-sm flex flex-col"
+  :class="`${setNotificationsPosition(position)}`"
   x-ref="list"
 >
   <template x-for="notification in notifications" :key="notification.id">
@@ -7,8 +8,8 @@
       x-data="{ show: false }"
       x-show="show"
       x-ref="item"
-      x-transition:enter="animate-slide-in-left"
-      x-transition:leave="animate-slide-out-left"
+      x-transition:enter="animate-slide-in-right"
+      x-transition:leave="animate-slide-out-right"
       x-effect="
         show = true;
         await new Promise(resolve => {
@@ -49,6 +50,23 @@
         return `border-warning-500 bg-warning-50`;
       default:
         return "";
+    }
+  };
+  function setNotificationsPosition(position) {
+    switch(position) {
+      case "top-right":
+        return "top-0 right-0";
+      case "top-center":
+        return "top-0 left-1/2";
+      case "bottom-left":
+        return "bottom-0 left-0";
+      case "bottom-right":
+        return "bottom-0 right-0";
+      case "bottom-center":
+        return "bottom-0 left-1/2";
+      case "top-left":
+      default:
+        return "top-0 left-0";
     }
   }
 </script>

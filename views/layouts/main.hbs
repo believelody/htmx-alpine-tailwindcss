@@ -33,8 +33,8 @@
 >
     {{> element/header }}
     <div class="relative flex flex-col overflow-y-auto grow">
-        <div x-data="notifier" @notify.window="send($event.detail)" class="flex">
-        {{!-- <div x-data="notifier" @notify.window="addFromBottom()" class="flex"> --}}
+        {{!-- <div x-data="notifier" @notify.window="send($event.detail)" class="flex"> --}}
+        <div x-data="notifier({ position: 'bottom-right', slideDirection: 'left' })" @notify.window="addFromTop()" class="flex">
             {{> element/notification }}
         </div>
         <main class="relative grow">
@@ -60,19 +60,19 @@
 </body>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('notifier', (initialState = { notifications: [], timeout: 3000}) => ({
-            notifications: initialState.notifications,
+        Alpine.data('notifier', (initialState) => ({
+            notifications: initialState.notifications || [],
             timer: {},
-            timeout: initialState.timeout,
+            timeout: initialState.timeout || 3000,
+            position: initialState.position || "top-left",
+            slideDirection: initialState.slideDirection || "left",
             send(notification) {
                 this.notifications = [{ id: crypto.randomUUID(), ...notification }, ...this.notifications];
             },
             addFromBottom() {
-                const length = this.notifications.length;
                 this.notifications = [...this.notifications, { id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }];
             },
             addFromTop() {
-                const length = this.notifications.length;
                 this.notifications =[{ id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }, ...this.notifications];
             },
             remove(notificationId) {
