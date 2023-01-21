@@ -35,7 +35,7 @@
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full">
         {{#each blogs as |item|}}
           <div class="min-w-full" id="blogs-content">
-            {{> block/base-3 item color="primary" extra='extra'}}
+            {{> block/base-3 item color="primary" extra='extra' withAuthor=true }}
           </div>
         {{else}}
           <div class="flex items-center justify-center sm:col-span-2 lg:col-span-3">

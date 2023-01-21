@@ -51,7 +51,7 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
         const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${postJson.userId}?select=username`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id };
+        const post = { ...postJson, author: authorJson, prev: prevPostJson?.id, next: nextPostJson?.id };
         req.ctx = { ...req.ctx, post, title: post.title };
         return res.render('pages/blog/id', req.ctx);
     } catch (error) {
