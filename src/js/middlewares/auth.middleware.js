@@ -16,7 +16,7 @@ export const checkAuthenticatedUserAndRedirect = (req, res, next) => {
 
 export const checkUnauthenticatedUserAndRedirect = (req, res, next) => {
   if (!req.session?.user) {
-    if (req.ctx.fromHTMX) {
+    if (req.ctx?.fromHTMX) {
       res.setHeader('HX-Push', '/login');
       res.statusCode = 401;
       return res.render("pages/login", { ...req.ctx, title: "Login" });
