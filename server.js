@@ -14,11 +14,12 @@ import blogRoute from './routes/blog';
 import loginRoute from './routes/login';
 import userRoute from './routes/user';
 import apiRoute from './routes/api';
+import error404Route from './routes/404';
 import * as url from 'url';
 import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
-import { error500Handler } from "./src/js/middlewares/http.middleware";
+import { error404NotFound, error500Handler } from "./src/js/middlewares/http.middleware";
 config();
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -53,6 +54,8 @@ app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
 app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
 app.use('/users', checkUnauthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
+app.use(error404NotFound);
+// app.use('*', error404Route);
 app.use(error500Handler);
 
 app.listen(port, () => {

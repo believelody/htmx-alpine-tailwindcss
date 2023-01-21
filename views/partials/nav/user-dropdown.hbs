@@ -8,7 +8,7 @@
     >
         My Profile
     </a>
-    <a href="/users/me/settings" x-bind="closer"
+    <a href="/users/me/settings" hx-target="#content" x-bind="closer" hx-swap="innerHTML"
         :class="currentRoute.includes('/user/me/settings') && 'bg-gray-800 text-white'"
         class="md:w-full text-center border md:border-none px-4 py-2"
     >

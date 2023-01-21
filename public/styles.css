@@ -1743,6 +1743,10 @@ h6 {
   padding: 1.25rem;
 }
 
+.p-24 {
+  padding: 6rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
