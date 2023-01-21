@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import express from 'express';
 import utils from '../../src/js/utils';
+import { numericParamsValidator } from '../../src/js/middlewares/http.middleware';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -39,11 +40,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', numericParamsValidator, async (req, res, next) => {
     try {
-        if (!req.params?.id.match(/[0-9]/g)) {
-            throw "id params is not a numeric value";
-        }
         const postRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${req.params.id}`);
         const postJson = await postRes.json();
         const prevPostRes = await fetch(`${process.env.DUMMY_DATA_URL}/posts/${Number(req.params.id) - 1}?select=id`);

@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post("/1", async (req, res, next) => {
   try {
-    console.log(req.body);
     await new Promise(resolve => setTimeout(resolve, 3000));
     res.setHeader('HX-Trigger', 'signal');
     return res.render('partials/form/contact', {
