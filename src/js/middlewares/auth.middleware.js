@@ -1,4 +1,4 @@
-export const checkUserSession = (req, res, next) => {
+export const setCheckAuthAsHxTrigger = (req, res, next) => {
   if (req.method === "GET" && req.session?.user) {
     console.log(req.headers['hx-current-url']);
     console.log("checkUserSession");

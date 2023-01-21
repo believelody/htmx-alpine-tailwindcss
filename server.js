@@ -15,7 +15,9 @@ import loginRoute from './routes/login';
 import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import * as url from 'url';
-import { checkUserSession, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
+import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
+import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
+import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
 config();
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -40,22 +42,15 @@ app.set('views', path.join(__dirname, 'views'));
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(async (req, res, next) => {
-    if (req.headers['hx-request']) {
-        req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
-    }
-    req.ctx = { ...req.ctx, user: { ...req.session?.user }, isAuthenticated: !!req.session?.user }
-    // await new Promise(r => setTimeout(r, 2000));
-    next();
-});
-
-app.use('/', checkUserSession, homeRoute);
-app.use('/about', checkUserSession, aboutRoute);
-app.use('/contact', checkUserSession, contactRoute);
-app.use('/blog', checkUserSession, blogRoute);
-app.use('/team', checkUserSession, teamsRoute);
+app.use(checkHTMXRequest);
+app.use(populateUserSessionInContext);
+app.use('/', setCheckAuthAsHxTrigger, homeRoute);
+app.use('/about', setCheckAuthAsHxTrigger, aboutRoute);
+app.use('/contact', setCheckAuthAsHxTrigger, contactRoute);
+app.use('/blog', setCheckAuthAsHxTrigger, blogRoute);
+app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
 app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
-app.use('/users', checkUnauthenticatedUserAndRedirect, checkUserSession, userRoute);
+app.use('/users', checkUnauthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
 app.use((error, req, res, next) => {
     console.log(error);
