@@ -18,6 +18,7 @@ import * as url from 'url';
 import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
+import { error500Handler } from "./src/js/middlewares/http.middleware";
 config();
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -52,10 +53,7 @@ app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
 app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
 app.use('/users', checkUnauthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
-app.use((error, req, res, next) => {
-    console.log(error);
-    res.status(500).send({ error });
-});
+app.use(error500Handler);
 
 app.listen(port, () => {
     console.log("Server running");

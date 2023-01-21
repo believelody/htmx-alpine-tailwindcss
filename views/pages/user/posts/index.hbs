@@ -23,7 +23,7 @@
         {{> button/default click="history.back()" label="Back to previous page"}}
       </div>
     {{else}}
-      <h2 class="text-center mt-4 underline underline-offset-4">{{ title }}</h2>
+      <h2 class="text-center mt-4">{{ title }}</h2>
       <div class="flex items-center justify-start p-4 gap-x-4">
         {{#each (toArray '6' '18' '30') as |limit|}}
           {{#if (gte ../meta.total limit)}}
