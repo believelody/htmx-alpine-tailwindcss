@@ -2,12 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    // console.log("user session : ", req.session.user);
-    if (req.session.user) {
-        return res.redirect("/");
-    }
-    req.ctx = { ...req.ctx, title: 'Login Page' }
-    return res.render('pages/login', req.ctx);
+    return res.render('pages/login', { ...req.ctx, title: 'Login Page' });
 });
 
 export default router;

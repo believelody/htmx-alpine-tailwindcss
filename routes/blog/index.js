@@ -30,7 +30,7 @@ router.get('/', async (req, res, next) => {
                 id: post.id,
                 userId: post.userId,
             }));
-            req.ctx = { ...req.ctx, blogs, meta: { pages: Math.round(total / Number(limit)), page, limit }, title: 'Blogs' };
+            req.ctx = { ...req.ctx, blogs, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: 'Blogs' };
         }
         return res.render('pages/blog', req.ctx);
     } catch (error) {

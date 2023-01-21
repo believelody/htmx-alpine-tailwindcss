@@ -15,6 +15,7 @@ import loginRoute from './routes/login';
 import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import * as url from 'url';
+import { checkUserSession, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 config();
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -43,21 +44,18 @@ app.use(async (req, res, next) => {
     if (req.headers['hx-request']) {
         req.ctx = { ...req.ctx, layout : null, fromHTMX: true };
     }
-    if (req.method === "GET" && req.session?.user) {
-        res.setHeader('HX-Trigger', 'check-auth');
-    }
     req.ctx = { ...req.ctx, user: { ...req.session?.user }, isAuthenticated: !!req.session?.user }
     // await new Promise(r => setTimeout(r, 2000));
     next();
 });
 
-app.use('/', homeRoute);
-app.use('/about', aboutRoute);
-app.use('/contact', contactRoute);
-app.use('/blog', blogRoute);
-app.use('/team', teamsRoute);
-app.use('/login', loginRoute);
-app.use('/users', userRoute);
+app.use('/', checkUserSession, homeRoute);
+app.use('/about', checkUserSession, aboutRoute);
+app.use('/contact', checkUserSession, contactRoute);
+app.use('/blog', checkUserSession, blogRoute);
+app.use('/team', checkUserSession, teamsRoute);
+app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
+app.use('/users', checkUnauthenticatedUserAndRedirect, checkUserSession, userRoute);
 app.use('/api', apiRoute);
 app.use((error, req, res, next) => {
     console.log(error);
