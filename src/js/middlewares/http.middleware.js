@@ -7,5 +7,5 @@ export const numericParamsValidator = (req, res, next) => {
 
 export const error500Handler = (error, req, res, next) => {
   console.log(error);
-  res.status(500).send({ error });
+  res.status(500).send({ '500': error });
 }

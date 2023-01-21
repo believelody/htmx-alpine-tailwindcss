@@ -1,7 +1,7 @@
 <form hx-post="/api/subscription/1"
     hx-trigger="submit"
     data-loading-path="/api/subscription/1"
-    x-effect="console.log('error : ', error)"
+    x-effect="console.log('error : ', errorMap)"
     class="flex flex-wrap items-center justify-center gap-y-2 md:gap-y-0 md:gap-x-2 md:flex-nowrap md:justify-start">
     {{> field/email data-loading-disable=true 
             class="relative w-auto shrink" value=form.subscription
@@ -16,14 +16,5 @@
             data-loading-aria-busy=true
             data-loading-disable=true
     }}
-        <div x-data="drawer" x-effect="open = error?.hasOwnProperty('subscription')">
-                {{> element/modal
-                        modal=(object
-                        title=(partial 'title/default'
-                                text="Subscription"
-                                class="text-lg text-center mb-4")
-                        component=(partial 'error/subscription'))
-                        class="p-8"
-                }}
-        </div>
+    {{> modal/subscription-error }}
 </form>

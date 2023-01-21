@@ -6,7 +6,7 @@ router.post('/1', async (req, res, next) => {
         await new Promise(r => setTimeout(r, 2000));
         // throw new Error('');
         // req.ctx.user.subscribed = true;
-        if (!req.ctx.user.subscribed) {
+        if (!req.ctx.user?.subscribed) {
             res.status(400).send({ subscription: 'Your email already exists. Try something else or contact us for more help.' });
         }
         else {

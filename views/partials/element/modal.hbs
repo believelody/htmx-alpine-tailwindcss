@@ -1,5 +1,5 @@
 <div {{#if id}}id="{{id}}"{{/if}}
-    x-effect="if (error) {
+    x-effect="if (errorMap.size) {
         lock = false;
     }"
     x-show="open"

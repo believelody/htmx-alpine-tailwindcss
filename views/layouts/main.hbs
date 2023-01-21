@@ -15,24 +15,23 @@
 </head>
 
 <body hx-ext="loading-states"
-    x-data="{ currentRoute : window.location.pathname, error: null }"
+    x-data="{ currentRoute : window.location.pathname, errorMap: new Map() }"
     x-effect="
         $el.addEventListener('htmx:responseError', ({ detail }) => {
-            if (detail.xhr.status === 500) {
-                $dispatch('error', 'error-500');
-            } else {
-                $dispatch('error', JSON.parse(detail.xhr.response));
+            if (detail.xhr.status) {
+                const { response } = detail.xhr;
+                $dispatch('error', response);
             }
         });
         navigation.addEventListener('navigate', ({ destination }) => {
             $dispatch('route', new URL(destination.url).pathname);
         });"
     @route="currentRoute = $event.detail"
-    @error="error = $event.detail;"
-    @modal-closer="if (error) { error = null }"
+    @error="Object.entries(JSON.parse($event.detail)).forEach(([key, value]) => errorMap.set(key, value));"
+    @modal-closer="if (errorMap.size) { errorMap.clear() }"
 >
     {{> element/header }}
-    <div class="relative flex flex-col overflow-y-auto grow">
+    <div class="relative flex flex-col overflow-y-auto grow" x-effect="console.log(errorMap)">
         <div x-data="notifier({ timeout: 15000, position: 'bottom-left' })" @notify.window="send($event.detail)" class="flex">
         {{!-- <div x-data="notifier({ position: 'bottom-right', slideDirection: 'left' })" @notify.window="addFromTop()" class="flex"> --}}
             {{> element/notification }}
@@ -47,16 +46,8 @@
         </main>
         {{> element/footer }}
     </div>
-    <div x-data="drawer" x-effect="open = error === 'error-500';">
-        {{> element/modal
-            modal=(object
-                title=(partial 'title/default'
-                        text="An error occured"
-                        class="text-lg text-danger-500 border rounded-lg text-center py-4")
-                component=(partial 'error/500'))
-            class="p-8"
-        }}
-    </div>
+    {{> 'modal/500' }}
+    {{> modal/not-found}}
 </body>
 <script>
     document.addEventListener('alpine:init', () => {

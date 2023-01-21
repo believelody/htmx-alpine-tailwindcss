@@ -8,8 +8,8 @@
     </p>
 </div>
 <form hx-post="/api/auth/login" {{#if fromModal}}@submit.prevent="lock = true;" hx-vals='{ "stay_on_current_url" : true }'{{/if}} hx-swap="innerHTML" hx-trigger="submit" class="mt-8 space-y-6" hx-target="#content">
-    <div x-show="error?.login" x-transition>
-        <p class="text-danger-500 text-center text-xl" x-text="error?.login"></p>
+    <div x-show="errorMap.has('login')" x-transition>
+        <p class="text-danger-500 text-center text-xl" x-text="errorMap.get('login')"></p>
     </div>
     
     <div class="rounded-md shadow-sm">
