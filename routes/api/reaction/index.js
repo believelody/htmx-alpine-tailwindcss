@@ -2,6 +2,7 @@ import express from 'express';
 import fetch from 'node-fetch';
 import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
 import { dummyDataURL } from '../../../src/js/utils/env.util';
+import { retrieveAppropriateBackUrl } from '../../../src/js/utils/url.util';
 const router = express.Router();
 
 router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
@@ -19,8 +20,8 @@ router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
     const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username`);
     const authorJson = await authorRes.json();
     delete postJson.userId;
-    const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id, liked: true };
-    res.render('pages/posts/id', { ...req.ctx, post, title: post.title });
+    const post = { ...postJson, liked: true, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts'), prev: prevPostJson?.id && `/posts/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts/${nextPostJson?.id}` } };
+    res.render('pages/posts/id', { ...req.ctx, post, author: authorJson, title: post.title });
   } catch (error) {
     console.log(error);
     next(error);

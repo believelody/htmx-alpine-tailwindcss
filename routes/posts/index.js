@@ -56,7 +56,7 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
         const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username,id`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts'), prev: `/posts/${prevPostJson?.id}`, next: `/posts/${nextPostJson?.id}` } };
+        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts'), prev: prevPostJson?.id && `/posts/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts/${nextPostJson?.id}` } };
         return res.render('pages/posts/id', { ...req.ctx, post, author: authorJson, title: post.title });
     } catch (error) {
         console.log("In get /posts/:id route : ", error);

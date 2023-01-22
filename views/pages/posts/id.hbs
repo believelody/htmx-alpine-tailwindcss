@@ -1,11 +1,11 @@
 {{#*inline 'nav-prev-next'}}
-  {{#if post.prev }}
+  {{#if post.url.prev }}
     <div class="flex items-center grow">
       {{> link/default href=post.url.prev label="Previous post"
           icon=(object component=(partial "icon/chevron-left" size=8 stroke="none") position="left") }}
     </div>
   {{/if}}
-  {{#if post.next }}
+  {{#if post.url.next }}
     <div class="flex items-center justify-end grow">
       {{> link/default href=post.url.next label="Next post"
           icon=(object component=(partial "icon/chevron-right" size=8 stroke="none") position="right") }}
