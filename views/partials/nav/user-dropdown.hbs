@@ -1,15 +1,15 @@
 <nav hx-boost="true" class="block">
     <a href="/users/me"
     hx-target="#content" x-bind="closer" hx-swap="innerHTML"
-    aria-disabled="currentRoute.includes('/users/me')"
-    disabled="currentRoute.includes('/users/me')"
-    :class="currentRoute.includes('/users/me') && 'bg-gray-200'"
+    aria-disabled="currentRoute.startsWith('/users/me')"
+    disabled="currentRoute.startsWith('/users/me')"
+    :class="currentRoute.startsWith('/users/me') && 'bg-gray-200'"
     class="md:w-full text-center border md:border-none px-4 py-2"
     >
         My Profile
     </a>
     <a href="/users/me/settings" hx-target="#content" x-bind="closer" hx-swap="innerHTML"
-        :class="currentRoute.includes('/user/me/settings') && 'bg-gray-800 text-white'"
+        :class="currentRoute.startsWith('/user/me/settings') && 'bg-gray-800 text-white'"
         class="md:w-full text-center border md:border-none px-4 py-2"
     >
         Settings

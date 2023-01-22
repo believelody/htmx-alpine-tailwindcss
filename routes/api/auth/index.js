@@ -34,7 +34,7 @@ router.post('/login', async (req, res, next) => {
       return res.redirect(new URL(req.headers['hx-current-url']).pathname);
     }
     res.setHeader('HX-Push', '/users/me');
-    return res.render('pages/user', { ...req.ctx, user: req.session.user, isAuthenticated: true, title: myProfileTitle });
+    return res.render('pages/user', { ...req.ctx, user: req.session.user, isAuthenticated: true, me: true, title: myProfileTitle });
   } catch (error) {
     console.log(error);
     next(error);

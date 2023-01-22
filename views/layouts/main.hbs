@@ -31,7 +31,7 @@
     @modal-closer="if (errorMap.size) { errorMap.clear() }"
 >
     {{> element/header }}
-    <div class="relative flex flex-col overflow-y-auto grow" x-effect="console.log(errorMap)">
+    <div class="relative flex flex-col overflow-y-auto grow">
         <div x-data="notifier({ timeout: 15000, position: 'bottom-left' })" @notify.window="send($event.detail)" class="flex">
         {{!-- <div x-data="notifier({ position: 'bottom-right', slideDirection: 'left' })" @notify.window="addFromTop()" class="flex"> --}}
             {{> element/notification }}

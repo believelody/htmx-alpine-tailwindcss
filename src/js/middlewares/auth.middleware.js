@@ -1,7 +1,7 @@
 export const setCheckAuthAsHxTrigger = (req, res, next) => {
   if (req.method === "GET" && req.session?.user) {
-    console.log(req.headers['hx-current-url']);
-    console.log("checkUserSession");
+    // console.log(req.headers['hx-current-url']);
+    // console.log("checkUserSession");
     res.setHeader('HX-Trigger', 'check-auth');
   }
   next();
@@ -28,7 +28,7 @@ export const checkUnauthenticatedUserAndRedirect = (req, res, next) => {
 }
 
 export const populateMeInContext = (req, res, next) => {
-  if (req.isAuthenticated) {
+  if (req.ctx.isAuthenticated) {
     req.ctx = { ...req.ctx, me: true };
   }
   next();

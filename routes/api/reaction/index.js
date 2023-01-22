@@ -20,7 +20,7 @@ router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
     const authorJson = await authorRes.json();
     delete postJson.userId;
     const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id };
-    res.render('pages/blog/id', { ...req.ctx, post, liked: true, title: post.title });
+    res.render('pages/posts/id', { ...req.ctx, post, liked: true, title: post.title });
   } catch (error) {
     console.log(error);
     next(error);

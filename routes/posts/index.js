@@ -3,9 +3,10 @@ import express from 'express';
 import utils from '../../src/js/utils';
 import { numericParamsValidator } from '../../src/js/middlewares/http.middleware';
 import { dummyDataURL } from '../../src/js/utils/env.util';
+import { retrieveAppropriateBackUrl } from '../../src/js/utils/url.util';
 const router = express.Router();
 
-export const blogTitle = 'Blogs';
+export const postsTitle = 'Posts';
 
 router.get('/', async (req, res, next) => {
     try {
@@ -29,16 +30,16 @@ router.get('/', async (req, res, next) => {
                 content: post.body,
                 views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 9999 + 1000)),
                 comments: post.reactions * Math.ceil(Math.random() * 100 + 10),
-                url: `/blog/${post.id}`,
+                url: `/posts/${post.id}`,
                 tags: post.tags,
                 id: post.id,
                 userId: post.userId,
             }));
-            req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: blogTitle };
+            req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: postsTitle };
         }
-        return res.render('pages/blog', req.ctx);
+        return res.render('pages/posts', req.ctx);
     } catch (error) {
-        console.log(error);
+        console.log("In get /posts route : ", error);
         next(error);
     }
 });
@@ -55,10 +56,10 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
         const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username,id`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, url: { back: `/posts`, prev: `/posts/${prevPostJson?.id}`, next: `/posts/${nextPostJson?.id}` } };
-        return res.render('pages/blog/id', { ...req.ctx, post, author: authorJson, title: post.title });
+        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts'), prev: `/posts/${prevPostJson?.id}`, next: `/posts/${nextPostJson?.id}` } };
+        return res.render('pages/posts/id', { ...req.ctx, post, author: authorJson, title: post.title });
     } catch (error) {
-        console.log(error);
+        console.log("In get /posts/:id route : ", error);
         next(error);
     }
 })

@@ -2,6 +2,7 @@ import express from 'express';
 import fetch from 'node-fetch';
 import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
 import { dummyDataURL } from '../../../src/js/utils/env.util';
+import { retrieveAppropriateBackUrl } from '../../../src/js/utils/url.util';
 const router = express.Router();
 
 export const myProfileTitle = 'My Profile';
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
   try {
     return res.render("pages/user", { ...req.ctx, title: myProfileTitle });
   } catch (error) {
-    console.log(error);
+    console.log("In get /users/me route : ", error);
     next(error);
   }
 });
@@ -46,9 +47,9 @@ router.get('/posts', async (req, res, next) => {
       }));
       req.ctx = { ...req.ctx, posts: postsMap, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: myProfilePostsTitle };
     }
-    return res.render('pages/user/posts', req.ctx);
+    return res.render('pages/posts', req.ctx);
   } catch (error) {
-    console.log(error);
+    console.log("In get /users/me/posts route : ", error);
     next(error);
   }
 });
@@ -63,10 +64,10 @@ router.get('/posts/:id', numericParamsValidator, async (req, res, next) => {
     const prevPostJson = posts[postJsonIndex - 1];
     const nextPostJson = posts[postJsonIndex + 1];
     delete postJson.userId;
-    const post = { ...postJson, url: { back: `/users/me/posts`, prev: `/users/me/posts/${prevPostJson?.id}`, next: `/users/me/posts/${nextPostJson?.id}` }};
-    return res.render('pages/user/posts/id', { ...req.ctx, post, title: post.title });
+    const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/users/me/posts'), prev: `/users/me/posts/${prevPostJson?.id}`, next: `/users/me/posts/${nextPostJson?.id}` }};
+    return res.render('pages/posts/id', { ...req.ctx, post, title: post.title });
   } catch (error) {
-    console.log(error);
+    console.log("In get /users/me/posts/:id route : ", error);
     next(error);
   }
 });

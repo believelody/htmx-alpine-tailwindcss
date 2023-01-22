@@ -8,7 +8,7 @@ export const numericParamsValidator = (req, res, next) => {
 }
 
 export const error500Handler = (error, req, res, next) => {
-  console.log(error);
+  console.log("error 500 : ", error);
   res.status(500).send({ '500': true });
 }
 
@@ -16,9 +16,9 @@ export const error404NotFound = (req, res, next) => {
   return res.status(404).send({ 'not-found': true })
 }
 
-export const popupalteCurrentRouteInContext = (req, res, next) => {
+export const popupalteCurrentURLInContext = (req, res, next) => {
   if (!req.originalUrl.includes("/api")) {
-    req.ctx = { ...req.ctx, currentRoute: req.originalUrl };
+    req.ctx = { ...req.ctx, currentURL: req._parsedUrl };
   }
   next();
 }
