@@ -26,3 +26,10 @@ export const checkUnauthenticatedUserAndRedirect = (req, res, next) => {
   }
   next();
 }
+
+export const populateMeInContext = (req, res, next) => {
+  if (req.isAuthenticated) {
+    req.ctx = { ...req.ctx, me: true };
+  }
+  next();
+}

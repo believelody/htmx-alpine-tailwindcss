@@ -1,14 +1,15 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import { dummyDataURL } from '../../../src/js/utils/env.util';
 import { homeTitle } from '../../home';
-import { myProfileTitle } from '../user';
+import { myProfileTitle } from '../../user/me';
 const router = express.Router();
 
 router.post('/login', async (req, res, next) => {
   try {
     // await new Promise(resolve => setTimeout(resolve, 3000));
     const { email, password } = req.body;
-    const loginRes = await fetch(`${process.env.DUMMY_DATA_URL}/auth/login`, {
+    const loginRes = await fetch(`${dummyDataURL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // body: JSON.stringify({ email, password }),
@@ -54,7 +55,7 @@ router.post('/logout', async (req, res, next) => {
     req.session.destroy();
     res.setHeader('HX-Push', '/');
     res.setHeader('HX-Trigger', 'check-auth');
-    return res.render('pages/about', { ...req.ctx, isAuthenticated: false, title: homeTitle });
+    return res.render('pages/home', { ...req.ctx, isAuthenticated: false, title: homeTitle });
   } catch (error) {
     console.log(error);
     next(error);

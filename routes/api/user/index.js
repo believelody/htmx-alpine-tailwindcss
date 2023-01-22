@@ -1,15 +1,12 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
+import { dummyDataURL } from '../../../src/js/utils/env.util';
 const router = express.Router();
 
-export const myProfileTitle = 'My Profile';
-
-router.get('/:id/author-name', async (req, res, next) => {
+router.get('/:id/author-name', numericParamsValidator, async (req, res, next) => {
   try {
-    if (!req.params?.id.match(/\d/g).length) {
-      throw "id params is not a numeric value";
-    }
-    const authorRes = await fetch(`${process.env.DUMMY_DATA_URL}/users/${req.params.id}?select=firstName`);
+    const authorRes = await fetch(`${dummyDataURL}/users/${req.params.id}?select=username`);
     const authorJson = await authorRes.json();
     req.ctx = {
       ...req.ctx, author: authorJson

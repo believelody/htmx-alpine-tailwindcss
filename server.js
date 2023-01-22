@@ -16,10 +16,10 @@ import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import error404Route from './routes/404';
 import * as url from 'url';
-import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect, checkUnauthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
+import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
-import { error404NotFound, error500Handler } from "./src/js/middlewares/http.middleware";
+import { error404NotFound, error500Handler, popupalteCurrentRouteInContext } from "./src/js/middlewares/http.middleware";
 config();
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -44,6 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 // => Here we expose your dist folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(popupalteCurrentRouteInContext);
 app.use(checkHTMXRequest);
 app.use(populateUserSessionInContext);
 app.use('/', setCheckAuthAsHxTrigger, homeRoute);
@@ -52,7 +53,7 @@ app.use('/contact', setCheckAuthAsHxTrigger, contactRoute);
 app.use('/blog', setCheckAuthAsHxTrigger, blogRoute);
 app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
 app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
-app.use('/users', checkUnauthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, userRoute);
+app.use('/users', setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
 app.use(error404NotFound);
 // app.use('*', error404Route);

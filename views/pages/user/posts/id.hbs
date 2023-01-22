@@ -1,13 +1,13 @@
 {{#*inline 'nav-prev-next'}}
   {{#if post.prev }}
     <div class="flex items-center grow">
-      {{> link/default href=(append "/users/me/posts/" (numberIntoString post.prev)) label="Previous post"
+      {{> link/default href=post.url.prev label="Previous post"
           icon=(object component=(partial "icon/chevron-left" size=8 stroke="none") position="left") }}
     </div>
   {{/if}}
   {{#if post.next }}
     <div class="flex items-center justify-end grow">
-      {{> link/default href=(append "/users/me/posts/" (numberIntoString post.next)) label="Next post"
+      {{> link/default href=post.url.next label="Next post"
           icon=(object component=(partial "icon/chevron-right" size=8 stroke="none") position="right") }}
     </div>
   {{/if}}
@@ -17,20 +17,27 @@
 {{> element/seo }}
 <section x-data="drawer" class="flex flex-col max-w-xl mx-auto h-full">
   <div class="flex items-center justify-center my-4">
-    {{> link/default href="/users/me/posts" label="Back to my posts" icon=(object component=(partial "icon/arrow-left") position="left") }}
+    {{> link/default href=post.url.back label="Back to my posts" icon=(object component=(partial "icon/arrow-left") position="left") }}
   </div>
   <div class="flex items-center justify-between my-4">
     {{> nav-prev-next}}
   </div>
   <div class="p-8 border h-full rounded-md shadow-md mx-auto flex flex-col gap-y-4">
-    <h3 class="flex items-center justify-end">
-      <div class="flex items-center gap-x-2">
-        {{> button/heart-circle class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
-          hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
-          data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
-          hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
-          bg-icon-color="bg-secondary"
-        }}
+    <h3 class="flex items-center justify-between">
+      {{#if author}}
+        <div>by {{> link/primary href=(chain "/users/" (numberIntoString author.id)) label=author.username }}</div>
+      {{/if}}
+      <div class="flex items-center grow justify-end gap-x-2">
+        {{#if isAuthenticated}}
+          {{> button/heart-circle class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
+                hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
+                data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
+                hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
+                bg-icon-color="bg-secondary"}}
+        {{else}}
+          {{> button/heart-circle x-bind="trigger" bg-icon-color="bg-secondary" class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"}}
+        {{/if}}
+        {{!-- {{button hx-post=(append "/reactions/" (numberIntoString post.id)) hx-trigger="click" hx-swap="outerHTML"}} --}}
         <span>{{ post.reactions }}</span>
       </div>
     </h3>

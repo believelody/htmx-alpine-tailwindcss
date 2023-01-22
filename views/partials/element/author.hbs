@@ -1,1 +1,4 @@
-<h3><span class="text-sm">author :</span> <a href="/users/{{ author.id }}" class="text-base text-secondary">{{ author.firstName }}</a></h3>
+<h3 class="flex gap-x-2 items-end justify-center" hx-boost="true">
+  <span class="text-sm">author:</span>
+  {{> link/base href=(chain "/users/" (numberIntoString author.id)) class="text-base text-secondary" label=author.username }}
+</h3>

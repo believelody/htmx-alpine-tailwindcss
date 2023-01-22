@@ -24,7 +24,7 @@
   </div>
   <div class="p-8 border h-full rounded-md shadow-md mx-auto flex flex-col gap-y-4">
     <h3 class="flex items-center justify-between">
-      <div>by {{> link/primary href="/users/{{ post.author.id }}" label=post.author.username }}</div>
+      <div>by {{> link/primary href=(chain "/users/" (numberIntoString author.id)) label=author.username }}</div>
       <div class="flex items-center gap-x-2">
         {{#if isAuthenticated}}
           {{> button/heart-circle class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"

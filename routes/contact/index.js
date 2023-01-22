@@ -1,9 +1,10 @@
 import express from 'express';
 const router = express.Router();
 
+export const contactTitle = 'Contact Us';
+
 router.get('/', (req, res) => {
-    req.ctx = { ...req.ctx, title: 'Contact Us' }
-    return res.render('pages/contact', req.ctx)
+    return res.render('pages/contact', { ...req.ctx, title: contactTitle })
 });
 
 export default router;
