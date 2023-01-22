@@ -19,8 +19,8 @@ router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
     const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username`);
     const authorJson = await authorRes.json();
     delete postJson.userId;
-    const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id };
-    res.render('pages/posts/id', { ...req.ctx, post, liked: true, title: post.title });
+    const post = { ...postJson, author: authorJson, prev: prevPostJson.id, next: nextPostJson.id, liked: true };
+    res.render('pages/posts/id', { ...req.ctx, post, title: post.title });
   } catch (error) {
     console.log(error);
     next(error);

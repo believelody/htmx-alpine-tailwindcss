@@ -31,7 +31,7 @@
         {{#if isAuthenticated}}
           {{> button/heart-circle class="flex disabled:cursor-not-allowed disabled:bg-neutral-200"
                 hx-post=(append "/api/reaction/post/" (numberIntoString post.id)) hx-trigger="click" data-loading-target="#loading-3"
-                data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1"
+                data-loading-busy=true data-loading-disable=true data-loading-icon="lottie/loading-1" liked=post.liked
                 hx-target="#content" hx-vals=(JSONstringify (object reaction=post.reactions)) data-loading-path=(append "/api/reaction/post/" (numberIntoString post.id))
                 bg-icon-color="bg-secondary"}}
         {{else}}
