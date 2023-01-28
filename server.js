@@ -5,6 +5,7 @@ import session from 'express-session';
 import { array, misc, string, comparison, math, number, collection, object, html, regex } from 'useful-handlebars-helpers';
 import customHelpers from './src/js/helpers';
 import bodyParser from "body-parser";
+import cookieParser from 'cookie-parser';
 import path from "path";
 import homeRoute from './routes/home';
 import aboutRoute from './routes/about';
@@ -30,7 +31,8 @@ const port = 8000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: 'yeswecan', resave: false }));
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false }));
 
 [array, misc, string, comparison, math, number, collection, object, html, regex, customHelpers].forEach(helper => hbs.registerHelper(helper));
 
