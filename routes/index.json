@@ -9,8 +9,12 @@
             "label": "Contact Us"
         },
         {
-            "url": "/posts",
-            "label": "Blog"
+            "url": "/posts-1",
+            "label": "Blog 1"
+        },
+        {
+            "url": "/posts-2",
+            "label": "Blog 2"
         },
         {
             "url": "/team",

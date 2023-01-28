@@ -6,7 +6,7 @@ import { dummyDataURL } from '../../src/js/utils/env.util';
 import { retrieveAppropriateBackUrl } from '../../src/js/utils/url.util';
 const router = express.Router();
 
-export const postsTitle = 'Posts';
+export const postsTitle = 'Posts with input pagination';
 
 router.get('/', async (req, res, next) => {
     try {
@@ -30,16 +30,16 @@ router.get('/', async (req, res, next) => {
                 content: post.body,
                 views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 9999 + 1000)),
                 comments: post.reactions * Math.ceil(Math.random() * 100 + 10),
-                url: `/posts/${post.id}`,
+                url: `/posts-2/${post.id}`,
                 tags: post.tags,
                 id: post.id,
                 userId: post.userId,
             }));
             req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: postsTitle };
         }
-        return res.render('pages/posts', req.ctx);
+        return res.render('pages/posts-2', req.ctx);
     } catch (error) {
-        console.log("In get /posts route : ", error);
+        console.log("In get /posts-2 route : ", error);
         next(error);
     }
 });
@@ -56,10 +56,10 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
         const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username,id`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts'), prev: prevPostJson?.id && `/posts/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts/${nextPostJson?.id}` } };
-        return res.render('pages/posts/id', { ...req.ctx, post, author: authorJson, title: post.title });
+        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts-2'), prev: prevPostJson?.id && `/posts-2/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts-2/${nextPostJson?.id}` } };
+        return res.render('pages/posts-2/id', { ...req.ctx, post, author: authorJson, title: post.title });
     } catch (error) {
-        console.log("In get /posts/:id route : ", error);
+        console.log(`In get /posts-2/${req.params.id} route : `, error);
         next(error);
     }
 })

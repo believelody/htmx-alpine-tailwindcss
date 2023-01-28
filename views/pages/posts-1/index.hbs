@@ -52,7 +52,6 @@
       </div>
       {{#if (gt meta.total meta.limit)}}
         {{> pagination/select-2 href=(chain currentURL.pathname "?limit=" meta.limit) page=meta.page pages=meta.pages}}
-        {{!-- {{> pagination/input href=(chain currentURL.pathname "?limit=" meta.limit) page=meta.page pages=meta.pages}} --}}
       {{/if}}
     {{/if}}
   </div>
