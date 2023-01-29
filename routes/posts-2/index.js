@@ -56,7 +56,9 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
         const authorRes = await fetch(`${dummyDataURL}/users/${postJson.userId}?select=username,id`);
         const authorJson = await authorRes.json();
         delete postJson.userId;
-        const post = { ...postJson, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts-2'), prev: prevPostJson?.id && `/posts-2/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts-2/${nextPostJson?.id}` } };
+        const { user } = req.session;
+        const liked = user?.likedPosts?.includes(id);
+        const post = { ...postJson, liked, reactions: liked ? ++postJson.reactions : postJson.reactions, url: { back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], '/posts-2'), prev: prevPostJson?.id && `/posts-2/${prevPostJson?.id}`, next: nextPostJson?.id && `/posts-2/${nextPostJson?.id}` } };
         return res.render('pages/posts-2/id', { ...req.ctx, post, author: authorJson, title: post.title });
     } catch (error) {
         console.log(`In get /posts-2/${req.params.id} route : `, error);

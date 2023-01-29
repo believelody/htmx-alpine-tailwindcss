@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import express from 'express';
 import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
-import { dummyDataURL } from '../../../src/js/utils/env.util';
+import { dummyDataURL, dummyDataURLAuth } from '../../../src/js/utils/env.util';
 const router = express.Router();
 
 router.get('/post/:id', numericParamsValidator, async (req, res, next) => {
@@ -20,9 +20,13 @@ router.post('/post', async (req, res, next) => {
   try {
     const post = JSON.parse(req.body.post);
     // await new Promise(resolve => setTimeout(resolve, 3000));
-    const newCommentRes = await fetch(`${dummyDataURL}/comments/add`, {
+    const newCommentRes = await fetch(`${dummyDataURLAuth}/comments/add`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${req.session.token}`
+     },
       body: JSON.stringify({
         body: req.body['your-comment'],
         postId: post.id,

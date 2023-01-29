@@ -24,12 +24,14 @@ router.post('/login', async (req, res, next) => {
     if (loginJson.message) {
       return res.status(404).send({ login: loginJson.message });
     }
-    res.setHeader('Authorization', `Bearer ${loginJson.token}`);
+    const { token } = loginJson;
     delete loginJson.token;
-    const user = { ...req.ctx.user, ...loginJson, subscribe: false }
+    req.session.token = token;
+    const user = { ...req.ctx.user, ...loginJson, subscribe: false, likedPosts: [] }
     req.session.user = user;
     if (req.body.remember) {
       req.session.cookie.maxAge = sessionMaxAge30Days;
+      res.cookie("session_token", token, { maxAge: sessionMaxAge30Days });
       res.cookie("session_user", user, { maxAge: sessionMaxAge30Days });
     }
     res.setHeader('HX-Trigger', 'check-auth');
