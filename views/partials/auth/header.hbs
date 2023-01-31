@@ -2,8 +2,8 @@
   {{#if isAuthenticated}}
     {{> dropdown/user }}
   {{else}}
-    <template x-if="!currentRoute.includes('/login')">
+    {{#unless (includes currentURLPathname "/login" )}}
       {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(partial 'icon/arrow-right' fill="none") ) }}
-    </template>
+    {{/unless}}
   {{/if}}
 </div>

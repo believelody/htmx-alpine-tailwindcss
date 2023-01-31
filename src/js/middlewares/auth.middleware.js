@@ -1,5 +1,6 @@
 export const setCheckAuthAsHxTrigger = (req, res, next) => {
-  if (req.method === "GET" && req.session?.user) {
+  if (req.method === "GET") {
+    // console.log("setCheckAuthAsHxTrigger", req.originalUrl);
     res.setHeader('HX-Trigger', 'check-auth');
   }
   next();

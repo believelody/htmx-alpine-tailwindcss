@@ -50,13 +50,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(popupalteCurrentURLInContext);
 app.use(checkHTMXRequest);
 app.use(populateUserSessionInContext);
-app.use('/', setCheckAuthAsHxTrigger, homeRoute);
+/* Have to specify with a regex to only take "/" route */
+app.use(/\//g, setCheckAuthAsHxTrigger, homeRoute);
 app.use('/about', setCheckAuthAsHxTrigger, aboutRoute);
 app.use('/contact', setCheckAuthAsHxTrigger, contactRoute);
 app.use('/posts-1', setCheckAuthAsHxTrigger, posts1Route);
 app.use('/posts-2', setCheckAuthAsHxTrigger, posts2Route);
 app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
-app.use('/login', checkAuthenticatedUserAndRedirect, loginRoute);
+app.use('/login', checkAuthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, loginRoute);
 app.use('/users', setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
 app.use(error404NotFound);

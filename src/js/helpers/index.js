@@ -18,6 +18,7 @@ import button from './button';
 import uuid from './uuid';
 import raw from './raw';
 import svg from './svg';
+import includes from './includes';
 
 export default {
     toString,
@@ -39,5 +40,6 @@ export default {
     button,
     uuid,
     raw,
-    svg
+    svg,
+    includes
 };

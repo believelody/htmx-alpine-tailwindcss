@@ -17,7 +17,7 @@
 {{> element/seo }}
 <section x-data="drawer" class="flex flex-col max-w-xl mx-auto h-full">
   <div class="flex items-center justify-center my-4">
-    {{> link/default href=post.url.back label=(chain "Back to " (cond me "my posts" (cond (test currentURL.pathname (toRegex "^/users")) (chain author.username "'s posts") "posts"))) icon=(object component=(partial "icon/arrow-left") position="left") }}
+    {{> link/default href=post.url.back label=(chain "Back to " (cond me "my posts" (cond (test currentURLPathname (toRegex "^/users")) (chain author.username "'s posts") "posts"))) icon=(object component=(partial "icon/arrow-left") position="left") }}
   </div>
   <div class="flex items-center justify-between my-4">
     {{> nav-prev-next}}

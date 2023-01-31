@@ -20,10 +20,12 @@ router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
       throw postJson.message;
     }
     req.session.user.likedPosts = req.session.user.likedPosts?.includes(req.params.id) ? req.session.user.likedPosts.filter(l => l !== req.params.id) : [...req.session.user.likedPosts, req.params.id ];
-    res.cookie("session_user", req.session.user);
+    if (req.cookies["session_remember"]) {
+      res.cookie("session_user", req.session.user);
+    }
     return res.redirect(new URL(req.headers['hx-current-url']).pathname);
   } catch (error) {
-    console.log(error);
+    console.log("in /api/reaction/post/" + req.params.id + " : ", error);
     next(error);
   }
 });

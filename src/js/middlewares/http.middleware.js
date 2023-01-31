@@ -18,7 +18,8 @@ export const error404NotFound = (req, res, next) => {
 
 export const popupalteCurrentURLInContext = (req, res, next) => {
   if (!req.originalUrl.includes("/api")) {
-    req.ctx = { ...req.ctx, currentURL: req._parsedUrl };
+    req.session.currentURLPathname = req.originalUrl;
+    req.ctx = { ...req.ctx, currentURLPathname: `${req.originalUrl}` };
   }
   next();
 }
