@@ -13,8 +13,8 @@
     </div>
     
     <div class="rounded-md shadow-sm">
-        {{> field/email class="" name="login-email" id=(chain "login-email-" (uuid)) placeholder="Email address" required=true label-class="sr-only" }}
-        {{> field/password-2 class="" name="password" id=(chain "password-" (uuid)) placeholder="Password" required=true label-class="sr-only" }}
+        {{> field/email name="login-email" id=(chain "login-email-" (uuid)) placeholder="Email address" required=true label-class="sr-only" }}
+        {{> field/password-2 name="password" id=(chain "password-" (uuid)) placeholder="Password" required=true label-class="sr-only" }}
     </div>
 
     <div class="flex items-center justify-between">

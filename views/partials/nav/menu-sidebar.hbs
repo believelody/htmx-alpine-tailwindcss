@@ -1,4 +1,4 @@
-<div x-data="{ activeLink: window.location.pathname }" class="md:hidden">
+<div class="md:hidden">
     <ul class="px-3 py-4 space-y-2 overflow-y-auto text-lg rounded bg-gray-50">
         {{#each (routes) as |route|}}
         {{> nav/item-sidebar route=route }}
