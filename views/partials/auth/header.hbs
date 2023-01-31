@@ -3,7 +3,7 @@
     {{> dropdown/user }}
   {{else}}
     {{#unless (includes currentURLPathname "/login" )}}
-      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(partial 'icon/arrow-right' fill="none") ) }}
+      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(object component=(partial 'icon/enter' fill="none")) ) }}
     {{/unless}}
   {{/if}}
 </div>
