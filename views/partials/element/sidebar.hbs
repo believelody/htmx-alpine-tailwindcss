@@ -19,14 +19,14 @@
         x-transition:leave="transform transition ease-in-out duration-1000 sm:duration-700"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
-        class="fixed flex flex-col h-screen overflow-y-hidden bg-white"
+        class="fixed max-w-lg flex flex-col h-screen overflow-y-hidden bg-white"
     >
        <div class="flex items-center justify-between w-full border-b min-h-[3em]">
             {{#if title }}
              {{ title }}
             {{/if}}
             <section class="flex justify-end">
-                {{> button/default bind="closer" icon=(partial "icon/close") sr-only="Close menu" class="inline-flex items-center p-1 text-sm text-gray-700 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" }}
+                {{> button/simple x-bind="closer" icon=(object component=(partial "icon/close")) sr-only="Close menu" class="inline-flex items-center p-1 text-sm text-gray-700 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" }}
             </section>
        </div>
         <div class="block overflow-y-auto">
