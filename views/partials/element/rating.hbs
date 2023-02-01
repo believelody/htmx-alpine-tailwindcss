@@ -1,0 +1,21 @@
+<ul class="list-none flex items-center">
+{{#each (arrayFrom nb) as |star|}}
+  <li>
+    {{> icon/star
+          id=(chain (numberIntoString @index) "-" (numberIntoString ../id))
+          stroke="none" size="6"
+          value=(divide
+                  (multiply
+                    (cond
+                      (gte (subtract ../rating (multiply 20 (add @index 1))) 0)
+                      20
+                      (cond
+                        (gte (subtract (multiply 20 (add @index 1)) ../rating) 20)
+                        0
+                        (subtract ../rating (multiply 20 @index))))
+                    100)
+                  20)
+    }}
+  </li>
+{{/each}}
+</ul>

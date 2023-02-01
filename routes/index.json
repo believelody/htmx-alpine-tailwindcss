@@ -19,6 +19,10 @@
         {
             "url": "/team",
             "label": "Our team"
+        },
+        {
+            "url": "/products",
+            "label": "Products"
         }
     ]
 }

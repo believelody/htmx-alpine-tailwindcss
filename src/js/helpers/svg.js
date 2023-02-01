@@ -16,5 +16,5 @@ export default function ({ fn, hash }) {
   delete hash["stroke-width"];
   delete hash["viewBox"];
   const spreadAttrs = expressHbs.handlebars.helpers['spread'].call(this, { ...hash });
-  return `<svg ${spreadAttrs} class="${color}" width="${size * 4}" height="${size * 4}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${fn()}</svg>`;
+  return `<svg ${spreadAttrs} class="${color}" width="${size * 4}" height="${size * 4}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${fn(hash)}</svg>`;
 }
