@@ -4,6 +4,7 @@
     {{> (chain "icon/" ../icon)
           id=(chain (numberIntoString @index) "-" (numberIntoString ../id))
           stroke="none" size="6"
+          apply-defs=../apply-defs
           value=(divide
                   (multiply
                     (cond

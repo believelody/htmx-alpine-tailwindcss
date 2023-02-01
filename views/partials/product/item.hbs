@@ -14,7 +14,7 @@
   <section class="flex items-end justify-between">
     <div>${{toFixed price 2}}</div>
     <div class="relative flex gap-x-1 items-end">
-      {{> element/rating icon="heart" nb=5 rating=(divide (multiply rating 100) 5) fill="none" stroke="none" size=8 }}
+      {{> element/rating icon="star" apply-defs="linear-gradient" nb=5 rating=(divide (multiply rating 100) 5) fill="none" stroke="none" size=8 }}
       <span>{{ rating }}</span>
     </div>
   </section>
