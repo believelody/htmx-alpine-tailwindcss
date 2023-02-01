@@ -1,20 +1,20 @@
 <ul class="list-none flex items-center">
-{{#each (arrayFrom nb) as |star|}}
+{{#each (arrayFrom (withDefault nb 1))}}
   <li>
-    {{> icon/star
+    {{> (chain "icon/" ../icon)
           id=(chain (numberIntoString @index) "-" (numberIntoString ../id))
           stroke="none" size="6"
           value=(divide
                   (multiply
                     (cond
-                      (gte (subtract ../rating (multiply 20 (add @index 1))) 0)
-                      20
+                      (gte (subtract ../rating (multiply (divide 100 (withDefault ../nb 1)) (add @index 1))) 0)
+                      (divide 100 (withDefault ../nb 1))
                       (cond
-                        (gte (subtract (multiply 20 (add @index 1)) ../rating) 20)
+                        (gte (subtract (multiply (divide 100 (withDefault ../nb 1)) (add @index 1)) ../rating) (divide 100 (withDefault ../nb 1)))
                         0
-                        (subtract ../rating (multiply 20 @index))))
+                        (subtract ../rating (multiply (divide 100 (withDefault ../nb 1)) @index))))
                     100)
-                  20)
+                  (divide 100 (withDefault ../nb 1)))
     }}
   </li>
 {{/each}}
