@@ -4,7 +4,7 @@
   <div class="container py-24 mx-auto">
     <div class="px-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full mb-4">
       {{#each products as |product|}}
-        <div hx-boost="true" class="border rounded overflow-hidden shadow">
+        <div hx-boost="true" class="border rounded overflow-hidden shadow-md">
           {{> product/item product }}
         </div>
       {{/each}}
