@@ -16,7 +16,7 @@ import posts2Route from './routes/posts-2';
 import loginRoute from './routes/login';
 import userRoute from './routes/user';
 import apiRoute from './routes/api';
-import productRoute from './routes/product';
+import productRoute from './routes/products';
 import error404Route from './routes/404';
 import * as urlPackage from 'url';
 import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
@@ -24,10 +24,8 @@ import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
 import { error404NotFound, error500Handler, popupalteCurrentURLInContext } from "./src/js/middlewares/http.middleware";
 import { port } from "./src/js/utils/url.util";
+import { __dirname } from "./src/js/utils/file.util";
 config();
-
-const __filename = urlPackage.fileURLToPath(import.meta.url);
-const __dirname = urlPackage.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
 

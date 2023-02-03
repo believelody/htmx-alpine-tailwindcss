@@ -10,17 +10,17 @@ export const postsTitle = 'Posts with select pagination';
 
 router.get('/', async (req, res, next) => {
     try {
-        const limitArray = ['6', '18', '30'];
-        if (req.query?.limit && !limitArray.includes(req.query.limit)) {
+        const limitArray = [6, 18, 30];
+        if (req.query?.limit && !limitArray.includes(Number(req.query.limit))) {
             if (req.ctx.fromHTMX) {
                 throw "There is a problem with limit value";
             }
             req.ctx.error = utils.error500;
             res.statusCode = 500;
         } else {
-            const limit = req.query.limit || limitArray[0];
+            const limit = Number(req.query.limit || limitArray[0]);
             const page = Number(req.query.page) || 1;
-            const postsRes = await fetch(`${dummyDataURL}/posts?limit=${limit}&skip=${Number(limit) * (page - 1)}`);
+            const postsRes = await fetch(`${dummyDataURL}/posts?limit=${limit}&skip=${limit * (page - 1)}`);
             const postsJson = await postsRes.json();
             const { total } = postsJson;
             const posts = postsJson.posts.map((post, index) => ({
@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
                 id: post.id,
                 userId: post.userId,
             }));
-            req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: postsTitle };
+            req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / limit), page, limit, total }, title: postsTitle };
         }
         return res.render('pages/posts-1', req.ctx);
     } catch (error) {

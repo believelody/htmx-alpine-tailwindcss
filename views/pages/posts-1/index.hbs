@@ -26,7 +26,7 @@
       <h2 class="text-center mt-4">{{ title }}</h2>
         <div class="flex items-center justify-start p-4 gap-x-4">
           {{> limit/default
-                group=(toArray '6' '18' '30')
+                group=(toArray 6 18 30)
                 href=(urlFromParams (chain (baseUrl) "/posts-1") page=(numberIntoString meta.page))
                 meta=meta
           }}

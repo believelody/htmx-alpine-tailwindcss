@@ -21,6 +21,7 @@ import svg from './svg';
 import includes from './includes';
 import baseUrl from './baseUrl';
 import urlPath from './urlPath';
+import set from './set';
 
 export default {
     toString,
@@ -45,5 +46,6 @@ export default {
     svg,
     includes,
     baseUrl,
-    urlPath
+    urlPath,
+    set
 };
