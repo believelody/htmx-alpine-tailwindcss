@@ -1,3 +1,5 @@
+import { limitArray } from "../utils/http.util";
+
 export const numericParamsValidator = (req, res, next) => {
   Object.values(req.params).forEach(value => {
     if (!value.match(/[0-9]/g)) {
@@ -20,6 +22,17 @@ export const popupalteCurrentURLInContext = (req, res, next) => {
   if (!req.originalUrl.includes("/api")) {
     req.session.currentURLPathname = req.originalUrl;
     req.ctx = { ...req.ctx, currentURLPathname: `${req.originalUrl}` };
+  }
+  next();
+}
+
+export const limitQueryValidator = (req, res, next) => {
+  if (req.query.limit && !limitArray.includes(Number(req.query.limit))) {
+    if (req.ctx.fromHTMX) {
+      throw "There is a problem with limit value";
+    }
+    req.ctx.error = utils.error500;
+    res.statusCode = 500;
   }
   next();
 }

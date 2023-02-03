@@ -1,45 +1,35 @@
 import fetch from 'node-fetch';
 import express from 'express';
-import utils from '../../src/js/utils';
-import { numericParamsValidator } from '../../src/js/middlewares/http.middleware';
+import { limitQueryValidator, numericParamsValidator } from '../../src/js/middlewares/http.middleware';
 import { dummyDataURL } from '../../src/js/utils/env.util';
 import { retrieveAppropriateBackUrl } from '../../src/js/utils/url.util';
+import { limitArray } from '../../src/js/utils/http.util';
 const router = express.Router();
 
 export const postsTitle = 'Posts with select pagination';
 
-router.get('/', async (req, res, next) => {
+router.get('/', limitQueryValidator, async (req, res, next) => {
     try {
-        const limitArray = [6, 18, 30];
-        if (req.query?.limit && !limitArray.includes(Number(req.query.limit))) {
-            if (req.ctx.fromHTMX) {
-                throw "There is a problem with limit value";
-            }
-            req.ctx.error = utils.error500;
-            res.statusCode = 500;
-        } else {
-            const limit = Number(req.query.limit || limitArray[0]);
-            const page = Number(req.query.page) || 1;
-            const postsRes = await fetch(`${dummyDataURL}/posts?limit=${limit}&skip=${limit * (page - 1)}`);
-            const postsJson = await postsRes.json();
-            const { total } = postsJson;
-            const posts = postsJson.posts.map((post, index) => ({
-                background: `https://picsum.photos/id/${Math.ceil(Math.random(6) * 100)}/200/300`,
-                alt: "content " + (index + 1),
-                title: post.title,
-                content: post.body,
-                views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 9999 + 1000)),
-                comments: post.reactions * Math.ceil(Math.random() * 100 + 10),
-                url: `/posts-1/${post.id}`,
-                tags: post.tags,
-                id: post.id,
-                userId: post.userId,
-            }));
-            req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / limit), page, limit, total }, title: postsTitle };
-        }
-        return res.render('pages/posts-1', req.ctx);
+        const limit = Number(req.query.limit || limitArray[0]);
+        const page = Number(req.query.page) || 1;
+        const postsRes = await fetch(`${dummyDataURL}/posts?limit=${limit}&skip=${limit * (page - 1)}`);
+        const postsJson = await postsRes.json();
+        const { total } = postsJson;
+        const posts = postsJson.posts.map((post, index) => ({
+            background: `https://picsum.photos/id/${Math.ceil(Math.random(6) * 100)}/200/300`,
+            alt: "content " + (index + 1),
+            title: post.title,
+            content: post.body,
+            views: new Intl.NumberFormat('fr', { notation: "compact" }).format(Math.ceil(Math.random() * 9999 + 1000)),
+            comments: post.reactions * Math.ceil(Math.random() * 100 + 10),
+            url: `/posts-1/${post.id}`,
+            tags: post.tags,
+            id: post.id,
+            userId: post.userId,
+        }));
+        return res.render('pages/posts-1', { ...req.ctx, posts, meta: { pages: Math.round(total / limit), page, limit, total }, title: postsTitle });
     } catch (error) {
-        console.log("In get /posts-1 route : ", error);
+        console.log(`In get ${req.originalUrl} route : `, error);
         next(error);
     }
 });

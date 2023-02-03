@@ -18,7 +18,6 @@ import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import productRoute from './routes/products';
 import error404Route from './routes/404';
-import * as urlPackage from 'url';
 import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";

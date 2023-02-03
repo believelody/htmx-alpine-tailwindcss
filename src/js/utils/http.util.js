@@ -1,0 +1,1 @@
+export const limitArray = [6, 18, 30];

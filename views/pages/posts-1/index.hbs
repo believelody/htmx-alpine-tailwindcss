@@ -48,7 +48,7 @@
         {{/each}}
       </div>
       {{#if (gt meta.total meta.limit)}}
-        {{> pagination/select-2 href=(urlFromParams (chain (baseUrl) "/posts-1") limit=(numberIntoString meta.limit)) page=meta.page pages=meta.pages}}
+        {{> pagination/select-2 href=(urlFromParams (chain (baseUrl) "/posts-1") limit=meta.limit) page=meta.page pages=meta.pages}}
       {{/if}}
     {{/if}}
   </div>
