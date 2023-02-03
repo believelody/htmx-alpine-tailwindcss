@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import express from 'express';
 import hbs from "express-hbs";
 import session from 'express-session';
-import { array, misc, string, comparison, math, number, collection, object, html, regex } from 'useful-handlebars-helpers';
+import { array, misc, string, comparison, math, number, collection, object, html, regex, url } from 'useful-handlebars-helpers';
 import customHelpers from './src/js/helpers';
 import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
@@ -18,17 +18,16 @@ import userRoute from './routes/user';
 import apiRoute from './routes/api';
 import productRoute from './routes/product';
 import error404Route from './routes/404';
-import * as url from 'url';
+import * as urlPackage from 'url';
 import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './src/js/middlewares/auth.middleware';
 import { checkHTMXRequest } from "./src/js/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/js/middlewares/session.middleware";
 import { error404NotFound, error500Handler, popupalteCurrentURLInContext } from "./src/js/middlewares/http.middleware";
+import { port } from "./src/js/utils/url.util";
 config();
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const port = 8000;
+const __filename = urlPackage.fileURLToPath(import.meta.url);
+const __dirname = urlPackage.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
 
@@ -36,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false }));
 
-[array, misc, string, comparison, math, number, collection, object, html, regex, customHelpers].forEach(helper => hbs.registerHelper(helper));
+[array, misc, string, comparison, math, number, collection, object, html, regex, url, customHelpers].forEach(helper => hbs.registerHelper(helper));
 
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({

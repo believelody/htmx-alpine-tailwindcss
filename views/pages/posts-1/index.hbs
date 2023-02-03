@@ -24,16 +24,13 @@
       </div>
     {{else}}
       <h2 class="text-center mt-4">{{ title }}</h2>
-      <div class="flex items-center justify-start p-4 gap-x-4">
-        {{#each (toArray '6' '18' '30') as |limit|}}
-          {{#if (gte ../meta.total limit)}}
-            {{> button/radio class="px-4 py-2 btn rounded-md disabled:text-black"
-              name="limit" id=(append "limit-" limit) label=limit disabled=(eq ../meta.limit limit)
-              href=(chain ../currentURLPathname "?limit=" limit "&page=" (numberIntoString ../meta.page))
-            }}
-          {{/if}}
-        {{/each}}
-      </div>
+        <div class="flex items-center justify-start p-4 gap-x-4">
+          {{> limit/default
+                group=(toArray '6' '18' '30')
+                href=(urlFromParams (chain (baseUrl) "/posts-1") page=(numberIntoString meta.page))
+                meta=meta
+          }}
+        </div>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full mb-4">
         {{#each posts as |item|}}
           <div id="posts-content">
@@ -51,7 +48,7 @@
         {{/each}}
       </div>
       {{#if (gt meta.total meta.limit)}}
-        {{> pagination/select-2 href=(chain currentURLPathname "?limit=" meta.limit) page=meta.page pages=meta.pages}}
+        {{> pagination/select-2 href=(urlFromParams (chain (baseUrl) "/posts-1") limit=(numberIntoString meta.limit)) page=meta.page pages=meta.pages}}
       {{/if}}
     {{/if}}
   </div>

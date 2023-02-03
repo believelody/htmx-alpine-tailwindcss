@@ -19,6 +19,8 @@ import uuid from './uuid';
 import raw from './raw';
 import svg from './svg';
 import includes from './includes';
+import baseUrl from './baseUrl';
+import urlPath from './urlPath';
 
 export default {
     toString,
@@ -41,5 +43,7 @@ export default {
     uuid,
     raw,
     svg,
-    includes
+    includes,
+    baseUrl,
+    urlPath
 };

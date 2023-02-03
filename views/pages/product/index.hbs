@@ -2,12 +2,22 @@
 {{> element/seo }}
 <section class="text-gray-600 body-font">
   <div class="container py-24 mx-auto">
+    <div class="flex items-center justify-start p-4 gap-x-4">
+      {{> limit/default
+            group=(toArray '6' '18' '30')
+            href=(urlFromParams (chain (baseUrl) "/products"))
+            meta=meta
+      }}
+    </div>
     <div class="px-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 h-full mb-4">
       {{#each products as |product|}}
         <div hx-boost="true" class="border rounded overflow-hidden shadow-md">
           {{> product/item product }}
         </div>
       {{/each}}
+    </div>
+    <div class="flex items-center justify-center">
+      {{> button/simple label="Voir plus" }}
     </div>
   </div>
 </section>
