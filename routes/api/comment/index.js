@@ -1,14 +1,12 @@
-import fetch from 'node-fetch';
 import express from 'express';
 import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
-import { dummyDataURL, dummyDataURLAuth } from '../../../src/js/utils/env.util';
+import service from '../../../src/js/services';
 const router = express.Router();
 
 router.get('/post/:id', numericParamsValidator, async (req, res, next) => {
   try {
     // await new Promise(resolve => setTimeout(resolve, 3000));
-    const commentsRes = await fetch(`${dummyDataURL}/comments/post/${req.params.id}`);
-    const { comments, total, limit } = await commentsRes.json();
+    const { comments, total, limit } = await service.post.fetchPostComments(req.params.id);
     return res.render("partials/comment/list", { ...req.ctx, postId: req.params.id, comments, meta: { total, limit } });
   } catch (error) {
     console.log(error);
@@ -19,29 +17,21 @@ router.get('/post/:id', numericParamsValidator, async (req, res, next) => {
 router.post('/post', async (req, res, next) => {
   try {
     const post = JSON.parse(req.body.post);
+    const { userId, comment } = req.body;
     // await new Promise(resolve => setTimeout(resolve, 3000));
-    const newCommentRes = await fetch(`${dummyDataURLAuth}/comments/add`, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${req.session.token}`
-     },
-      body: JSON.stringify({
-        body: req.body['your-comment'],
-        postId: post.id,
-        userId: req.body.userId,
-      })
-    });
-    const newCommentJson = await newCommentRes.json();
-    if (newCommentJson.message) {
-      throw newCommentJson.message;
+    const newComment = await service.user.me.commentPost({
+      userId,
+      postId: post.id,
+      body: comment
+    })
+    if (newComment.message) {
+      throw newComment.message;
     }
     res.setHeader('HX-Trigger', 'add-comment');
     return res.render("partials/form/comment", { ...req.ctx, post });
   } catch (error) {
     console.log(error);
-    next(error);    
+    next(error);
   }
 });
 

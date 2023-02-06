@@ -1,5 +1,7 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import service from '../../../src/js/services';
+import api from '../../../src/js/services/api';
 import { dummyDataURL } from '../../../src/js/utils/env.util';
 import { sessionMaxAge30Days } from '../../../src/js/utils/session.util';
 import { homeTitle } from '../../home';
@@ -10,24 +12,15 @@ router.post('/login', async (req, res, next) => {
   try {
     // await new Promise(resolve => setTimeout(resolve, 3000));
     const { email, password } = req.body;
-    const loginRes = await fetch(`${dummyDataURL}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      // body: JSON.stringify({ email, password }),
-      body: JSON.stringify({
-        username: 'kminchelle',
-        password: '0lelplR',
-        // expiresInMins: 60, // optional
-      }),
-    });
-    const loginJson = await loginRes.json();
-    if (loginJson.message) {
-      return res.status(404).send({ login: loginJson.message });
+    const loginRes = await service.auth.login({ email, password });
+    if (loginRes.message) {
+      return res.status(404).send({ login: loginRes.message });
     }
-    const { token } = loginJson;
-    delete loginJson.token;
+    const { token } = loginRes;
+    delete loginRes.token;
     req.session.token = token;
-    const user = { ...req.ctx.user, ...loginJson, subscribe: false, likedPosts: [] }
+    api.setHeader("Authorization", `Bearer ${token}`)
+    const user = { ...req.ctx.user, ...loginRes, subscribe: false, likedPosts: [] }
     req.session.user = user;
     req.session.remember = true;
     if (req.body.remember) {

@@ -1,15 +1,13 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import { numericParamsValidator } from '../../../src/js/middlewares/http.middleware';
-import { dummyDataURL } from '../../../src/js/utils/env.util';
+import service from '../../../src/js/services';
 const router = express.Router();
 
 router.get('/:id/author-name', numericParamsValidator, async (req, res, next) => {
   try {
-    const authorRes = await fetch(`${dummyDataURL}/users/${req.params.id}?select=username`);
-    const authorJson = await authorRes.json();
+    const author = await service.user.fetchAuthor(req.params.id)
     req.ctx = {
-      ...req.ctx, author: authorJson
+      ...req.ctx, author
     };
     res.render('partials/element/author', req.ctx);
   } catch (error) {

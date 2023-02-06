@@ -1,1 +1,3 @@
-export const error500 = "Error: something went wrong.";
+const code500 = "Error: something went wrong.";
+
+export default { code500 };

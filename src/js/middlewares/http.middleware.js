@@ -1,3 +1,4 @@
+import utils from "../utils";
 import { limitArray } from "../utils/http.util";
 
 export const numericParamsValidator = (req, res, next) => {
@@ -31,7 +32,7 @@ export const limitQueryValidator = (req, res, next) => {
     if (req.ctx.fromHTMX) {
       throw "There is a problem with limit value";
     }
-    req.ctx.error = utils.error500;
+    req.ctx.error = utils.error.code500;
     res.statusCode = 500;
   }
   next();
