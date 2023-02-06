@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev:app": "nodemon --experimental-specifier-resolution=node server.js",
-    "dev:tailwind": "npx tailwindcss -i ./src/css/tailwind.css -o ./public/styles.css --watch",
+    "dev:tailwind": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/styles.css --watch",
     "dev": "concurrently \"npm run dev:app\" \"npm run dev:tailwind\"",
     "start": "NODE_ENV=production nodemon server.js"
   },

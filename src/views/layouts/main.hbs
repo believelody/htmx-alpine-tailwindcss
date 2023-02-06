@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/styles.css">
+    <title>{{ title }}</title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"
+        integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body hx-ext="loading-states"
+    x-data="{ currentRoute : window.location.pathname, errorMap: new Map() }"
+    x-effect="
+        $el.addEventListener('htmx:responseError', ({ detail }) => {
+            if (detail.xhr.status) {
+                const { response } = detail.xhr;
+                $dispatch('error', response);
+            }
+        });
+        navigation.addEventListener('navigate', ({ destination }) => {
+            $dispatch('route', new URL(destination.url).pathname);
+        });"
+    @route="currentRoute = $event.detail"
+    @error="Object.entries(JSON.parse($event.detail)).forEach(([key, value]) => errorMap.set(key, value));"
+    @modal-closer="if (errorMap.size) { errorMap.clear() }"
+>
+    {{> element/header }}
+    <div class="relative flex flex-col overflow-y-auto grow">
+        <div x-data="notifier({ timeout: 15000, position: 'bottom-left' })" @notify.window="send($event.detail)" class="flex">
+        {{!-- <div x-data="notifier({ position: 'bottom-right', slideDirection: 'left' })" @notify.window="addFromTop()" class="flex"> --}}
+            {{> element/notification }}
+        </div>
+        <main class="relative grow">
+            {{!-- {{> loading/base-1 }} --}}
+            {{> loading/base-2 size=18 }}
+            {{> loading/base-3 }}
+            <section id="content" class="relative h-full">
+                {{{ body }}}
+            </section>
+        </main>
+        {{> element/footer }}
+    </div>
+    {{> 'modal/500' }}
+    {{> modal/not-found}}
+</body>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('notifier', (initialState) => ({
+            notifications: initialState.notifications || [],
+            timer: {},
+            timeout: initialState.timeout || 3000,
+            position: initialState.position || "top-left",
+            slideDirection: initialState.slideDirection || "left",
+            send(notification) {
+                this.notifications = [{ id: crypto.randomUUID(), ...notification }, ...this.notifications];
+            },
+            addFromBottom() {
+                this.notifications = [...this.notifications, { id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }];
+            },
+            addFromTop() {
+                this.notifications =[{ id: crypto.randomUUID(), type: 'success', title: 'Contact', message: 'Nous avons bien reçu votre demande. Nous reviendrons vers vous dans les plus brefs délai.', timeout: 5000 }, ...this.notifications];
+            },
+            remove(notificationId) {
+                this.notifications = this.notifications.filter(notification => notification.id !== notificationId);
+                clearTimeout(this.timer[notificationId]);
+            },
+        }));
+        Alpine.data('drawer', (initialOpenState = false) => ({
+            open: initialOpenState,
+            lock: false,
+            toggle() {
+                this.open = !this.open;
+                if (!open) {
+                    this.$dispatch('modal-closer');
+                }
+            },
+            trigger: {
+                ['x-ref']: 'trigger',
+                ['@click']() {
+                    this.open = true;
+                },
+            },
+            dialogue: {
+                ['x-show']() {
+                    return this.open;
+                },
+                ['@click.outside']() {
+                    if (!this.lock) {
+                        this.open = false;
+                        this.$dispatch('modal-closer');
+                    }
+                },
+                ['@keyup.escape.window']() {
+                    if (!this.lock) {
+                        this.open = false;
+                        this.$dispatch('modal-closer');
+                    }
+                },
+            },
+            closer: {
+                type: 'button',
+                ['@click']() {
+                    this.open = false;
+                    this.$dispatch('modal-closer');
+                },
+            },
+        }));
+        {{!-- Alpine.bind('inputType', {}) --}}
+    });
+</script>
+</html>
