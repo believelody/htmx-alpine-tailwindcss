@@ -47,10 +47,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(popupalteCurrentURLInContext);
 app.use(checkHTMXRequest);
 app.use(populateUserSessionInContext);
-// app.use('/', (req, res) => {
-//     console.log(req.originalUrl);
-//     return res.redirect('home');
-// });
 app.use('/', setCheckAuthAsHxTrigger, homeRoute);
 app.use('/about', setCheckAuthAsHxTrigger, aboutRoute);
 app.use('/contact', setCheckAuthAsHxTrigger, contactRoute);
