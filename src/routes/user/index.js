@@ -1,15 +1,14 @@
 import express from 'express';
-import { checkUnauthenticatedUserAndRedirect, populateMeInContext } from '../../middlewares/auth.middleware';
-import { limitQueryValidator, numericParamsValidator } from '../../middlewares/http.middleware';
+import middlewares from '../../middlewares';
 import service from '../../services';
 import utils from '../../utils';
 import meRoute from './me';
 
 const router = express.Router();
 
-router.use('/me', checkUnauthenticatedUserAndRedirect, populateMeInContext, meRoute);
+router.use('/me', middlewares.auth.checkUnauthenticatedUserAndRedirect, middlewares.auth.populateMeInContext, meRoute);
 
-router.get('/:id', numericParamsValidator, async (req, res, next) => {
+router.get('/:id', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await service.user.fetchById(id);
@@ -20,10 +19,10 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
   }
 });
 
-router.get('/:id/posts', numericParamsValidator, limitQueryValidator, async (req, res, next) => {
+router.get('/:id/posts', middlewares.http.numericParamsValidator, middlewares.http.limitQueryValidator, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const limit = Number(req.query.limit || utils.http.limitArray[0]);
+    const limit = Number(req.query.limit || utils.http.limitQueryArray[0]);
     const page = Number(req.query.page) || 1;
     const { posts, total } = await service.user.fetchPosts(id, limit, limit * (page - 1));
     const author = await service.user.fetchAuthor(id);
@@ -35,7 +34,7 @@ router.get('/:id/posts', numericParamsValidator, limitQueryValidator, async (req
   }
 });
 
-router.get('/:id/posts/:postId', numericParamsValidator, async (req, res, next) => {
+router.get('/:id/posts/:postId', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     const { id, postId } = req.params;
     const { author, nextPost, post, prevPost } = await service.user.fetchPostById(id, Number(postId));

@@ -1,6 +1,6 @@
 import utils from "../utils";
 
-export const numericParamsValidator = (req, res, next) => {
+const numericParamsValidator = (req, res, next) => {
   Object.values(req.params).forEach(value => {
     if (!value.match(/[0-9]/g)) {
       throw "id params is not a numeric value";
@@ -9,16 +9,16 @@ export const numericParamsValidator = (req, res, next) => {
   next();
 }
 
-export const error500Handler = (error, req, res, next) => {
+const error500Handler = (error, req, res, next) => {
   console.log("error 500 : ", error);
   res.status(500).send({ '500': true });
 }
 
-export const error404NotFound = (req, res, next) => {
+const error404NotFound = (req, res, next) => {
   return res.status(404).send({ 'not-found': true })
 }
 
-export const popupalteCurrentURLInContext = (req, res, next) => {
+const popupalteCurrentURLInContext = (req, res, next) => {
   if (!req.originalUrl.includes("/api")) {
     req.session.currentURLPathname = req.originalUrl;
     req.ctx = { ...req.ctx, currentURLPathname: `${req.originalUrl}` };
@@ -26,8 +26,8 @@ export const popupalteCurrentURLInContext = (req, res, next) => {
   next();
 }
 
-export const limitQueryValidator = (req, res, next) => {
-  if (req.query.limit && !utils.http.limitArray.includes(Number(req.query.limit))) {
+const limitQueryValidator = (req, res, next) => {
+  if (req.query.limit && !utils.http.limitQueryArray.includes(Number(req.query.limit))) {
     if (req.ctx.fromHTMX) {
       throw "There is a problem with limit value";
     }
@@ -36,3 +36,5 @@ export const limitQueryValidator = (req, res, next) => {
   }
   next();
 }
+
+export default { numericParamsValidator, error500Handler, error404NotFound, limitQueryValidator, popupalteCurrentURLInContext };

@@ -18,11 +18,8 @@ import userRoute from './src/routes/user';
 import apiRoute from './src/routes/api';
 import productRoute from './src/routes/products';
 import error404Route from './src/routes/404';
-import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './src/middlewares/auth.middleware';
-import { checkHTMXRequest } from "./src/middlewares/htmx.middleware";
-import { populateUserSessionInContext } from "./src/middlewares/session.middleware";
-import { error404NotFound, error500Handler, popupalteCurrentURLInContext } from "./src/middlewares/http.middleware";
 import utils from "./src/utils";
+import middlewares from "./src/middlewares";
 config();
 
 const app = express();
@@ -43,22 +40,22 @@ app.set('views', path.join(utils.file.__dirname, 'src/views'));
 
 app.use('/public', express.static(path.join(utils.file.__dirname, 'public')));
 
-app.use(popupalteCurrentURLInContext);
-app.use(checkHTMXRequest);
-app.use(populateUserSessionInContext);
-app.use('/', setCheckAuthAsHxTrigger, homeRoute);
-app.use('/about', setCheckAuthAsHxTrigger, aboutRoute);
-app.use('/contact', setCheckAuthAsHxTrigger, contactRoute);
-app.use('/posts-1', setCheckAuthAsHxTrigger, posts1Route);
-app.use('/posts-2', setCheckAuthAsHxTrigger, posts2Route);
-app.use('/team', setCheckAuthAsHxTrigger, teamsRoute);
-app.use('/products', setCheckAuthAsHxTrigger, productRoute);
-app.use('/login', checkAuthenticatedUserAndRedirect, setCheckAuthAsHxTrigger, loginRoute);
-app.use('/users', setCheckAuthAsHxTrigger, userRoute);
+app.use(middlewares.http.popupalteCurrentURLInContext);
+app.use(middlewares.htmx.checkHTMXRequest);
+app.use(middlewares.session.populateUserSessionInContext);
+app.use('/', middlewares.auth.setCheckAuthAsHxTrigger, homeRoute);
+app.use('/about', middlewares.auth.setCheckAuthAsHxTrigger, aboutRoute);
+app.use('/contact', middlewares.auth.setCheckAuthAsHxTrigger, contactRoute);
+app.use('/posts-1', middlewares.auth.setCheckAuthAsHxTrigger, posts1Route);
+app.use('/posts-2', middlewares.auth.setCheckAuthAsHxTrigger, posts2Route);
+app.use('/team', middlewares.auth.setCheckAuthAsHxTrigger, teamsRoute);
+app.use('/products', middlewares.auth.setCheckAuthAsHxTrigger, productRoute);
+app.use('/login', middlewares.auth.checkAuthenticatedUserAndRedirect, middlewares.auth.setCheckAuthAsHxTrigger, loginRoute);
+app.use('/users', middlewares.auth.setCheckAuthAsHxTrigger, userRoute);
 app.use('/api', apiRoute);
-app.use(error404NotFound);
+app.use(middlewares.http.error404NotFound);
 // app.use('*', error404Route);
-app.use(error500Handler);
+app.use(middlewares.http.error500Handler);
 
 app.listen(utils.env.port, () => {
     console.log("Server running");

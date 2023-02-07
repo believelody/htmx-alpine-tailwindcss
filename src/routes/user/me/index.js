@@ -1,5 +1,5 @@
 import express from 'express';
-import { limitQueryValidator, numericParamsValidator } from '../../../middlewares/http.middleware';
+import middlewares from '../../../middlewares';
 import service from '../../../services';
 import utils from '../../../utils';
 
@@ -18,9 +18,9 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/posts', limitQueryValidator, async (req, res, next) => {
+router.get('/posts', middlewares.http.limitQueryValidator, async (req, res, next) => {
   try {
-    const limit = Number(req.query.limit || utils.http.limitArray[0]);
+    const limit = Number(req.query.limit || utils.http.limitQueryArray[0]);
     const page = Number(req.query.page) || 1;
     const { posts, total } = await service.user.fetchPosts(req.ctx.user.id, limit, limit * (page - 1));
     req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: myProfilePostsTitle };
@@ -31,7 +31,7 @@ router.get('/posts', limitQueryValidator, async (req, res, next) => {
   }
 });
 
-router.get('/posts/:id', numericParamsValidator, async (req, res, next) => {
+router.get('/posts/:id', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { author, nextPost, post, prevPost } = await service.user.fetchPostById(req.ctx.user.id, Number(id));

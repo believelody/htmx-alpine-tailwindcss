@@ -1,4 +1,4 @@
-export const populateUserSessionInContext = async (req, res, next) => {
+const populateUserSessionInContext = async (req, res, next) => {
   let user = req.cookies["session_user"];
   let token = req.cookies["session_token"];
   req.session.user = user ?? req.session?.user;
@@ -8,3 +8,5 @@ export const populateUserSessionInContext = async (req, res, next) => {
   }
   next();
 }
+
+export default { populateUserSessionInContext };

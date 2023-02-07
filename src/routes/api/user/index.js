@@ -1,10 +1,10 @@
 import express from 'express';
-import { numericParamsValidator } from '../../../middlewares/http.middleware';
+import middlewares from '../../../middlewares';
 import service from '../../../services';
 
 const router = express.Router();
 
-router.get('/:id/author-name', numericParamsValidator, async (req, res, next) => {
+router.get('/:id/author-name', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     const author = await service.user.fetchAuthor(req.params.id)
     req.ctx = {

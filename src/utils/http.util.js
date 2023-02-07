@@ -1,3 +1,3 @@
-const limitArray = [6, 18, 30];
+const limitQueryArray = [6, 18, 30];
 
-export default { limitArray };
+export default { limitQueryArray };

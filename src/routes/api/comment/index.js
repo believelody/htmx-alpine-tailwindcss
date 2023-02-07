@@ -1,10 +1,10 @@
 import express from 'express';
-import { numericParamsValidator } from '../../../middlewares/http.middleware';
+import middlewares from '../../../middlewares';
 import service from '../../../services';
 
 const router = express.Router();
 
-router.get('/post/:id', numericParamsValidator, async (req, res, next) => {
+router.get('/post/:id', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     // await new Promise(resolve => setTimeout(resolve, 3000));
     const { comments, total, limit } = await service.post.fetchPostComments(req.params.id);

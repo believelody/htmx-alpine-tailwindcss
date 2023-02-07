@@ -1,10 +1,10 @@
 import express from 'express';
-import { numericParamsValidator } from '../../../middlewares/http.middleware';
+import middlewares from '../../../middlewares';
 import service from '../../../services';
 
 const router = express.Router();
 
-router.post('/post/:id', numericParamsValidator, async (req, res, next) => {
+router.post('/post/:id', middlewares.http.numericParamsValidator, async (req, res, next) => {
   try {
     const isPostLiked = req.session?.user?.likedPosts?.includes(req.params.id);
     const reactions = isPostLiked ? Number(req.body.reaction) - 1 : Number(req.body.reaction) + 1

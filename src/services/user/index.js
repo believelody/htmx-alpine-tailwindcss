@@ -16,7 +16,7 @@ const fetchAuthor = async id => await fetchById(id, ['username', 'id']);
 const fetchPosts = async (id, limit, skip) => {
   const res = await api.get(`/users/${id}/posts?limit=${limit}&skip=${skip}`);
   const posts = utils.user.constructPosts(res.posts, id);
-  return { posts, total: json.total };
+  return { posts, total: res.total };
 }
 
 const fetchPostById = async (id, postId) => {
