@@ -6,7 +6,7 @@ const login = async body => {
     body: {
       username: 'kminchelle',
       password: '0lelplR',
-      // expiresInMins: 60, // optional
+      expiresInMins: 2, // optional
     }
   });
 }

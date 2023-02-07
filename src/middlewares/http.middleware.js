@@ -11,7 +11,18 @@ const numericParamsValidator = (req, res, next) => {
 
 const error500Handler = (error, req, res, next) => {
   console.log("error 500 : ", error);
-  res.status(500).send({ '500': true });
+  switch (error) {
+    case 'TokenExpiredError':
+      req.session.destroy(err => {
+        if (err) {
+          throw err;
+        }
+      });
+      ["session_user", "session_token", "session_remember"].forEach((sessionItem) => res.clearCookie(sessionItem));
+      return res.redirect('/login');
+    default:
+      return res.status(500).send({ '500': true });
+  }
 }
 
 const error404NotFound = (req, res, next) => {

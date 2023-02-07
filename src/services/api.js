@@ -35,11 +35,11 @@ const api = {
   patch: (path, options = {}) => fetchApi(path, "PATCH", options),
   delete: (path, options = {}) => fetchApi(path, "DELETE", options),
   auth: {
-    get: (path, options = {}) => fetchApi(`/auth${path}`, "GET", options),
-    post: (path, options = {}) => fetchApi(`/auth${path}`, "POST", options),
-    put: (path, options = {}) => fetchApi(`/auth${path}`, "PUT", options),
-    patch: (path, options = {}) => fetchApi(`/auth${path}`, "PATCH", options),
-    delete: (path, options = {}) => fetchApi(`/auth${path}`, "DELETE", options),
+    get: async (path, options = {}) => utils.error.handleFetchError(await fetchApi(`/auth${path}`, "GET", options)),
+    post: async (path, options = {}) => utils.error.handleFetchError(await fetchApi(`/auth${path}`, "POST", options)),
+    put: async (path, options = {}) => utils.error.handleFetchError(await fetchApi(`/auth${path}`, "PUT", options)),
+    patch: async (path, options = {}) => utils.error.handleFetchError(await fetchApi(`/auth${path}`, "PATCH", options)),
+    delete: async (path, options = {}) => utils.error.handleFetchError(await fetchApi(`/auth${path}`, "DELETE", options)),
   }
 };
 

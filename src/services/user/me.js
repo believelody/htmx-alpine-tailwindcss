@@ -2,10 +2,10 @@ import service from "..";
 import utils from "../../utils";
 import api from "../api";
 
-const fetchPosts = async (id, limit, skip, isMe = false) => {
+const fetchPosts = async (id, limit, skip) => {
   const res = await api.auth.get(`/users/${id}/posts?limit=${limit}&skip=${skip}`);
-  const posts = utils.user.constructPosts(res.posts)
-  return { posts, total: json.total };
+  const posts = utils.user.constructPosts(res.posts);
+  return { posts, total: res.total };
 }
 
 const fetchPostById = async (id, postId) => {
