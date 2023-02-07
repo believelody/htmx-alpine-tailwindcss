@@ -1,7 +1,7 @@
 import express from 'express';
 import { limitQueryValidator } from '../../middlewares/http.middleware';
 import service from '../../services';
-import { limitArray } from '../../utils/http.util';
+import utils from '../../utils';
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ export const productsTitle = 'Products';
 
 router.get('/', limitQueryValidator, async (req, res, next) => {
   try {
-    const limit = Number(req.query.limit || limitArray[0]);
+    const limit = Number(req.query.limit || utils.http.limitArray[0]);
     const count = Number(req.query.count || limit);
     if (req.query.count && req.ctx.fromHTMX) {
       const { products, total } = await service.product.fetchAll(limit, count - limit);

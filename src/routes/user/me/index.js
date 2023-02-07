@@ -1,8 +1,7 @@
 import express from 'express';
 import { limitQueryValidator, numericParamsValidator } from '../../../middlewares/http.middleware';
 import service from '../../../services';
-import { limitArray } from '../../../utils/http.util';
-import { retrieveAppropriateBackUrl } from '../../../utils/url.util';
+import utils from '../../../utils';
 
 const router = express.Router();
 
@@ -21,7 +20,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/posts', limitQueryValidator, async (req, res, next) => {
   try {
-    const limit = Number(req.query.limit || limitArray[0]);
+    const limit = Number(req.query.limit || utils.http.limitArray[0]);
     const page = Number(req.query.page) || 1;
     const { posts, total } = await service.user.fetchPosts(req.ctx.user.id, limit, limit * (page - 1));
     req.ctx = { ...req.ctx, posts, meta: { pages: Math.round(total / Number(limit)), page, limit, total }, title: myProfilePostsTitle };
@@ -42,7 +41,7 @@ router.get('/posts/:id', numericParamsValidator, async (req, res, next) => {
         ...post,
         url:
         {
-          back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], `/users/${id}/posts`),
+          back: utils.url.retrieveAppropriateBackUrl(req.headers['hx-current-url'], `/users/${id}/posts`),
           prev: prevPost && `/users/me/posts/${prevPost.id}`,
           next: nextPost && `/users/me/posts/${nextPost.id}`
         }

@@ -1,7 +1,7 @@
 import express from 'express';
 import service from '../../../services';
 import api from '../../../services/api';
-import { sessionMaxAge30Days } from '../../../utils/session.util';
+import utils from '../../../utils';
 import { homeTitle } from '../../home';
 import { myProfileTitle } from '../../user/me';
 
@@ -23,10 +23,10 @@ router.post('/login', async (req, res, next) => {
     req.session.user = user;
     req.session.remember = true;
     if (req.body.remember) {
-      req.session.cookie.maxAge = sessionMaxAge30Days;
-      res.cookie("session_token", token, { maxAge: sessionMaxAge30Days });
-      res.cookie("session_user", user, { maxAge: sessionMaxAge30Days });
-      res.cookie("session_remember", req.body.remember, { maxAge: sessionMaxAge30Days });
+      req.session.cookie.maxAge = utils.session.sessionMaxAge30Days;
+      res.cookie("session_token", token, { maxAge: utils.session.sessionMaxAge30Days });
+      res.cookie("session_user", user, { maxAge: utils.session.sessionMaxAge30Days });
+      res.cookie("session_remember", req.body.remember, { maxAge: utils.session.sessionMaxAge30Days });
     }
     res.setHeader('HX-Trigger', 'check-auth');
     if (req.body['stay_on_current_url']) {

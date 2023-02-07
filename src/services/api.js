@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { dummyDataURL } from "../utils/env.util";
+import utils from "../utils";
 
 const headers = {
   'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ const fetchApi = async (path, method, options) => {
   if (options.body) {
     fetchOptions.body = JSON.stringify(options.body);
   }
-  const res = await fetch(`${dummyDataURL}${path}`, fetchOptions);
+  const res = await fetch(`${utils.env.dummyDataURL}${path}`, fetchOptions);
   const json = await res.json();
   return json;
 }

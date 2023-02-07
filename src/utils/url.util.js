@@ -1,4 +1,6 @@
-export const retrieveAppropriateBackUrl = (backURL, backupURL) => {
+import envUtil from './env.util'
+
+const retrieveAppropriateBackUrl = (backURL, backupURL) => {
   if (!backURL) {
     return backupURL;
   }
@@ -6,6 +8,6 @@ export const retrieveAppropriateBackUrl = (backURL, backupURL) => {
   return backURLObject.pathname.startsWith(`${backupURL}?`) ? `${backURLObject.pathname}${backURLObject.search}` : backupURL;
 }
 
-export const port = 8000;
+const baseUrl = `http://localhost:${envUtil.port}`;
 
-export const baseUrl = `http://localhost:${port}`;
+export default { retrieveAppropriateBackUrl, baseUrl };

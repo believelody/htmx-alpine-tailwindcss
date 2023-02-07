@@ -1,5 +1,4 @@
 import utils from "../utils";
-import { limitArray } from "../utils/http.util";
 
 export const numericParamsValidator = (req, res, next) => {
   Object.values(req.params).forEach(value => {
@@ -28,7 +27,7 @@ export const popupalteCurrentURLInContext = (req, res, next) => {
 }
 
 export const limitQueryValidator = (req, res, next) => {
-  if (req.query.limit && !limitArray.includes(Number(req.query.limit))) {
+  if (req.query.limit && !utils.http.limitArray.includes(Number(req.query.limit))) {
     if (req.ctx.fromHTMX) {
       throw "There is a problem with limit value";
     }

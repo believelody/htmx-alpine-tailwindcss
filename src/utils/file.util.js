@@ -1,1 +1,3 @@
-export const __dirname = process.cwd();
+const __dirname = process.cwd();
+
+export default { __dirname };

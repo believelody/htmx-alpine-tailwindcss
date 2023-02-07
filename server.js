@@ -22,8 +22,7 @@ import { setCheckAuthAsHxTrigger, checkAuthenticatedUserAndRedirect } from './sr
 import { checkHTMXRequest } from "./src/middlewares/htmx.middleware";
 import { populateUserSessionInContext } from "./src/middlewares/session.middleware";
 import { error404NotFound, error500Handler, popupalteCurrentURLInContext } from "./src/middlewares/http.middleware";
-import { port } from "./src/utils/url.util";
-import { __dirname } from "./src/utils/file.util";
+import utils from "./src/utils";
 config();
 
 const app = express();
@@ -36,13 +35,13 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false }));
 
 // => Here we expose the views so it can be rendered.
 app.engine('.hbs', hbs.express4({
-    partialsDir: __dirname + '/src/views/partials',
-    layoutsDir: __dirname + '/src/views/layouts'
+    partialsDir: utils.file.__dirname + '/src/views/partials',
+    layoutsDir: utils.file.__dirname + '/src/views/layouts'
 }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'src/views'));
+app.set('views', path.join(utils.file.__dirname, 'src/views'));
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(utils.file.__dirname, 'public')));
 
 app.use(popupalteCurrentURLInContext);
 app.use(checkHTMXRequest);
@@ -61,6 +60,6 @@ app.use(error404NotFound);
 // app.use('*', error404Route);
 app.use(error500Handler);
 
-app.listen(port, () => {
+app.listen(utils.env.port, () => {
     console.log("Server running");
 });

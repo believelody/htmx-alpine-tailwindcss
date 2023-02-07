@@ -2,8 +2,7 @@ import express from 'express';
 import { checkUnauthenticatedUserAndRedirect, populateMeInContext } from '../../middlewares/auth.middleware';
 import { limitQueryValidator, numericParamsValidator } from '../../middlewares/http.middleware';
 import service from '../../services';
-import { limitArray } from '../../utils/http.util';
-import { retrieveAppropriateBackUrl } from '../../utils/url.util';
+import utils from '../../utils';
 import meRoute from './me';
 
 const router = express.Router();
@@ -24,7 +23,7 @@ router.get('/:id', numericParamsValidator, async (req, res, next) => {
 router.get('/:id/posts', numericParamsValidator, limitQueryValidator, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const limit = Number(req.query.limit || limitArray[0]);
+    const limit = Number(req.query.limit || utils.http.limitArray[0]);
     const page = Number(req.query.page) || 1;
     const { posts, total } = await service.user.fetchPosts(id, limit, limit * (page - 1));
     const author = await service.user.fetchAuthor(id);
@@ -46,7 +45,7 @@ router.get('/:id/posts/:postId', numericParamsValidator, async (req, res, next) 
         ...post,
         url:
         {
-          back: retrieveAppropriateBackUrl(req.headers['hx-current-url'], `/users/${id}/posts`),
+          back: utils.url.retrieveAppropriateBackUrl(req.headers['hx-current-url'], `/users/${id}/posts`),
           prev: prevPost && `/users/${id}/posts/${prevPost.id}`,
           next: nextPost && `/users/${id}/posts/${nextPost.id}`
         } },

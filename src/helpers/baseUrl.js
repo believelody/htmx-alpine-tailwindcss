@@ -1,5 +1,5 @@
-import { baseUrl } from "../utils/url.util"
+import utils from "../utils";
 
 export default () => {
-  return baseUrl;
+  return utils.url.baseUrl;
 }
