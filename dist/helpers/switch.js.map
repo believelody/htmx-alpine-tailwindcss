@@ -1,0 +1,1 @@
+{"version":3,"file":"switch.js","sourceRoot":"","sources":["../../src/helpers/switch.ts"],"names":[],"mappings":";;AAAA,mBAAyB,KAAK,EAAE,OAAO;IACnC,IAAI,CAAC,WAAW,GAAG,EAAE,KAAK,EAAE,KAAK,EAAE,KAAK,EAAE,CAAC;IAC3C,OAAO,OAAO,CAAC,EAAE,CAAC,IAAI,CAAC,CAAC;AAC5B,CAAC;AAHD,4BAGC"}
